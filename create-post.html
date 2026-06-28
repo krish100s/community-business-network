@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Post – Community.Business</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  :root {
+    --bg: #0d0b1a;
+    --surface: #13112a;
+    --surface2: #1a1735;
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(111,93,255,0.5);
+    --accent: #6f5dff;
+    --accent2: #a78bfa;
+    --accent-glow: rgba(111,93,255,0.35);
+    --text: #f0eeff;
+    --muted: #8b82b0;
+    --danger: #ff5f7e;
+    --success: #4ade80;
+    --radius: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* — Background mesh — */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% -10%, rgba(111,93,255,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 90%, rgba(167,139,250,0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* — Navbar — */
+ header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:100;
+    background:#ffffff;
+    padding:16px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 2px 10px rgba(0,0,0,0.07);
+}
+
+.nav-logo{
+    font-family:'Syne',sans-serif;
+    font-size:1.2rem;
+    font-weight:800;
+    color:#111827;
+    text-decoration:none;
+    letter-spacing:-0.3px;
+}
+
+nav{
+    display:flex;
+    gap:22px;
+    align-items:center;
+}
+
+nav a{
+    position:relative;
+    text-decoration:none;
+    color:#111827;
+    font-size:0.88rem;
+    font-weight:600;
+    padding:8px 0;
+    transition:color 0.18s;
+    white-space:nowrap;
+}
+
+nav a:hover{
+    color:#4f46e5;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:#4f46e5;
+    transition:width 0.18s;
+}
+
+nav a:hover::after{
+    width:100%;
+}
+
+  /* — Page wrapper — */
+  .page {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 110px 20px 80px;
+  }
+
+  /* — Card — */
+  .card {
+    width: 100%;
+    max-width: 640px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(111,93,255,0.05), 0 32px 80px rgba(0,0,0,0.5);
+    animation: slideUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* — Card header — */
+  .card-header {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .header-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px var(--accent-glow);
+  }
+
+  .header-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .header-text p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* — Card body — */
+  .card-body {
+    padding: 28px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* — Upload zone — */
+  .upload-zone {
+    border: 2px dashed rgba(111,93,255,0.3);
+    border-radius: var(--radius);
+    background: rgba(111,93,255,0.04);
+    padding: 36px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upload-zone:hover {
+    border-color: var(--accent);
+    background: rgba(111,93,255,0.08);
+    transform: translateY(-1px);
+  }
+
+  .upload-zone.drag-over {
+    border-color: var(--accent2);
+    background: rgba(167,139,250,0.1);
+    transform: scale(1.01);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-icon {
+    width: 52px; height: 52px;
+    margin: 0 auto 12px;
+    border-radius: 14px;
+    background: rgba(111,93,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    color: var(--accent2);
+    transition: transform 0.3s;
+  }
+
+  .upload-zone:hover .upload-icon { transform: scale(1.1) rotate(-5deg); }
+
+  .upload-zone h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .upload-zone p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .upload-zone .pill {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(111,93,255,0.15);
+    color: var(--accent2);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* — Preview — */
+  .preview-wrap {
+    display: none;
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    animation: fadeIn 0.35s ease both;
+  }
+
+  @keyframes fadeIn { from { opacity:0; transform:scale(0.97); } to { opacity:1; transform:scale(1); } }
+
+  .preview-wrap img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 14px 16px;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .preview-wrap:hover .preview-overlay { opacity: 1; }
+
+  .preview-badge {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #fff;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(8px);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .remove-btn {
+    background: rgba(255,95,126,0.9);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 5px 12px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 5px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .remove-btn:hover { background: var(--danger); }
+
+  /* — Field group — */
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .field-label i { color: var(--accent2); font-size: 0.7rem; }
+
+  textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    resize: none;
+    height: 130px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  textarea::placeholder { color: rgba(139,130,176,0.55); }
+
+  textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .char-count {
+    align-self: flex-end;
+    font-size: 0.72rem;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .char-count.warn { color: var(--danger); }
+
+  /* — Divider — */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2px 0;
+  }
+
+  /* — Footer actions — */
+  .card-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-secondary {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    background: var(--surface2);
+  }
+
+  .btn-primary {
+    flex: 2;
+    padding: 14px;
+    border: none;
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 4px 20px var(--accent-glow);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+    filter: brightness(1.08);
+  }
+
+  .btn-primary:hover::after { opacity: 1; }
+
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-primary.loading .btn-text { display: none; }
+  .btn-primary .spinner { display: none; }
+  .btn-primary.loading .spinner {
+    display: block;
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* — Toast — */
+  .toast-wrap {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+  }
+
+  .toast {
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    animation: toastIn 0.35s cubic-bezier(0.16,1,0.3,1) both;
+    pointer-events: auto;
+  }
+
+  .toast.success { background: rgba(74,222,128,0.2); border: 1px solid rgba(74,222,128,0.3); }
+  .toast.error   { background: rgba(255,95,126,0.2); border: 1px solid rgba(255,95,126,0.3); }
+
+  @keyframes toastIn { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+  @keyframes toastOut { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(20px); } }
+
+  /* — Scrollbar — */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header>
+
+<a href="index.html" class="nav-logo">
+Community.Business
+</a>
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="businesses.html">🏢 Businesses</a>
+
+<a href="posts.html">📸 Posts</a>
+
+<a href="about.html">ℹ️ About</a>
+
+<span id="adminPanelLink"></span>
+
+<a href="#" onclick="auth.signOut();window.location='login.html';return false;">
+🚪 Sign Out
+</a>
+
+<a href="profile.html">
+👤 My Profile
+</a>
+
+</nav>
+
+</header>
+
+<!-- Page -->
+<div class="page">
+  <div class="card">
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="header-icon"><i class="fa-solid fa-pen-nib"></i></div>
+      <div class="header-text">
+        <h2 id="postBusinessName">
+Create Business Post
+</h2>
+        <p>Share updates, offers, and stories with your community</p>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+      <!-- Upload zone -->
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="postImage" accept="image/*">
+        <div class="upload-icon"><i class="fa-solid fa-image"></i></div>
+        <h3>Drop your photo here</h3>
+        <p>PNG, JPG, WEBP up to 10 MB</p>
+        <span class="pill"><i class="fa-solid fa-arrow-up-from-bracket"></i> &nbsp;Browse files</span>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview-wrap" id="previewWrap">
+        <img id="preview" src="" alt="Preview">
+        <div class="preview-overlay">
+          <span class="preview-badge"><i class="fa-solid fa-check"></i> Photo selected</span>
+          <button class="remove-btn" onclick="removeImage()"><i class="fa-solid fa-xmark"></i> Remove</button>
+        </div>
+      </div>
+
+      <!-- Caption -->
+      <div class="field-group">
+        <label class="field-label" for="caption">
+          <i class="fa-solid fa-align-left"></i> Caption
+        </label>
+        <textarea
+          id="caption"
+          placeholder="What's happening with your business? Share an update, promotion, or story…"
+          maxlength="500"
+          oninput="updateCount(this)"></textarea>
+        <span class="char-count" id="charCount">0 / 500</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Actions -->
+      <div class="card-footer">
+        <button class="btn-secondary" onclick="window.location.href='profile.html'">
+          <i class="fa-solid fa-xmark"></i> Discard
+        </button>
+        <button class="btn-primary" id="publishBtn" onclick="publishPost()">
+          <span class="btn-text"><i class="fa-solid fa-paper-plane"></i> Publish Post</span>
+          <span class="spinner"></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase.js"></script>
+<script>
+
+auth.onAuthStateChanged((user)=>{
+
+if(!user){
+
+window.location.href =
+"login.html";
+
+}
+
+});
+
+</script>
+
+<script>
+auth.onAuthStateChanged(async (user) => {
+  if (!user) return;
+  try {
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    const role = userDoc.exists ? userDoc.data().role : "";
+    const isAdmin = role === "admin" || user.email === "admin@community.business";
+    document.getElementById("adminPanelLink").innerHTML = isAdmin ? '<a href="admin.html">Admin Panel</a>' : '';
+  } catch (err) {
+    console.warn("Admin lookup failed:", err);
+  }
+});
+</script>
+
+<script>
+
+/* ── UI helpers ── */
+
+function showToast(msg, type = 'success') {
+  const wrap = document.getElementById('toastWrap');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<i class="fa-solid fa-${type === 'success' ? 'check-circle' : 'circle-exclamation'}"></i> ${msg}`;
+  wrap.appendChild(t);
+  setTimeout(() => {
+    t.style.animation = 'toastOut 0.3s ease forwards';
+    setTimeout(() => t.remove(), 300);
+  }, 3000);
+}
+
+function setLoading(on) {
+  const btn = document.getElementById('publishBtn');
+  btn.classList.toggle('loading', on);
+  btn.disabled = on;
+}
+
+function updateCount(el) {
+  const c = document.getElementById('charCount');
+  c.textContent = `${el.value.length} / 500`;
+  c.classList.toggle('warn', el.value.length > 460);
+}
+
+/* ── Image preview ── */
+
+document.getElementById('postImage').addEventListener('change', function () {
+  const file = this.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('preview').src = e.target.result;
+    document.getElementById('previewWrap').style.display = 'block';
+    document.getElementById('uploadZone').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+
+function removeImage() {
+  document.getElementById('preview').src = '';
+  document.getElementById('previewWrap').style.display = 'none';
+  document.getElementById('uploadZone').style.display = 'block';
+  document.getElementById('postImage').value = '';
+}
+
+/* ── Drag-and-drop ── */
+
+const zone = document.getElementById('uploadZone');
+
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    document.getElementById('postImage').files = dt.files;
+    document.getElementById('postImage').dispatchEvent(new Event('change'));
+  }
+});
+
+/* ── Publish ── */
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const businessId =
+params.get("id");
+
+loadBusinessName();
+
+async function loadBusinessName(){
+
+if(!businessId) return;
+
+const doc =
+await db.collection("businesses")
+.doc(businessId)
+.get();
+
+if(!doc.exists) return;
+
+document.getElementById(
+"postBusinessName"
+).innerText =
+
+"Create Post for " +
+doc.data().businessName;
+
+}
+async function publishPost() {
+  const user = auth.currentUser;
+  if (!user) { showToast('Please sign in first', 'error'); return; }
+
+  const imageFile = document.getElementById('postImage').files[0];
+  const caption   = document.getElementById('caption').value.trim();
+
+  if (!imageFile)  { showToast('Please select a photo', 'error'); return; }
+  if (!caption)    { showToast('Please write a caption', 'error'); return; }
+
+  setLoading(true);
+
+  try {
+    /* Upload to Cloudinary */
+    const formData = new FormData();
+    formData.append('file', imageFile);
+    formData.append('upload_preset', 'business_logos');
+
+    const res       = await fetch('https://api.cloudinary.com/v1_1/dzpzmkhoj/image/upload', { method: 'POST', body: formData });
+    const imageData = await res.json();
+    const imageURL  = imageData.secure_url;
+
+    /* Fetch business */
+   /* Get business ID from URL */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const businessId =
+params.get("id");
+
+if(!businessId){
+
+showToast(
+"Business not selected",
+"error"
+);
+
+setLoading(false);
+
+return;
+
+}
+    /* Save post */
+    await db.collection('business_posts').add({
+      businessId,
+      ownerUID : user.uid,
+      imageURL,
+      caption,
+      createdAt:
+firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    showToast('Post published successfully!');
+    setTimeout(() => window.location.href = 'profile.html', 1400);
+
+  } catch (err) {
+    console.error(err);
+    showToast('Something went wrong. Try again.', 'error');
+    setLoading(false);
+  }
+}
+</script>
+
+</body>
+</html>

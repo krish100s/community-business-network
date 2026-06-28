@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Businesses — Community Business</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #eeecf4;
+    --white:    #ffffff;
+    --purple:   #6c63ff;
+    --purple2:  #8b5cf6;
+    --purple-d: #4f46e5;
+    --ink:      #111827;
+    --muted:    #6b7280;
+    --border:   #e5e7eb;
+    --green:    #22c55e;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--white);
+    padding: 16px 6%;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem; font-weight: 800;
+    color: var(--ink); text-decoration: none; letter-spacing: -0.3px;
+  }
+  nav { display: flex; gap: 22px; align-items: center; }
+  nav a {
+    position: relative;
+    text-decoration: none; color: var(--ink);
+    font-size: 0.88rem; font-weight: 600;
+    padding: 8px 0;
+    transition: color 0.18s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: #4f46e5; }
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #4f46e5;
+    transition: width 0.18s;
+  }
+  nav a:hover::after { width: 100%; }
+  nav a.nav-signout { color: #000000; }
+  nav a.nav-signout:hover { color: #dc2626; }
+
+  /* ── HERO ── */
+  .hero-strip {
+    margin-top: 65px;
+    position: relative; overflow: hidden;
+    min-height: 210px;
+    background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 40%, #2d1b69 70%, #4c2fa0 100%);
+    display: flex; align-items: flex-end;
+  }
+  .hero-bg-text {
+    position: absolute; top: 0; left: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(80px, 14vw, 180px); font-weight: 800;
+    color: rgba(255,255,255,0.055); white-space: nowrap;
+    letter-spacing: -6px; user-select: none; line-height: 1;
+    padding-top: 10px;
+    animation: drift 24s linear infinite;
+  }
+  @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-4%); } }
+
+  .hero-glow {
+    position: absolute; right: -60px; top: -60px;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(139,92,246,0.5) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 6% 34px;
+    display: flex; align-items: flex-end; gap: 20px; width: 100%;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+  @keyframes fadeUp {
+    from { transform: translateY(22px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+  .hero-icon {
+    width: 70px; height: 70px; border-radius: 18px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--purple), var(--purple2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; color: #fff;
+    box-shadow: 0 12px 32px rgba(108,99,255,0.45);
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.15s both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.55); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .hero-tag {
+    display: inline-block; font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #c4b5fd;
+    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.35);
+    padding: 4px 12px; border-radius: 30px; margin-bottom: 8px;
+  }
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+    color: #fff; line-height: 1.1; letter-spacing: -0.5px;
+  }
+  .hero-title em { color: #c4b5fd; font-style: italic; }
+  .hero-sub { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-top: 6px; }
+
+  /* ── PAGE ── */
+  .page-wrap { max-width: 1100px; margin: 0 auto; padding: 44px 24px 100px; }
+
+  /* ── SEARCH + FILTERS ROW ── */
+  .top-row {
+    display: flex; gap: 14px; align-items: center;
+    margin-bottom: 36px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .search-wrap {
+    flex: 1; position: relative;
+  }
+  .search-wrap i {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    color: var(--muted); font-size: 0.88rem;
+  }
+  .search-wrap input {
+    width: 100%; padding: 13px 16px 13px 42px;
+    background: var(--white);
+    border: 1px solid var(--border); border-radius: 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.93rem; color: var(--ink);
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .search-wrap input:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+  }
+  .search-wrap input::placeholder { color: #d1d5db; }
+
+  /* category filter pills */
+  .filter-pills {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 28px;
+    animation: fadeUp 0.5s ease 0.05s both;
+  }
+  .pill {
+    padding: 7px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; border: 1.5px solid var(--border);
+    background: var(--white); color: var(--muted);
+    transition: all 0.18s; user-select: none;
+  }
+  .pill:hover { border-color: var(--purple); color: var(--purple); }
+  .pill.active {
+    background: linear-gradient(135deg, var(--purple-d), var(--purple));
+    color: #fff; border-color: transparent;
+    box-shadow: 0 4px 12px rgba(108,99,255,0.3);
+  }
+
+  /* results count */
+  .results-meta {
+    font-size: 0.82rem; color: var(--muted); margin-bottom: 22px;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+  .results-meta span { color: var(--purple); font-weight: 700; }
+
+  /* ── BUSINESS GRID ── */
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.22s, box-shadow 0.22s;
+    animation: fadeUp 0.5s ease both;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(108,99,255,0.13);
+  }
+
+  .card-img {
+    width: 100%; height: 185px; object-fit: cover;
+    display: block;
+    background: #e5e7eb;
+    transition: transform 0.4s;
+  }
+  .card:hover .card-img { transform: scale(1.03); }
+
+  .card-img-wrap {
+    overflow: hidden; position: relative; height: 185px;
+  }
+
+  /* initials fallback when no image */
+  .card-initials {
+    width: 100%; height: 185px;
+    background: linear-gradient(135deg, var(--purple-d), var(--purple2));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: -2px;
+  }
+
+  .card-content { padding: 18px 20px 20px; }
+
+  .category-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple); background: rgba(108,99,255,0.1);
+    border: 1px solid rgba(108,99,255,0.2);
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 9px;
+  }
+
+  .card-content h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem; color: var(--ink);
+    margin-bottom: 7px; line-height: 1.3;
+  }
+
+  .card-content p {
+    font-size: 0.85rem; color: var(--muted);
+    line-height: 1.6; margin-bottom: 16px;
+    display: -webkit-box; ;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; border-top: 1px solid var(--border);
+  }
+
+  .card-location {
+    font-size: 0.78rem; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .card-location i { color: var(--purple); font-size: 0.72rem; }
+
+  .view-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--purple); background: rgba(108,99,255,0.08);
+    border: 1px solid rgba(108,99,255,0.2);
+    padding: 7px 14px; border-radius: 8px; text-decoration: none;
+    transition: background 0.18s, gap 0.18s;
+  }
+  .view-btn:hover { background: rgba(108,99,255,0.16); gap: 10px; }
+  .view-btn i { font-size: 0.72rem; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    grid-column: 1 / -1;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 14px; padding: 72px 24px; color: var(--muted); text-align: center;
+  }
+  .empty-state i { font-size: 3rem; color: #d1d5db; }
+  .empty-state h3 { font-size: 1.1rem; color: var(--ink); }
+  .empty-state p { font-size: 0.88rem; }
+
+  /* ── LOADING SHIMMER ── */
+  .shimmer-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 18px; overflow: hidden;
+  }
+  .shimmer-img {
+    height: 185px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
+  .shimmer-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .shimmer-line {
+    border-radius: 6px; height: 12px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 14px 5%; }
+    nav { gap: 16px; }
+    nav a { padding: 6px 0; font-size: 0.8rem; }
+    .hero-content { padding: 0 5% 28px; flex-direction: column; align-items: flex-start; }
+    .hero-strip { min-height: 190px; }
+    .page-wrap { padding: 30px 16px 80px; }
+    .top-row { flex-direction: column; }
+    .business-grid { grid-template-columns: 1fr; }
+  }
+  .menu-toggle{
+    display:none;
+    border:none;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+@media(max-width:768px){
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    padding:15px 20px;
+}
+
+.menu-toggle{
+    display:block;
+}
+
+#navbarLinks{
+    display:none;
+    width:100%;
+    flex-direction:column;
+    background:white;
+    margin-top:10px;
+    padding:15px;
+}
+
+#navbarLinks.active{
+    display:flex;
+}
+
+#navbarLinks a{
+    width:100%;
+    padding:12px;
+    margin:0;
+    text-align:left;
+}
+
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+
+<a href="index.html" class="nav-logo">
+Community.Business
+</a>
+
+<button
+class="menu-toggle"
+onclick="toggleMenu()">
+☰
+</button>
+
+<nav id="navbarLinks">
+
+<a href="index.html">🏠 Home</a>
+
+<a href="businesses.html">🏢 Businesses</a>
+
+<a href="posts.html">📸 Posts</a>
+
+<a href="about.html">ℹ️ About</a>
+
+<a href="profile.html">👤 My Profile</a>
+
+<a href="#"
+onclick="logoutUser();return false;">
+🚪 Sign Out
+</a>
+
+</nav>
+
+</header>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="hero-bg-text">DIRECTORY</div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-icon"><i class="fas fa-building"></i></div>
+    <div class="hero-meta">
+      <div class="hero-tag">Community Directory</div>
+      <h1 class="hero-title">Business Directory.</h1>
+      <p class="hero-sub">Explore businesses from our community.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page-wrap">
+
+  <!-- Search -->
+  <div class="top-row">
+    <div class="search-wrap">
+      <i class="fas fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="Search businesses...">
+    </div>
+  </div>
+
+  <!-- Category Filter Pills -->
+ <div class="filter-pills" id="filterPills">
+
+<div class="pill active" data-cat="all">All</div>
+
+<div class="pill" data-cat="Education">📚 Education</div>
+
+<div class="pill" data-cat="Technology">💻 Technology</div>
+
+<div class="pill" data-cat="Food & Restaurant">🍔 Food</div>
+
+<div class="pill" data-cat="Architecture">🏗 Architecture</div>
+
+<div class="pill" data-cat="Interior Design">🏠 Interior</div>
+
+<div class="pill" data-cat="Construction">🏢 Construction</div>
+
+<div class="pill" data-cat="Graphic Design">🎨 Design</div>
+
+<div class="pill" data-cat="Photography">📸 Photography</div>
+
+<div class="pill" data-cat="Digital Marketing">📈 Marketing</div>
+
+<div class="pill" data-cat="Healthcare">🏥 Healthcare</div>
+
+<div class="pill" data-cat="Finance">💰 Finance</div>
+
+<div class="pill" data-cat="Automobile">🚗 Automobile</div>
+
+<div class="pill" data-cat="Event Management">🎉 Events</div>
+
+<div class="pill" data-cat="Travel & Tourism">✈ Travel</div>
+
+<div class="pill" data-cat="Hotel & Hospitality">🏨 Hotels</div>
+
+<div class="pill" data-cat="Consultancy">📋 Consultancy</div>
+
+<div class="pill" data-cat="Other">✨ Other</div>
+
+</div>
+
+  <!-- Results count -->
+  <div class="results-meta" id="resultsMeta">Loading businesses...</div>
+
+  <!-- Grid -->
+  <div class="business-grid" id="businessGrid">
+    <!-- shimmer placeholders -->
+    <div class="shimmer-card"><div class="shimmer-img"></div><div class="shimmer-body"><div class="shimmer-line" style="width:40%"></div><div class="shimmer-line" style="width:70%"></div><div class="shimmer-line" style="width:55%"></div></div></div>
+    <div class="shimmer-card"><div class="shimmer-img"></div><div class="shimmer-body"><div class="shimmer-line" style="width:35%"></div><div class="shimmer-line" style="width:80%"></div><div class="shimmer-line" style="width:60%"></div></div></div>
+    <div class="shimmer-card"><div class="shimmer-img"></div><div class="shimmer-body"><div class="shimmer-line" style="width:45%"></div><div class="shimmer-line" style="width:65%"></div><div class="shimmer-line" style="width:50%"></div></div></div>
+  </div>
+
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase.js"></script>
+<script>
+function toggleMenu(){
+
+document
+.getElementById("navbarLinks")
+.classList
+.toggle("active");
+
+}
+async function updateNavbar(user){
+
+const nav =
+document.getElementById(
+"navbarLinks"
+);
+
+nav.classList.remove(
+"active"
+);
+if(user){
+
+let adminLink = "";
+
+try {
+  const userDoc = await db.collection("users").doc(user.uid).get();
+  const role = userDoc.exists ? userDoc.data().role : "";
+  if (role === "admin" || user.email === "admin@community.business") {
+    adminLink = `<a href="admin.html">🛡️Admin Panel</a>`;
+  }
+} catch (err) {
+  console.warn("Admin lookup failed:", err);
+}
+
+nav.innerHTML = `
+
+<a href="index.html">🏠 Home</a>
+
+<a href="businesses.html">🏢 Businesses</a>
+
+<a href="posts.html">📸 Posts</a>
+
+<a href="about.html">ℹ️ About</a>
+
+<a href="profile.html">
+👤 My Profile
+</a>
+
+${adminLink}
+
+<a href="#"
+onclick="logoutUser();return false;">
+🚪 Sign Out
+</a>
+
+`;
+
+}else{
+
+nav.innerHTML = `
+
+<a href="index.html">🏠 Home</a>
+
+<a href="businesses.html">🏢 Businesses</a>
+
+<a href="posts.html">📸 Posts</a>
+
+<a href="about.html">ℹ️ About</a>
+
+<a href="login.html">
+🔑 Login
+</a>
+
+<a href="signup.html">
+📝 Sign Up
+</a>
+
+`;
+
+}
+
+}
+
+function logoutUser(){
+
+auth.signOut()
+.then(()=>{
+
+window.location.href =
+"index.html";
+
+});
+
+}
+
+auth.onAuthStateChanged((user)=>{
+
+updateNavbar(user);
+
+});
+
+</script>
+
+<script>
+  /* cover images cycling so cards look varied */
+  const COVERS = [
+    "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&auto=format&fit=crop",
+  ];
+
+  let allBusinesses = [];
+  let activeCategory = "all";
+
+  function getInitials(name) {
+    if (!name) return "BZ";
+    const w = name.trim().split(/\s+/);
+    return w.length >= 2 ? (w[0][0] + w[1][0]).toUpperCase() : name.substring(0,2).toUpperCase();
+  }
+
+  function renderCards(list) {
+    const grid = document.getElementById("businessGrid");
+    const meta = document.getElementById("resultsMeta");
+
+    if (list.length === 0) {
+      grid.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-store-slash"></i>
+          <h3>No businesses found</h3>
+          <p>Try a different search or category filter.</p>
+        </div>`;
+      meta.innerHTML = `Showing <span>0</span> businesses`;
+      return;
+    }
+
+    meta.innerHTML = `Showing <span>${list.length}</span> business${list.length !== 1 ? "es" : ""}`;
+
+    grid.innerHTML = list.map((item, i) => {
+      const cover = COVERS[i % COVERS.length];
+      const initials = getInitials(item.data.businessName);
+      return `
+      <div class="card" style="animation-delay:${i * 0.06}s">
+        <div class="card-img-wrap">
+          <img class="card-img"
+     src="${item.data.logoURL || cover}"
+     alt="${item.data.businessName}"
+     loading="lazy"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-initials" style="display:none">${initials}</div>
+        </div>
+        <div class="card-content">
+          <div class="category-tag">${item.data.category || "Business"}</div>
+          <h3>${item.data.businessName || "Unnamed Business"}</h3>
+          <p>${item.data.description || "No description available"}</p>
+          <div class="card-footer">
+            <div class="card-location">
+              <i class="fas fa-location-dot"></i>
+              ${item.data.location || "Location not set"}
+            </div>
+            <a href="business-details.html?id=${item.id}" class="view-btn">
+              View Details <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  function applyFilters() {
+    const query = document.getElementById("searchInput").value.toLowerCase().trim();
+    let filtered = allBusinesses;
+
+    if (activeCategory !== "all") {
+      filtered = filtered.filter(b => (b.data.category || "") === activeCategory);
+    }
+    if (query) {
+      filtered = filtered.filter(b => {
+        const text = (b.data.businessName + " " + b.data.description + " " + b.data.category + " " + b.data.location).toLowerCase();
+        return text.includes(query);
+      });
+    }
+    renderCards(filtered);
+  }
+
+  /* search */
+  document.getElementById("searchInput").addEventListener("input", applyFilters);
+
+  /* category pills */
+  document.getElementById("filterPills").addEventListener("click", e => {
+    const pill = e.target.closest(".pill");
+    if (!pill) return;
+    document.querySelectorAll(".pill").forEach(p => p.classList.remove("active"));
+    pill.classList.add("active");
+    activeCategory = pill.dataset.cat;
+    applyFilters();
+  });
+
+  /* load from Firebase */
+  async function loadBusinesses() {
+    try {
+      const snapshot = await db.collection("businesses").get();
+      allBusinesses = snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() }));
+      applyFilters();
+    } catch (err) {
+      console.error(err);
+      document.getElementById("businessGrid").innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-triangle-exclamation"></i>
+          <h3>Could not load businesses</h3>
+          <p>${err.message}</p>
+        </div>`;
+    }
+  }
+
+  loadBusinesses();
+
+  function logoutUser() {
+    auth.signOut().then(() => { window.location.href = "login.html"; }).catch(e => alert(e.message));
+  }
+</script>
+</body>
+</html>

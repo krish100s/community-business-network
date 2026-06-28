@@ -1,0 +1,13 @@
+{
+  "name": "community-business-functions",
+  "private": true,
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^5.0.1",
+    "nodemailer": "^6.9.15"
+  }
+}

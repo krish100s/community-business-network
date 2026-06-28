@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Details — Community Business</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:      #0d0d0d;
+    --paper:    #f5f2eb;
+    --cream:    #fffdf8;
+    --accent:   #2a3ac8;
+    --accent2:  #997ce8;
+    --muted:    #8a8070;
+    --border:   #e2ddd4;
+    --glass:    rgba(255,253,248,0.6);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* ── NAV ── */
+  header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+
+    background:white;
+
+    padding:20px 8%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+
+  .nav-logo{
+    font-family:'Syne',sans-serif;
+    font-size:18px;
+    font-weight:800;
+    color:#111827;
+    text-decoration:none;
+    letter-spacing:-0.5px;
+}
+nav{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+nav a{
+    position:relative;
+    text-decoration:none;
+    color:#111827;
+    font-weight:600;
+    font-size:0.88rem;
+    padding:8px 0;
+    transition:color .18s ease;
+}
+nav a:hover{
+    color:#4f46e5;
+}
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+
+    width:0;
+    height:2px;
+
+    background:#4f46e5;
+
+    transition:width 0.18s ease;
+}
+
+nav a:hover::after{
+    width:100%;
+}
+
+  /* ── HERO STRIP ── */
+  .hero-strip {
+    margin-top: 73px;
+    position: relative;
+    overflow: hidden;
+    height: 480px;
+    display: flex;
+    align-items: flex-end;
+    background: var(--ink);
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    top: -20px; left: -10px;
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(100px, 16vw, 220px);
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    white-space: nowrap;
+    letter-spacing: -8px;
+    user-select: none;
+    line-height: 1;
+    animation: drift 18s linear infinite;
+  }
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-5%); }
+  }
+
+  .hero-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+  }
+  .shape-1 { width: 500px; height: 500px; background: var(--accent); top: -200px; right: -100px; }
+  .shape-2 { width: 300px; height: 300px; background: #5a3fbf; bottom: -100px; left: 20%; }
+  .shape-3 { width: 200px; height: 200px; background: var(--accent2); top: 100px; left: 40%; }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 60px 60px;
+    display: flex;
+    align-items: flex-end;
+    gap: 36px;
+    width: 100%;
+  }
+
+  .logo-ring {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 28px;
+    overflow:hidden;
+position:relative;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 20px 60px rgba(200,82,42,0.4);
+    animation: popIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.5) translateY(20px); opacity: 0; }
+    to   { transform: scale(1)   translateY(0);    opacity: 1; }
+  }
+
+  .hero-meta { flex: 1; animation: fadeUp 0.7s ease 0.4s both; }
+  @keyframes fadeUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .hero-category-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    background: rgba(200,82,42,0.15);
+    border: 1px solid rgba(200,82,42,0.3);
+    padding: 5px 14px;
+    border-radius: 40px;
+    margin-bottom: 14px;
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    color: #fff;
+    line-height: 1.08;
+    letter-spacing: -1px;
+  }
+  .hero-title em { color: var(--accent2); font-style: italic; }
+
+  /* ── MAIN BODY ── */
+  .page-wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 40px 120px;
+  }
+
+  /* ── GRID ── */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 36px;
+    align-items: start;
+  }
+
+  /* ── SECTION CARD ── */
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .card + .card { margin-top: 20px; }
+
+  .card-header {
+    padding: 22px 28px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.85rem;
+  }
+
+  .card-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-body {
+    padding: 14px 28px 26px;
+  }
+
+  .card-body p, .card-value {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .card-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 28px;
+  }
+
+  /* ── DESCRIPTION CARD SPECIAL ── */
+  .desc-card .card-body p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.2rem;
+    color: #2a2520;
+    line-height: 1.75;
+  }
+
+  /* ── SIDEBAR CONTACT ── */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  .contact-card {
+    background: var(--ink);
+    border-radius: 20px;
+    padding: 30px;
+    color: #fff;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .contact-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-item:hover { gap: 20px; }
+
+  .ci-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .ci-phone  { background: rgba(255,255,255,0.1); color: #fff; }
+  .ci-email  { background: rgba(200,82,42,0.25);  color: var(--accent2); }
+  .ci-wa     { background: rgba(37,211,102,0.2);  color: #25d366; }
+  .ci-li     { background: rgba(10,102,194,0.25); color: #5aabf5; }
+
+  .ci-text { display: flex; flex-direction: column; }
+  .ci-sub  { font-size: 0.72rem; color: var(--muted); font-weight: 500; letter-spacing: 0.06em; }
+  .ci-val  { font-size: 0.92rem; color: #fff; font-weight: 400; margin-top: 2px; }
+
+  .ci-arrow { margin-left: auto; color: var(--muted); font-size: 0.8rem; transition: transform 0.2s, color 0.2s; }
+  .contact-item:hover .ci-arrow { transform: translateX(4px); color: #fff; }
+
+  /* ── MAP / LOCATION CARD ── */
+  /* .location-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: fadeUp 0.7s ease 0.3s both;
+  } */
+
+  /* .map-placeholder {
+    height: 130px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+
+  /* .map-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .map-pin {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .map-pin i { font-size: 2rem; color: var(--accent); filter: drop-shadow(0 0 12px rgba(200,82,42,0.8)); }
+  .map-pulse {
+    width: 40px;
+    height: 8px;
+    background: radial-gradient(ellipse, rgba(200,82,42,0.5), transparent 70%);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  } */
+  /* @keyframes pulse {
+    0%, 100% { transform: scaleX(0.6); opacity: 0.4; }
+    50%       { transform: scaleX(1.2); opacity: 1; }
+  }
+
+  .location-body {
+    padding: 18px 22px;
+  }
+  .location-body p {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.5;
+  } */
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.5s ease 0.1s both;
+  }
+  .stat-pill {
+    flex: 1;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── BACK BTN ── */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 36px;
+    transition: color 0.2s, gap 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .back-link:hover { color: var(--ink); gap: 12px; }
+  .back-link i { font-size: 0.75rem; }
+
+  /* ── LOADING STATE ── */
+  .loading-shimmer {
+    background: linear-gradient(90deg, #e8e4dc 25%, #f0ede5 50%, #e8e4dc 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+    color: transparent;
+    user-select: none;
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    header { padding: 16px 20px; }
+    nav { gap: 16px; }
+    .hero-content { padding: 0 24px 40px; flex-direction: column; align-items: flex-start; gap: 20px; }
+    .hero-strip { height: 380px; }
+    .page-wrap { padding: 40px 20px 80px; }
+    .content-grid { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+  }
+
+  .business-post{
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    margin-bottom:20px;
+
+    background:white;
+
+}
+
+.business-post img{
+
+    width:100%;
+
+    height:350px;
+
+    object-fit:cover;
+
+}
+
+.post-caption{
+
+    padding:15px;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+}
+
+.business-gallery{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.business-gallery img{
+  width:100%;
+  flex:1 1 calc(50% - 7px);
+  height:180px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#fff;
+}
+
+.business-gallery.compact img{
+  flex:1 1 calc(50% - 7px);
+}
+
+.business-gallery.expanded{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+}
+
+.gallery-actions{
+  margin-top:14px;
+  display:flex;
+  justify-content:center;
+}
+
+.see-more-btn{
+  border:none;
+  background:transparent;
+  color:var(--accent);
+  font-weight:700;
+  cursor:pointer;
+  padding:8px 0;
+}
+
+.gallery-upload{
+  display:grid;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.gallery-upload input[type="file"]{
+  width:100%;
+  padding:12px;
+  border:1px dashed var(--border);
+  border-radius:12px;
+  background:#fff;
+}
+
+.gallery-upload button{
+  border:none;
+  border-radius:12px;
+  padding:12px 16px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.gallery-upload button:disabled{
+  opacity:0.7;
+  cursor:wait;
+}
+
+.gallery-hint{
+  font-size:0.82rem;
+  color:var(--muted);
+}
+
+.gallery-edit{
+  margin-top:20px;
+}
+  .ci-insta{
+    background:rgba(225,48,108,0.20);
+    color:#e1306c;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+
+<a href="index.html" class="nav-logo">
+Community.Business
+</a>
+
+<button
+class="menu-toggle"
+onclick="toggleMenu()">
+
+☰
+
+</button>
+
+<nav id="navbarLinks">
+</nav>
+
+</header>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="hero-bg-text">BUSINESS</div>
+  <div class="hero-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="logo-ring">
+
+    <img
+        id="businessLogo"
+        src=""
+        style="
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        border-radius:28px;
+        display:none;
+        ">
+
+    <span id="logoInitials">KS</span>
+
+</div>
+    <div class="hero-meta">
+      <div class="hero-category-tag" id="categoryTag">Loading...</div>
+      <h1 class="hero-title" id="businessName">Loading Business<em>...</em></h1>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="page-wrap">
+  <a href="businesses.html" class="back-link">
+    <i class="fas fa-arrow-left"></i> Back to Businesses
+  </a>
+
+  <div class="content-grid">
+
+    <!-- LEFT COLUMN -->
+    <div>
+      <!-- About -->
+      <div class="card desc-card">
+        <div class="card-header">
+          <div class="card-icon"><i class="fas fa-quote-left"></i></div>
+          <span class="card-label">About this Business</span>
+        </div>
+        <div class="card-body">
+          <p id="description">Loading description...</p>
+        </div>
+      </div>
+
+      <!-- Details -->
+      <div class="card" style="margin-top:20px;">
+        <div class="card-header">
+          <div class="card-icon"><i class="fas fa-circle-info"></i></div>
+          <span class="card-label">Details</span>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:18px;">
+            <div>
+              <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Category</div>
+              <div id="categoryDetail" style="font-size:1rem;color:var(--ink);font-weight:500;">Loading...</div>
+            </div>
+            <div class="card-divider" style="margin:0;"></div>
+            <div>
+              <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Location</div>
+              <div id="location" style="font-size:1rem;color:var(--ink);display:flex;align-items:center;gap:8px;">
+                <i class="fas fa-location-dot" style="color:var(--accent);"></i>
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+        <div class="card-header">
+          <div class="card-icon"><i class="fas fa-images"></i></div>
+          <span class="card-label">Business Images</span>
+        </div>
+        <div class="card-body">
+          <div id="businessGallery" class="business-gallery">
+            <p style="color:var(--muted);">No business images yet.</p>
+          </div>
+          <div class="gallery-actions" id="galleryActions" style="display:none;">
+            <button type="button" class="see-more-btn" id="toggleGalleryBtn">See more</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div> <!-- Details Card Ends -->
+
+<!-- BUSINESS POSTS -->
+
+<div class="card" style="margin-top:20px;">
+
+    <div class="card-header">
+
+        <div class="card-icon">
+            <i class="fas fa-images"></i>
+        </div>
+
+        <span class="card-label">
+            Recent Posts
+        </span>
+
+    </div>
+
+    <div class="card-body">
+
+        <div id="businessPosts">
+
+            Loading Posts...
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="sidebar">
+
+      <!-- Contact card -->
+      <div class="contact-card">
+        <div class="contact-card-title">Get in Touch</div>
+
+        <a id="phoneLink" class="contact-item" href="#">
+          <div class="ci-icon ci-phone"><i class="fas fa-phone"></i></div>
+          <div class="ci-text">
+            <span class="ci-sub">Phone</span>
+            <span class="ci-val" id="phone">Loading...</span>
+          </div>
+          <i class="fas fa-chevron-right ci-arrow"></i>
+        </a>
+
+        <a id="emailLink" class="contact-item" href="#">
+          <div class="ci-icon ci-email"><i class="fas fa-envelope"></i></div>
+          <div class="ci-text">
+            <span class="ci-sub">Email</span>
+            <span class="ci-val" id="emailDisplay">Loading...</span>
+          </div>
+          <i class="fas fa-chevron-right ci-arrow"></i>
+        </a>
+
+        <a id="whatsappLink" class="contact-item" href="#" target="_blank">
+          <div class="ci-icon ci-wa"><i class="fab fa-whatsapp"></i></div>
+          <div class="ci-text">
+            <span class="ci-sub">WhatsApp</span>
+            <span class="ci-val">Chat Now</span>
+          </div>
+          <i class="fas fa-chevron-right ci-arrow"></i>
+        </a>
+
+        <a id="linkedInLink" class="contact-item" href="#" target="_blank">
+          <div class="ci-icon ci-li"><i class="fab fa-linkedin-in"></i></div>
+          <div class="ci-text">
+            <span class="ci-sub">LinkedIn</span>
+            <span class="ci-val">View Profile</span>
+          </div>
+          <i class="fas fa-chevron-right ci-arrow"></i>
+        </a>
+
+        <a id="instagramLink" class="contact-item" href="#" target="_blank">
+
+  <div class="ci-icon ci-insta">
+      <i class="fab fa-instagram"></i>
+  </div>
+
+  <div class="ci-text">
+      <span class="ci-sub">Instagram</span>
+      <span class="ci-val">View Profile</span>
+  </div>
+
+  <i class="fas fa-chevron-right ci-arrow"></i>
+
+</a>
+      </div>
+
+      <!-- Location visual
+      <div class="location-card">
+        <div class="map-placeholder">
+          <div class="map-grid"></div>
+          <div class="map-pin">
+            <i class="fas fa-location-dot"></i>
+            <div class="map-pulse"></div>
+          </div>
+        </div>
+        <div class="location-body">
+          <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Location</div>
+          <p id="locationSidebar">Loading location...</p>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+<script src="js/firebase.js"></script>
+<script>
+
+function toggleMenu(){
+
+document
+.getElementById("navbarLinks")
+.classList
+.toggle("active");
+
+}
+async function updateNavbar(user){
+
+const nav =
+document.getElementById(
+"navbarLinks"
+);
+
+nav.classList.remove(
+"active"
+);
+
+if(user){
+
+let adminLink = "";
+
+try {
+  const userDoc = await db.collection("users").doc(user.uid).get();
+  const role = userDoc.exists ? userDoc.data().role : "";
+  if (role === "admin" || user.email === "admin@community.business") {
+    adminLink = `<a href="admin.html"> 🛡️Admin Panel</a>`;
+  }
+} catch (err) {
+  console.warn("Admin lookup failed:", err);
+}
+
+nav.innerHTML = `
+
+<a href="index.html">🏠 Home</a>
+
+<a href="businesses.html">🏢 Businesses</a>
+
+<a href="posts.html">📸 Posts</a>
+
+<a href="about.html">ℹ️ About</a>
+
+<a href="profile.html">
+👤 My Profile
+</a>
+
+${adminLink}
+
+<a href="#"
+onclick="logoutUser();return false;">
+🚪 Sign Out
+</a>
+
+`;
+
+}else{
+
+nav.innerHTML = `
+
+<a href="index.html">🏠 Home</a>
+
+<a href="businesses.html">🏢 Businesses</a>
+
+<a href="posts.html">📸 Posts</a>
+
+<a href="about.html">ℹ️ About</a>
+
+<a href="login.html">
+🔑 Login
+</a>
+
+<a href="signup.html">
+📝 Sign Up
+</a>
+
+`;
+
+}
+
+}
+
+function logoutUser(){
+
+auth.signOut()
+.then(()=>{
+
+window.location.href =
+"index.html";
+
+});
+
+}
+
+auth.onAuthStateChanged((user)=>{
+
+updateNavbar(user);
+
+});
+
+</script>
+
+<script>
+  const params     = new URLSearchParams(window.location.search);
+  const businessId = params.get("id");
+console.log("URL Business ID:", businessId);
+  function getInitials(name) {
+    if (!name) return "BZ";
+    const words = name.trim().split(/\s+/);
+    return words.length >= 2
+      ? (words[0][0] + words[1][0]).toUpperCase()
+      : name.substring(0, 2).toUpperCase();
+  }
+  let allPosts = [];
+let showingAllPosts = false;
+let allBusinessImages = [];
+let showingAllBusinessImages = false;
+
+ async function loadBusinessPosts(){
+
+const snapshot =
+await db.collection("business_posts")
+.where("businessId","==",businessId)
+.get();
+
+allPosts = [];
+
+snapshot.forEach((doc)=>{
+
+allPosts.push({
+    id: doc.id,
+    ...doc.data()
+});
+
+});
+allPosts.sort((a,b)=>{
+
+return (
+(b.createdAt?.seconds || 0)
+-
+(a.createdAt?.seconds || 0)
+
+);
+
+});
+renderPosts();
+
+}
+
+function renderPosts(){
+
+const postsContainer =
+document.getElementById("businessPosts");
+
+postsContainer.innerHTML = "";
+
+if(allPosts.length === 0){
+
+postsContainer.innerHTML =
+"<p>No posts available.</p>";
+
+return;
+
+}
+
+const postsToShow =
+showingAllPosts
+? allPosts
+: allPosts.slice(0,3);
+
+postsToShow.forEach((post)=>{
+
+postsContainer.innerHTML += `
+
+<div class="business-post">
+
+<img src="${post.imageURL}">
+
+<div class="post-caption">
+
+${post.caption || ""}
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(allPosts.length > 3){
+
+postsContainer.innerHTML += `
+
+<div style="text-align:center;margin-top:20px;">
+
+<button
+class="view-more-btn"
+onclick="togglePosts()">
+
+${showingAllPosts
+? "Show Less"
+: `View All ${allPosts.length} Posts →`}
+
+</button>
+
+</div>
+
+`;
+
+}
+
+}
+
+function togglePosts(){
+
+showingAllPosts =
+!showingAllPosts;
+
+renderPosts();
+
+}
+
+function renderBusinessGallery() {
+  const galleryEl = document.getElementById("businessGallery");
+  const actionsEl = document.getElementById("galleryActions");
+  const toggleBtn = document.getElementById("toggleGalleryBtn");
+
+  if (!allBusinessImages.length) {
+    galleryEl.innerHTML = '<p style="color:var(--muted);">No business images yet.</p>';
+    actionsEl.style.display = "none";
+    return;
+  }
+
+  const visibleImages = showingAllBusinessImages
+    ? allBusinessImages
+    : allBusinessImages.slice(-2);
+
+  galleryEl.className = showingAllBusinessImages
+    ? "business-gallery expanded"
+    : "business-gallery compact";
+
+  galleryEl.innerHTML = visibleImages
+    .map((url) => `<img src="${url}" alt="Business image" loading="lazy">`)
+    .join("");
+
+  if (allBusinessImages.length > 2) {
+    actionsEl.style.display = "flex";
+    toggleBtn.textContent = showingAllBusinessImages ? "Show less" : "See more";
+  } else {
+    actionsEl.style.display = "none";
+  }
+}
+
+function toggleBusinessGallery() {
+  showingAllBusinessImages = !showingAllBusinessImages;
+  renderBusinessGallery();
+}
+
+  async function loadBusiness() {
+    try {
+      const doc = await db.collection("businesses").doc(businessId).get();
+      if (!doc.exists) return;
+
+      const d = doc.data();
+      console.log("Business Data:", d);
+console.log("Logo URL:", d.logoURL);
+      if(d.logoURL){
+
+    document.getElementById("businessLogo").src =
+    d.logoURL;
+
+    document.getElementById("businessLogo").style.display =
+    "block";
+
+    document.getElementById("logoInitials").style.display =
+    "none";
+
+}
+
+      // Hero
+      document.getElementById("logoInitials").textContent = getInitials(d.businessName);
+      document.getElementById("businessName").innerHTML =
+        (d.businessName || "Business") + '<em>.</em>';
+      document.getElementById("categoryTag").textContent = d.category || "Business";
+
+      // Body
+      document.getElementById("description").textContent     = d.description  || "No description provided.";
+      document.getElementById("categoryDetail").textContent  = d.category     || "—";
+      document.getElementById("location").innerHTML =
+        `<i class="fas fa-location-dot" style="color:var(--accent);"></i> ${d.location || "—"}`;
+    //   document.getElementById("locationSidebar").textContent = d.location     || "—";
+
+      // Contact
+      document.getElementById("phone").textContent = d.phone || "—";
+      if (d.phone) document.getElementById("phoneLink").href = "tel:" + d.phone;
+
+      if (d.email) {
+        document.getElementById("emailLink").href = "mailto:" + d.email;
+        document.getElementById("emailDisplay").textContent = d.email;
+      }
+
+      if (d.whatsapp) document.getElementById("whatsappLink").href = "https://wa.me/" + d.whatsapp;
+      if (d.linkedIn) document.getElementById("linkedInLink").href = d.linkedIn;
+      if (d.instagram)
+    document.getElementById("instagramLink").href =
+    d.instagram;
+
+      allBusinessImages = Array.isArray(d.businessImages) ? d.businessImages : [];
+      showingAllBusinessImages = false;
+      renderBusinessGallery();
+
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  document.getElementById("toggleGalleryBtn").addEventListener("click", toggleBusinessGallery);
+
+  loadBusiness();
+loadBusinessPosts();
+</script>
+</body>
+</html>

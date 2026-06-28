@@ -1,0 +1,11 @@
+node_modules/
+functions/node_modules/
+
+.firebase/
+
+.env
+
+.vscode/
+
+.DS_Store
+Thumbs.db

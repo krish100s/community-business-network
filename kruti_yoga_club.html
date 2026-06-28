@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VS Tuition Classes</title>
+
+  <link rel="stylesheet" href="CSS/style.css">
+
+  <style>
+
+    body{
+      background:#f5f7fb;
+      font-family:Arial, sans-serif;
+    }
+
+    .hero{
+      width:100%;
+      height:450px;
+      background:
+      linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+      url('images/yoga_classes.jpg');
+
+      background-size:cover;
+      background-position:center;
+
+      display:flex;
+      align-items:center;
+      padding:0 8%;
+      color:white;
+    }
+
+    .hero-content h1{
+      font-size:65px;
+      margin-bottom:15px;
+    }
+
+    .hero-content p{
+      font-size:22px;
+      color:#ddd;
+    }
+
+    .container{
+      width:85%;
+      margin:auto;
+      margin-top:60px;
+      margin-bottom:80px;
+    }
+
+    .top-section{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:30px;
+      margin-bottom:40px;
+    }
+
+    .card{
+      background:white;
+      padding:35px;
+      border-radius:22px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .card h2{
+      color:#4f46e5;
+      margin-bottom:20px;
+      font-size:30px;
+    }
+
+    .card p{
+      color:#666;
+      line-height:1.9;
+      margin-bottom:15px;
+    }
+
+    .info{
+      margin-bottom:20px;
+    }
+
+    .info h4{
+      margin-bottom:6px;
+      color:#111827;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      margin-top:25px;
+    }
+
+    .gallery img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      border-radius:18px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 28px;
+      background:#25d366;
+      color:white;
+      text-decoration:none;
+      border-radius:12px;
+      margin-top:15px;
+      font-weight:bold;
+    }
+
+    .socials{
+      margin-top:25px;
+      display:flex;
+      gap:15px;
+    }
+
+    .socials a{
+      padding:12px 18px;
+      border-radius:10px;
+      text-decoration:none;
+      color:white;
+      font-weight:bold;
+    }
+
+    .instagram{
+      background:#e1306c;
+    }
+
+    .facebook{
+      background:#1877f2;
+    }
+
+    @media(max-width:900px){
+
+      .top-section{
+        grid-template-columns:1fr;
+      }
+
+      .hero-content h1{
+        font-size:42px;
+      }
+
+      .container{
+        width:92%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+  <header>
+
+  <div class="logo">Community Business</div>
+
+  <nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="businesses.html">Businesses</a>
+
+    <a href="about.html">About</a>
+
+    <a href="profile.html">My Profile</a>
+
+    <a href="contact.html">Contact</a>
+
+    <a href="login.html">Sign Out</a>
+
+  </nav>
+
+</header>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>Kruti Yoga Club</h1>
+
+      <p>
+        Transform Your Mind, Body & Soul
+      </p>
+
+    </div>
+
+  </section>
+
+  <div class="container">
+
+    <div class="top-section">
+
+      <!-- LEFT -->
+
+      <div class="card">
+
+        <h2>About Our Classes</h2>
+
+        <p>
+          Peace Yoga Studio is dedicated to helping individuals achieve a healthy and balanced lifestyle through yoga, meditation, and wellness practices. Our classes are designed for all age groups and experience levels, creating a calm and positive environment for physical and mental well-being.
+        </p>
+
+        <p>
+          We focus on improving flexibility, strength, relaxation, and inner peace through guided sessions conducted by experienced instructors.
+
+        </p>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="card">
+
+        <h2>Business Details</h2>
+
+        <div class="info">
+          <h4>Owner Name</h4>
+          <p>Kruti Soni </p>
+        </div>
+
+        <div class="info">
+          <h4>Location</h4>
+          <p>Sargasan, Gandhinagar</p>
+        </div>
+
+        <div class="info">
+          <h4>Category</h4>
+          <p>Wellness</p>
+        </div>
+
+        <div class="info">
+          <h4>Contact</h4>
+          <p>+91 987654321</p>
+        </div>
+
+        <div class="info">
+          <h4>Email</h4>
+          <p>abc@gmail.com</p>
+        </div>
+
+        <a href="#" class="btn">
+          Contact on WhatsApp
+        </a>
+
+        <div class="socials">
+
+          <a href="#" class="instagram">
+            Instagram
+          </a>
+
+          <a href="#" class="facebook">
+            Facebook
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SERVICES -->
+
+    <div class="card">
+
+      <h2>Services We Provide</h2>
+
+      <p>✔ Yoga Classes</p>
+      <p>✔ Meditation Sessions</p>
+      <p>✔ Weight Loss Yoga</p>
+      <p>✔ Morning & Evening Batches</p>
+      <p>✔ Personal Yoga Training</p>
+
+    </div>
+
+    <!-- GALLERY -->
+
+    <div class="card" style="margin-top:40px;">
+
+      <h2>Gallery</h2>
+
+      <div class="gallery">
+
+        <img src="images/yoga_classes.jpg">
+
+        <img src="images/yoga_classes.jpg">
+
+        <img src="images/yoga_classes.jpg">
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
