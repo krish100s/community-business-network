@@ -774,21 +774,21 @@
             <strong>Featured discovery</strong>
             <span>Curated local businesses with strong visibility</span>
           </div>
-          <div class="hero-mini-stat">500+</div>
+         <div class="hero-mini-stat" id="liveBusinesses">0</div>
         </div>
         <div class="hero-mini-card">
           <div>
             <strong>Active members</strong>
             <span>People connecting, collaborating, and referring</span>
           </div>
-          <div class="hero-mini-stat">1.2k</div>
+          <div class="hero-mini-stat" id="liveUsers">0</div>
         </div>
         <div class="hero-mini-card">
           <div>
             <strong>Communities served</strong>
             <span>Supporting entrepreneurs across categories</span>
           </div>
-          <div class="hero-mini-stat">100+</div>
+          <div class="hero-mini-stat" id="livePosts">0</div>
         </div>
       </div>
     </div>
@@ -825,10 +825,10 @@
     <div class="eyebrow-line"></div>
   </div>
   <div class="stats-grid">
-    <div class="stat-card"><div class="stat-number">500+</div><div class="stat-label">Businesses</div></div>
-    <div class="stat-card"><div class="stat-number">1200+</div><div class="stat-label">Members</div></div>
-    <div class="stat-card"><div class="stat-number">350+</div><div class="stat-label">Posts</div></div>
-    <div class="stat-card"><div class="stat-number">100+</div><div class="stat-label">Communities</div></div>
+    <div class="stat-card"><div class="stat-number" id="statBusinesses">0</div><div class="stat-label">Businesses</div></div>
+    <div class="stat-card"><div class="stat-number" id="statUsers">0</div><div class="stat-label">Members</div></div>
+    <div class="stat-card"><div class="stat-number" id="statPosts">0</div><div class="stat-label">Posts</div></div>
+    <div class="stat-card"><div class="stat-number" id="statCategories">0</div><div class="stat-label">Communities</div></div>
   </div>
 
   <div class="section-eyebrow">
@@ -979,6 +979,39 @@ auth.onAuthStateChanged((user) => {
 });
 
 loadFeaturedBusinesses();
+loadHomepageStats();
+
+async function loadHomepageStats() {
+
+    const businesses = await db.collection("businesses").get();
+    const users = await db.collection("users").get();
+    const posts = await db.collection("business_posts").get();
+
+    // Business Count
+    document.getElementById("liveBusinesses").innerText = businesses.size + "+";
+    document.getElementById("statBusinesses").innerText = businesses.size + "+";
+
+    // User Count
+    document.getElementById("liveUsers").innerText = users.size + "+";
+    document.getElementById("statUsers").innerText = users.size + "+";
+
+    // Posts Count
+    document.getElementById("livePosts").innerText = posts.size + "+";
+    document.getElementById("statPosts").innerText = posts.size + "+";
+
+    // Categories Count
+    const categories = new Set();
+
+    businesses.forEach(doc => {
+        const data = doc.data();
+        if (data.category) {
+            categories.add(data.category);
+        }
+    });
+
+    document.getElementById("statCategories").innerText =
+        categories.size + "+";
+}
 
 async function loadFeaturedBusinesses(){
   const container = document.getElementById("featuredBusinesses");
