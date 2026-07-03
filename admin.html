@@ -3,538 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel - Community Business</title>
+<title>Admin Panel - Community Business Network</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0b1020;
-    --panel: #0f172a;
-    --panel-2: #111827;
-    --card: #ffffff;
-    --card-2: #f8fafc;
-    --text: #e5e7eb;
-    --ink: #0f172a;
-    --muted: #94a3b8;
-    --border: rgba(148,163,184,0.18);
-    --accent: #8b5cf6;
-    --accent-2: #4f46e5;
-    --danger: #ef4444;
-    --success: #22c55e;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background:
-      radial-gradient(circle at top left, rgba(139,92,246,0.18), transparent 35%),
-      radial-gradient(circle at top right, rgba(79,70,229,0.18), transparent 30%),
-      linear-gradient(180deg, #08101f 0%, #0b1020 36%, #eef2ff 36%, #eef2ff 100%);
-    color: var(--ink);
-    min-height: 100vh;
-  }
-
-header{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:1000;
-
-    background:white;
-
-    padding:16px 6%;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.07);
-}
-
- .nav-logo{
-    font-family:'Syne',sans-serif;
-    font-size:1.2rem;
-    font-weight:800;
-    color:var(--ink);
-    text-decoration:none;
-    letter-spacing:-0.3px;
-}
-  nav{
-    display:flex;
-    gap:22px;
-    align-items:center;
-}
- nav a{
-    position:relative;
-    text-decoration:none;
-    color:var(--ink);
-    font-size:.88rem;
-    font-weight:600;
-    padding:8px 0;
-    transition:color .18s;
-    white-space:nowrap;
-}
-
-nav a:hover{
-    color:var(--accent-2);
-}
-
-nav a::after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-6px;
-    width:0;
-    height:2px;
-    background:var(--accent-2);
-    transition:width .18s;
-}
-
-nav a:hover::after{
-    width:100%;
-}
-
-  
-
-  .menu-toggle {
-    display: none;
-    border: none;
-    background: none;
-    color: var(--ink);
-    font-size: 28px;
-    cursor: pointer;
-  }
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-    padding: 52px 6% 38px;
-    min-height: 230px;
-    margin-top:65px;
-    background: linear-gradient(135deg, #0d0d1a 0%, #1a1040 40%, #2d1b69 70%, #4c2fa0 100%);
-  }
-
-  .hero::before {
-    content: "ADMIN";
-    position: absolute;
-    left: 4%;
-    top: 8px;
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(84px, 15vw, 180px);
-    font-weight: 800;
-    letter-spacing: -0.08em;
-    color: rgba(255,255,255,0.05);
-    white-space: nowrap;
-    user-select: none;
-  }
-
-  .hero::after {
-    content: "";
-    position: absolute;
-    right: -80px;
-    top: -80px;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(139,92,246,0.38) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-copy {
-    position: relative;
-    z-index: 1;
-    color: #fff;
-    animation: rise 0.7s ease both;
-    max-width: 760px;
-  }
-
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.12);
-    background: rgba(255,255,255,0.06);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #c4b5fd;
-    margin-bottom: 16px;
-  }
-
-  .hero-copy h1 {
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-    margin-bottom: 14px;
-  }
-
-  .hero-copy p {
-    max-width: 620px;
-    color: rgba(255,255,255,0.62);
-    line-height: 1.7;
-    font-size: 0.98rem;
-  }
-
-  .page {
-    max-width: 1240px;
-    margin: 0 auto;
-    padding: 0 6% 90px;
-  }
-
-  .toolbar {
-    display: flex;
-    gap: 12px;
-    align-items: stretch;
-    justify-content: space-between;
-    margin-top: 24px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-  }
-
-  .search {
-    flex: 1;
-    min-width: 260px;
-    position: relative;
-  }
-
-  .search i {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--muted);
-  }
-
-  .search input {
-    width: 100%;
-    padding: 14px 16px 14px 44px;
-    border: 1px solid rgba(15,23,42,0.1);
-    border-radius: 14px;
-    background: rgba(255,255,255,0.95);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.94rem;
-    outline: none;
-    box-shadow: 0 12px 34px rgba(15,23,42,0.06);
-  }
-
-  .tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-
-  .tab-btn {
-    border: 1px solid rgba(15,23,42,0.08);
-    background: rgba(255,255,255,0.92);
-    color: var(--ink);
-    padding: 10px 14px;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.18s, color 0.18s, transform 0.18s;
-  }
-
-  .tab-btn:hover { transform: translateY(-1px); }
-  .tab-btn.active {
-    background: linear-gradient(135deg, var(--accent-2), var(--accent));
-    color: #fff;
-    border-color: transparent;
-  }
-
-  .panel-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .panel {
-    background: rgba(255,255,255,0.96);
-    border: 1px solid rgba(15,23,42,0.08);
-    border-radius: 22px;
-    overflow: hidden;
-    box-shadow: 0 16px 44px rgba(15,23,42,0.08);
-  }
-
-  .panel-head {
-    padding: 20px 22px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .panel-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .panel-title h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.7rem;
-    line-height: 1;
-  }
-
-  .panel-title p {
-    font-size: 0.84rem;
-    color: var(--muted);
-    margin-top: 4px;
-  }
-
-  .panel-body {
-    padding: 20px 22px 22px;
-  }
-
-  .grid-cards {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 18px;
-  }
-
-  .summary-card {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    border: 1px solid rgba(15,23,42,0.08);
-    border-radius: 18px;
-    padding: 18px;
-  }
-
-  .summary-card .label {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .summary-card .value {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-  }
-
-  .summary-card .sub {
-    margin-top: 6px;
-    color: var(--muted);
-    font-size: 0.84rem;
-  }
-
-  .table-wrap {
-    overflow-x: auto;
-    border: 1px solid rgba(15,23,42,0.08);
-    border-radius: 18px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    min-width: 760px;
-  }
-
-  th, td {
-    text-align: left;
-    padding: 14px 16px;
-    border-bottom: 1px solid rgba(15,23,42,0.06);
-    vertical-align: top;
-  }
-
-  th {
-    background: #f8fafc;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-
-  td {
-    font-size: 0.9rem;
-    color: var(--ink);
-  }
-
-  tr:last-child td { border-bottom: none; }
-
-  .row-muted {
-    color: var(--muted);
-    font-size: 0.82rem;
-    margin-top: 4px;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 10px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .pill.admin { background: rgba(34,197,94,0.12); color: #15803d; }
-  .pill.user { background: rgba(79,70,229,0.12); color: #4338ca; }
-  .pill.none { background: rgba(148,163,184,0.14); color: #475569; }
-
-  .action-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .action-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    border: 1px solid rgba(15,23,42,0.08);
-    background: #fff;
-    color: var(--ink);
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 8px 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: transform 0.18s, background 0.18s, border-color 0.18s;
-    white-space: nowrap;
-  }
-
-  .action-btn:hover { transform: translateY(-1px); }
-  .action-btn.primary { background: linear-gradient(135deg, var(--accent-2), var(--accent)); color: #fff; border-color: transparent; }
-  .action-btn.danger { background: rgba(239,68,68,0.08); color: var(--danger); border-color: rgba(239,68,68,0.16); }
-
-  .access-card {
-    background: rgba(255,255,255,0.96);
-    border: 1px solid rgba(15,23,42,0.08);
-    border-radius: 22px;
-    padding: 28px;
-    box-shadow: 0 16px 44px rgba(15,23,42,0.08);
-  }
-
-  .access-card h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-
-  .access-card p {
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 720px;
-  }
-
-  .notice {
-    margin-top: 16px;
-    background: rgba(79,70,229,0.08);
-    border: 1px solid rgba(79,70,229,0.16);
-    border-radius: 16px;
-    padding: 16px;
-    color: #3730a3;
-    line-height: 1.6;
-  }
-
-  .hidden { display: none !important; }
-
-  .toast {
-    position: fixed;
-    left: 50%;
-    bottom: 26px;
-    transform: translateX(-50%) translateY(80px);
-    background: #0f172a;
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 999px;
-    font-size: 0.88rem;
-    box-shadow: 0 18px 44px rgba(15,23,42,0.24);
-    opacity: 0;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-    z-index: 1000;
-  }
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-
-  @keyframes rise {
-    from { transform: translateY(22px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  @keyframes slideDown {
-    from { transform: translateY(-100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  @media (max-width: 900px) {
-    .grid-cards { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 760px) {
-    header {
-      flex-wrap: wrap;
-      padding: 16px 20px;
-    }
-
-    .menu-toggle { display: block; }
-
-    #navbarLinks {
-      display: none;
-      width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      margin-top: 10px;
-      padding: 10px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.1);
-    }
-
-    #navbarLinks.active { display: flex; }
-
-    #navbarLinks a {
-      width: 100%;
-      padding: 12px;
-    }
-
-    .hero {
-      padding: 36px 5% 26px;
-    }
-
-    .page {
-      padding: 0 5% 72px;
-    }
-
-    .toolbar {
-      margin-top: 18px;
-    }
-
-    .panel-head, .panel-body {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f8f7f5;--surface:#fff;--ink:#111;--muted:#6b7280;--border:#e8e8e8;--accent:#c49a6c;--shadow:0 18px 50px rgba(17,17,17,.08);--shadow-hover:0 28px 60px rgba(17,17,17,.12);--success:#15803d;--danger:#b91c1c}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:linear-gradient(180deg,#fbfaf8 0%,#f3f0eb 100%);color:var(--ink);min-height:100vh;overflow-x:hidden;padding-top:65px}
+  a{color:inherit;text-decoration:none}
+  header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(248,247,245,.8);backdrop-filter:blur(18px);padding:16px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(17,17,17,.06)}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.08rem;display:inline-flex;align-items:center;gap:10px}
+  .nav-logo::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(196,154,108,.12)}
+  nav{display:flex;align-items:center;gap:22px}
+  nav a{position:relative;color:rgba(17,17,17,.8);font-size:.9rem;font-weight:600;padding:8px 0;transition:color .18s ease,transform .18s ease;white-space:nowrap}
+  nav a:hover{color:var(--ink);transform:translateY(-1px)} nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .2s ease} nav a:hover::after{width:100%}
+  .menu-toggle{display:none;border:1px solid rgba(17,17,17,.08);background:rgba(255,255,255,.72);width:44px;height:44px;border-radius:14px;font-size:20px}
+  .hero{position:relative;overflow:hidden;padding:52px 6% 38px;min-height:230px;background:linear-gradient(135deg,#111 0%,#1e1e1e 100%);margin-top:0}
+  .hero::before{content:"ADMIN";position:absolute;left:4%;top:8px;font-family:'Syne',sans-serif;font-size:clamp(84px,15vw,180px);font-weight:800;letter-spacing:-.08em;color:rgba(255,255,255,.05);white-space:nowrap;user-select:none}
+  .hero::after{content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,108,.22) 0%,transparent 70%);pointer-events:none}
+  .hero-copy{position:relative;z-index:1;color:#fff;animation:rise .7s ease both;max-width:760px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#c4b5fd;margin-bottom:16px}
+  .hero-copy h1{font-family:'Instrument Serif',serif;font-size:clamp(2.4rem,5vw,4rem);line-height:1.02;letter-spacing:-.04em;margin-bottom:14px}
+  .hero-copy p{max-width:620px;color:rgba(255,255,255,.68);line-height:1.7;font-size:.98rem}
+  .page{max-width:1240px;margin:0 auto;padding:0 6% 90px;position:relative;z-index:1}
+  .toolbar{display:flex;gap:12px;align-items:stretch;justify-content:space-between;margin-top:24px;margin-bottom:28px;flex-wrap:wrap}
+  .search{flex:1;min-width:260px;position:relative}
+  .search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--muted)}
+  .search input{width:100%;padding:14px 16px 14px 44px;border:1px solid rgba(15,23,42,.1);border-radius:16px;background:rgba(255,255,255,.95);font:inherit;font-size:.94rem;outline:none;box-shadow:0 12px 34px rgba(15,23,42,.06)}
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;width:100%}
+  .tab-btn{border:1px solid rgba(15,23,42,.08);background:rgba(255,255,255,.92);color:var(--ink);padding:10px 14px;border-radius:999px;font-size:.85rem;font-weight:800;cursor:pointer;transition:background .18s ease,color .18s ease,transform .18s ease}
+  .tab-btn:hover{transform:translateY(-1px)} .tab-btn.active{background:linear-gradient(135deg,#111,#1e1e1e);color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+  .panel-grid{display:grid;grid-template-columns:1fr;gap:20px}
+  .panel{background:rgba(255,255,255,.96);border:1px solid rgba(15,23,42,.08);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+  .panel-head{padding:20px 22px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .panel-title{display:flex;align-items:center;gap:10px}
+  .panel-title h2{font-family:'Instrument Serif',serif;font-size:1.7rem;line-height:1}.panel-title p{font-size:.84rem;color:var(--muted);margin-top:4px}
+  .panel-body{padding:20px 22px 22px}
+  .grid-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:18px}
+  .summary-card{background:linear-gradient(180deg,#fff 0%,#f8fafc 100%);border:1px solid rgba(15,23,42,.08);border-radius:18px;padding:18px;box-shadow:0 10px 28px rgba(17,17,17,.03)}
+  .summary-card .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}.summary-card .value{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800}.summary-card .sub{margin-top:6px;color:var(--muted);font-size:.84rem}
+  .table-wrap{overflow-x:auto;border:1px solid rgba(15,23,42,.08);border-radius:18px}
+  table{width:100%;border-collapse:collapse;background:#fff;min-width:760px}
+  th,td{text-align:left;padding:14px 16px;border-bottom:1px solid rgba(15,23,42,.06);vertical-align:top}
+  th{background:#f8fafc;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  td{font-size:.9rem;color:var(--ink)} tr:last-child td{border-bottom:none}
+  .row-muted{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:.75rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+  .pill.admin{background:rgba(34,197,94,.12);color:var(--success)} .pill.user{background:rgba(79,70,229,.12);color:#4338ca} .pill.none{background:rgba(148,163,184,.14);color:#475569}
+  .action-row{display:flex;gap:8px;flex-wrap:wrap}
+  .action-btn{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(15,23,42,.08);background:#fff;color:var(--ink);font-size:.8rem;font-weight:800;padding:8px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:transform .18s ease,background .18s ease,border-color .18s ease;white-space:nowrap}
+  .action-btn:hover{transform:translateY(-1px)} .action-btn.primary{background:#111;color:#fff;border-color:transparent}.action-btn.danger{background:rgba(239,68,68,.08);color:var(--danger);border-color:rgba(239,68,68,.16)}
+  .access-card{background:rgba(255,255,255,.96);border:1px solid rgba(15,23,42,.08);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
+  .access-card h2{font-family:'Instrument Serif',serif;font-size:2rem;margin-bottom:10px}.access-card p{color:var(--muted);line-height:1.7;max-width:720px}
+  .notice{margin-top:16px;background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.16);border-radius:16px;padding:16px;color:#3730a3;line-height:1.6}
+  .hidden{display:none!important}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:#0f172a;color:#fff;padding:12px 18px;border-radius:999px;font-size:.88rem;box-shadow:0 18px 44px rgba(15,23,42,.24);opacity:0;transition:transform .25s ease,opacity .25s ease;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+  @keyframes rise{from{transform:translateY(22px);opacity:0}to{transform:translateY(0);opacity:1}}
+  @media(max-width:900px){.grid-cards{grid-template-columns:1fr}}
+  @media(max-width:760px){header{flex-wrap:wrap;padding:16px 20px}.menu-toggle{display:block}#navbarLinks{display:none;width:100%;flex-direction:column;align-items:flex-start;gap:0;margin-top:10px;padding:10px;background:#fff;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,.1)}#navbarLinks.active{display:flex}#navbarLinks a{width:100%;padding:12px 0}.hero{padding:36px 5% 26px}.page{padding:0 5% 72px}.panel-head,.panel-body{padding-left:16px;padding-right:16px}}
 </style>
 </head>
 <body>
-
 <header>
   <a href="index.html" class="nav-logo">Community.Business</a>
-
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
   <nav id="navbarLinks"></nav>
 </header>
 
@@ -563,472 +98,70 @@ nav a:hover::after{
   <div id="accessDenied" class="access-card hidden">
     <h2>Admin access required</h2>
     <p>This page is protected by a Firestore role check. To enable it, add <strong>role: "admin"</strong> to your document in the <strong>users</strong> collection for this account.</p>
-    <div class="notice" id="bootstrapNote">
-      If you are setting up the first admin account, open Firestore, locate <code>users/{yourUid}</code>, and create or update the document with <code>role: "admin"</code>. After that, reload this page.
-    </div>
+    <div class="notice" id="bootstrapNote">If you are setting up the first admin account, open Firestore, locate <code>users/{yourUid}</code>, and create or update the document with <code>role: "admin"</code>. After that, reload this page.</div>
     <div class="action-row" style="margin-top:16px;">
-      <button id="bootstrapAdminBtn" class="action-btn primary hidden" type="button">
-        <i class="fa-solid fa-user-shield"></i> Make this account first admin
-      </button>
+      <button id="bootstrapAdminBtn" class="action-btn primary hidden" type="button"><i class="fa-solid fa-user-shield"></i> Make this account first admin</button>
     </div>
   </div>
 
   <div id="adminContent" class="hidden">
     <div class="grid-cards">
-      <div class="summary-card">
-        <div class="label">Businesses</div>
-        <div class="value" id="businessCount">0</div>
-        <div class="sub">Listings currently in the directory</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Posts</div>
-        <div class="value" id="postCount">0</div>
-        <div class="sub">Community updates from businesses</div>
-      </div>
-      <div class="summary-card">
-        <div class="label">Users</div>
-        <div class="value" id="userCount">0</div>
-        <div class="sub">Registered user accounts</div>
-      </div>
+      <div class="summary-card"><div class="label">Businesses</div><div class="value" id="businessCount">0</div><div class="sub">Listings currently in the directory</div></div>
+      <div class="summary-card"><div class="label">Posts</div><div class="value" id="postCount">0</div><div class="sub">Community updates from businesses</div></div>
+      <div class="summary-card"><div class="label">Users</div><div class="value" id="userCount">0</div><div class="sub">Registered user accounts</div></div>
     </div>
-
     <div class="panel-grid">
       <section class="panel" data-panel="overview">
         <div class="panel-head">
-          <div class="panel-title">
-            <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
-            <div>
-              <h2>Overview</h2>
-              <p>Recent items from across the platform.</p>
-            </div>
-          </div>
-          <div class="action-row">
-            <a href="businesses.html" class="action-btn primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open directory</a>
-          </div>
+          <div class="panel-title"><div class="stat-icon" style="width:44px;height:44px;border-radius:14px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-gauge-high"></i></div><div><h2>Overview</h2><p>Recent items from across the platform.</p></div></div>
+          <div class="action-row"><a href="businesses.html" class="action-btn primary"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open directory</a></div>
         </div>
-        <div class="panel-body">
-          <p style="color:var(--muted);line-height:1.7;">Use the tabs above to switch between moderation queues. Quick search will filter the currently selected tab.</p>
-        </div>
+        <div class="panel-body"><p style="color:var(--muted);line-height:1.7;">Use the tabs above to switch between moderation queues. Quick search will filter the currently selected tab.</p></div>
       </section>
-
       <section class="panel hidden" data-panel="businesses">
-        <div class="panel-head">
-          <div class="panel-title">
-            <div class="stat-icon"><i class="fa-solid fa-store"></i></div>
-            <div>
-              <h2>Businesses</h2>
-              <p>Review and remove listings when needed.</p>
-            </div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Category</th>
-                  <th>Location</th>
-                  <th>Owner UID</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="businessTable"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel-head"><div class="panel-title"><div class="stat-icon" style="width:44px;height:44px;border-radius:14px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-store"></i></div><div><h2>Businesses</h2><p>Review and remove listings when needed.</p></div></div></div>
+        <div class="panel-body"><div class="table-wrap"><table><thead><tr><th>Name</th><th>Category</th><th>Location</th><th>Owner UID</th><th>Actions</th></tr></thead><tbody id="businessTable"></tbody></table></div></div>
       </section>
-
       <section class="panel hidden" data-panel="posts">
-        <div class="panel-head">
-          <div class="panel-title">
-            <div class="stat-icon"><i class="fa-solid fa-newspaper"></i></div>
-            <div>
-              <h2>Posts</h2>
-              <p>Monitor recent community updates.</p>
-            </div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Business</th>
-                  <th>Caption</th>
-                  <th>Created</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="postTable"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel-head"><div class="panel-title"><div class="stat-icon" style="width:44px;height:44px;border-radius:14px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-newspaper"></i></div><div><h2>Posts</h2><p>Monitor recent community updates.</p></div></div></div>
+        <div class="panel-body"><div class="table-wrap"><table><thead><tr><th>Business</th><th>Caption</th><th>Created</th><th>Actions</th></tr></thead><tbody id="postTable"></tbody></table></div></div>
       </section>
-
       <section class="panel hidden" data-panel="users">
-        <div class="panel-head">
-          <div class="panel-title">
-            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
-            <div>
-              <h2>Users</h2>
-              <p>Manage roles for site access.</p>
-            </div>
-          </div>
-        </div>
-        <div class="panel-body">
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>UID</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="userTable"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel-head"><div class="panel-title"><div class="stat-icon" style="width:44px;height:44px;border-radius:14px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;"><i class="fa-solid fa-users"></i></div><div><h2>Users</h2><p>Manage roles for site access.</p></div></div></div>
+        <div class="panel-body"><div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>UID</th><th>Actions</th></tr></thead><tbody id="userTable"></tbody></table></div></div>
       </section>
     </div>
   </div>
 </main>
-
 <div class="toast" id="toast"></div>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="js/firebase.js"></script>
 <script>
-  function toggleMenu() {
-    document.getElementById("navbarLinks").classList.toggle("active");
-  }
-
-  function showToast(message) {
-    const toast = document.getElementById("toast");
-    toast.textContent = message;
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 2600);
-  }
-
-  function logoutUser() {
-    auth.signOut().then(() => {
-      window.location.href = "login.html";
-    });
-  }
-
-  function formatDate(value) {
-    if (!value) return "Not set";
-    if (value.toDate) {
-      return value.toDate().toLocaleString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-    }
-    if (value.seconds) {
-      return new Date(value.seconds * 1000).toLocaleString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      });
-    }
-    return String(value);
-  }
-
-  function getInitials(name) {
-    if (!name) return "?";
-    const words = name.trim().split(/\s+/);
-    return words.length >= 2 ? (words[0][0] + words[1][0]).toUpperCase() : name.substring(0, 2).toUpperCase();
-  }
-
-  function safeText(value, fallback = "—") {
-    return (value && String(value).trim()) ? String(value) : fallback;
-  }
-
-  const state = {
-    activeTab: "overview",
-    search: "",
-    businesses: [],
-    posts: [],
-    users: [],
-    businessMap: new Map(),
-    isAdmin: false,
-    hasAdmin: false
-  };
-
-  function updateNavbar(user) {
-    const nav = document.getElementById("navbarLinks");
-    nav.classList.remove("active");
-    if (user) {
-     nav.innerHTML = `
-
-<a href="index.html">🏠 Home</a>
-
-<a href="businesses.html">🏢 Businesses</a>
-
-<a href="posts.html">📸 Posts</a>
-
-<a href="about.html">ℹ️ About</a>
-
-<a href="profile.html">👤 My Profile</a>
-
-<a href="admin.html">🛡️ Admin Panel</a>
-
-<a href="#" onclick="logoutUser();return false;">
-🚪 Sign Out
-</a>
-
-`
-    } else {
-      nav.innerHTML = `
-        <a href="index.html">Home</a>
-        <a href="businesses.html">Businesses</a>
-        <a href="posts.html">Posts</a>
-        <a href="about.html">About</a>
-        <a href="login.html">Login</a>
-        <a href="signup.html">Sign Up</a>
-      `;
-    }
-  }
-
-  function setActiveTab(tab) {
-    state.activeTab = tab;
-    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.tab === tab));
-    document.querySelectorAll("[data-panel]").forEach(panel => {
-      panel.classList.toggle("hidden", panel.dataset.panel !== tab);
-    });
-    if (tab === "overview") {
-      document.querySelector('[data-panel="overview"]').classList.remove("hidden");
-    }
-    renderCurrentTab();
-  }
-
-  function filteredBusinesses() {
-    const q = state.search;
-    return state.businesses.filter(item => {
-      if (!q) return true;
-      const text = `${item.businessName || ""} ${item.category || ""} ${item.location || ""} ${item.ownerUID || ""}`.toLowerCase();
-      return text.includes(q);
-    });
-  }
-
-  function filteredPosts() {
-    const q = state.search;
-    return state.posts.filter(item => {
-      if (!q) return true;
-      const businessName = state.businessMap.get(item.businessId) || "";
-      const text = `${businessName} ${item.caption || ""}`.toLowerCase();
-      return text.includes(q);
-    });
-  }
-
-  function filteredUsers() {
-    const q = state.search;
-    return state.users.filter(item => {
-      if (!q) return true;
-      const text = `${item.fullname || ""} ${item.email || ""} ${item.businessname || ""} ${item.role || ""}`.toLowerCase();
-      return text.includes(q);
-    });
-  }
-
-  function renderCurrentTab() {
-    document.getElementById("businessCount").textContent = state.businesses.length;
-    document.getElementById("postCount").textContent = state.posts.length;
-    document.getElementById("userCount").textContent = state.users.length;
-
-    const businessBody = document.getElementById("businessTable");
-    const postBody = document.getElementById("postTable");
-    const userBody = document.getElementById("userTable");
-
-    const businesses = filteredBusinesses();
-    const posts = filteredPosts();
-    const users = filteredUsers();
-
-    businessBody.innerHTML = businesses.length ? businesses.map(item => `
-      <tr>
-        <td>
-          <strong>${safeText(item.businessName, "Unnamed business")}</strong>
-          <div class="row-muted">${safeText(item.description, "No description provided")}</div>
-        </td>
-        <td>${safeText(item.category)}</td>
-        <td>${safeText(item.location)}</td>
-        <td><code>${safeText(item.ownerUID, "Unknown")}</code></td>
-        <td>
-          <div class="action-row">
-            <a class="action-btn" href="business-details.html?id=${item.id}"><i class="fa-solid fa-eye"></i> View</a>
-            <button class="action-btn danger" onclick="deleteBusiness('${item.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
-          </div>
-        </td>
-      </tr>
-    `).join("") : `<tr><td colspan="5">No businesses match your search.</td></tr>`;
-
-    postBody.innerHTML = posts.length ? posts.map(item => `
-      <tr>
-        <td>
-          <strong>${safeText(state.businessMap.get(item.businessId), "Unknown business")}</strong>
-          <div class="row-muted"><code>${safeText(item.businessId)}</code></div>
-        </td>
-        <td>${safeText(item.caption, "No caption")}</td>
-        <td>${formatDate(item.createdAt)}</td>
-        <td>
-          <div class="action-row">
-            <a class="action-btn" href="posts.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</a>
-            <button class="action-btn danger" onclick="deletePost('${item.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
-          </div>
-        </td>
-      </tr>
-    `).join("") : `<tr><td colspan="4">No posts match your search.</td></tr>`;
-
-    userBody.innerHTML = users.length ? users.map(item => {
-      const role = item.role === "admin" ? "admin" : (item.role ? "user" : "none");
-      return `
-        <tr>
-          <td>
-            <strong>${safeText(item.fullname, "Unnamed user")}</strong>
-            <div class="row-muted">${safeText(item.businessname, "No business name")}</div>
-          </td>
-          <td>${safeText(item.email, "No email")}</td>
-          <td><span class="pill ${role}">${safeText(item.role, "none")}</span></td>
-          <td><code>${safeText(item.id)}</code></td>
-          <td>
-            <div class="action-row">
-              <button class="action-btn primary" onclick="toggleAdminRole('${item.id}', '${item.role === "admin" ? "remove" : "grant"}')">
-                <i class="fa-solid fa-user-shield"></i> ${item.role === "admin" ? "Remove admin" : "Make admin"}
-              </button>
-            </div>
-          </td>
-        </tr>
-      `;
-    }).join("") : `<tr><td colspan="5">No users match your search.</td></tr>`;
-  }
-
-  async function deleteBusiness(id) {
-    if (!confirm("Delete this business? This cannot be undone.")) return;
-    await db.collection("businesses").doc(id).delete();
-    state.businesses = state.businesses.filter(item => item.id !== id);
-    showToast("Business deleted");
-    renderCurrentTab();
-  }
-
-  async function deletePost(id) {
-    if (!confirm("Delete this post? This cannot be undone.")) return;
-    await db.collection("business_posts").doc(id).delete();
-    state.posts = state.posts.filter(item => item.id !== id);
-    showToast("Post deleted");
-    renderCurrentTab();
-  }
-
-  async function refreshAdminStatus() {
-    const adminSnap = await db.collection("users").where("role", "==", "admin").limit(1).get();
-    state.hasAdmin = !adminSnap.empty;
-  }
-
-  async function bootstrapFirstAdmin(user) {
-    if (!confirm("No admin exists yet. Make your account the first admin?")) return;
-
-    await refreshAdminStatus();
-    if (state.hasAdmin) {
-      showToast("An admin already exists. Please log in as an admin.", true);
-      return;
-    }
-
-    await db.collection("users").doc(user.uid).set({
-      role: "admin",
-      email: user.email || "",
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
-
-    showToast("Admin access created. Reloading...");
-    setTimeout(() => window.location.reload(), 900);
-  }
-
-  async function toggleAdminRole(id, action) {
-    if (!confirm(`${action === "grant" ? "Make" : "Remove"} admin for this user?`)) return;
-    await db.collection("users").doc(id).update({
-      role: action === "grant" ? "admin" : firebase.firestore.FieldValue.delete()
-    });
-    const target = state.users.find(item => item.id === id);
-    if (target) {
-      if (action === "grant") target.role = "admin";
-      else delete target.role;
-    }
-    showToast(action === "grant" ? "Admin role granted" : "Admin role removed");
-    renderCurrentTab();
-  }
-
-  async function loadData() {
-    const [businessSnap, postSnap, userSnap] = await Promise.all([
-      db.collection("businesses").get(),
-      db.collection("business_posts").get(),
-      db.collection("users").get()
-    ]);
-
-    state.businesses = businessSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    state.posts = postSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    state.users = userSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    state.businessMap = new Map(state.businesses.map(item => [item.id, item.businessName || "Business"]));
-    renderCurrentTab();
-  }
-
-  async function initAdmin(user) {
-    updateNavbar(user);
-    if (!user) {
-      window.location.href = "login.html";
-      return;
-    }
-
-    await refreshAdminStatus();
-
-    const userDoc = await db.collection("users").doc(user.uid).get();
-    const role = userDoc.exists ? userDoc.data().role : "";
-    state.isAdmin = role === "admin";
-
-    if (!state.isAdmin) {
-      document.getElementById("accessDenied").classList.remove("hidden");
-      document.getElementById("adminContent").classList.add("hidden");
-
-      const bootstrapBtn = document.getElementById("bootstrapAdminBtn");
-      const bootstrapNote = document.getElementById("bootstrapNote");
-      if (!state.hasAdmin) {
-        bootstrapBtn.classList.remove("hidden");
-        bootstrapNote.textContent = "No admin account exists yet. You can claim the first admin role for this signed-in account.";
-      } else {
-        bootstrapBtn.classList.add("hidden");
-        bootstrapNote.textContent = "An admin already exists, so this account cannot open the dashboard until it is granted the admin role.";
-      }
-
-      return;
-    }
-
-    document.getElementById("accessDenied").classList.add("hidden");
-    document.getElementById("adminContent").classList.remove("hidden");
-    await loadData();
-  }
-
-  document.getElementById("searchInput").addEventListener("input", (e) => {
-    state.search = e.target.value.trim().toLowerCase();
-    renderCurrentTab();
-  });
-
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => setActiveTab(btn.dataset.tab));
-  });
-
-  document.getElementById("bootstrapAdminBtn").addEventListener("click", () => {
-    const user = auth.currentUser;
-    if (user) bootstrapFirstAdmin(user);
-  });
-
-  auth.onAuthStateChanged(initAdmin);
+function toggleMenu(){document.getElementById("navbarLinks").classList.toggle("active");}
+function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");setTimeout(()=>toast.classList.remove("show"),2600);}
+function logoutUser(){auth.signOut().then(()=>{window.location.href="login.html";});}
+function formatDate(value){if(!value)return"Not set";if(value.toDate){return value.toDate().toLocaleString("en-IN",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});}if(value.seconds){return new Date(value.seconds*1000).toLocaleString("en-IN",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"});}return String(value);}
+function safeText(value,fallback="—"){return(value&&String(value).trim())?String(value):fallback;}
+const state={activeTab:"overview",search:"",businesses:[],posts:[],users:[],businessMap:new Map(),isAdmin:false,hasAdmin:false};
+function updateNavbar(user){const nav=document.getElementById("navbarLinks");nav.classList.remove("active");if(user){nav.innerHTML=`<a href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a><a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="profile.html"><i class="fa-solid fa-user"></i> My Profile</a><a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a><a href="#" onclick="logoutUser();return false;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>`;}else{nav.innerHTML=`<a href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a><a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a><a href="signup.html"><i class="fa-solid fa-pen-to-square"></i> Sign Up</a>`;}}
+function setActiveTab(tab){state.activeTab=tab;document.querySelectorAll(".tab-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.tab===tab));document.querySelectorAll("[data-panel]").forEach(panel=>panel.classList.toggle("hidden",panel.dataset.panel!==tab));renderCurrentTab();}
+function filteredBusinesses(){const q=state.search;return state.businesses.filter(item=>!q||`${item.businessName||""} ${item.category||""} ${item.location||""} ${item.ownerUID||""}`.toLowerCase().includes(q));}
+function filteredPosts(){const q=state.search;return state.posts.filter(item=>!q||`${state.businessMap.get(item.businessId)||""} ${item.caption||""}`.toLowerCase().includes(q));}
+function filteredUsers(){const q=state.search;return state.users.filter(item=>!q||`${item.fullname||""} ${item.email||""} ${item.businessname||""} ${item.role||""}`.toLowerCase().includes(q));}
+function renderCurrentTab(){document.getElementById("businessCount").textContent=state.businesses.length;document.getElementById("postCount").textContent=state.posts.length;document.getElementById("userCount").textContent=state.users.length;const businessBody=document.getElementById("businessTable");const postBody=document.getElementById("postTable");const userBody=document.getElementById("userTable");const businesses=filteredBusinesses();const posts=filteredPosts();const users=filteredUsers();businessBody.innerHTML=businesses.length?businesses.map(item=>`<tr><td><strong>${safeText(item.businessName,"Unnamed business")}</strong><div class="row-muted">${safeText(item.description,"No description provided")}</div></td><td>${safeText(item.category)}</td><td>${safeText(item.location)}</td><td><code>${safeText(item.ownerUID,"Unknown")}</code></td><td><div class="action-row"><a class="action-btn" href="business-details.html?id=${item.id}"><i class="fa-solid fa-eye"></i> View</a><button class="action-btn danger" onclick="deleteBusiness('${item.id}')"><i class="fa-solid fa-trash"></i> Delete</button></div></td></tr>`).join(""):`<tr><td colspan="5">No businesses match your search.</td></tr>`;postBody.innerHTML=posts.length?posts.map(item=>`<tr><td><strong>${safeText(state.businessMap.get(item.businessId),"Unknown business")}</strong><div class="row-muted"><code>${safeText(item.businessId)}</code></div></td><td>${safeText(item.caption,"No caption")}</td><td>${formatDate(item.createdAt)}</td><td><div class="action-row"><a class="action-btn" href="posts.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</a><button class="action-btn danger" onclick="deletePost('${item.id}')"><i class="fa-solid fa-trash"></i> Delete</button></div></td></tr>`).join(""):`<tr><td colspan="4">No posts match your search.</td></tr>`;userBody.innerHTML=users.length?users.map(item=>{const role=item.role==="admin"?"admin":(item.role?"user":"none");return `<tr><td><strong>${safeText(item.fullname,"Unnamed user")}</strong><div class="row-muted">${safeText(item.businessname,"No business name")}</div></td><td>${safeText(item.email,"No email")}</td><td><span class="pill ${role}">${safeText(item.role,"none")}</span></td><td><code>${safeText(item.id)}</code></td><td><div class="action-row"><button class="action-btn primary" onclick="toggleAdminRole('${item.id}','${item.role==="admin"?"remove":"grant"}')"><i class="fa-solid fa-user-shield"></i> ${item.role==="admin"?"Remove admin":"Make admin"}</button></div></td></tr>`;}).join(""):`<tr><td colspan="5">No users match your search.</td></tr>`;}
+async function deleteBusiness(id){if(!confirm("Delete this business? This cannot be undone."))return;await db.collection("businesses").doc(id).delete();state.businesses=state.businesses.filter(item=>item.id!==id);showToast("Business deleted");renderCurrentTab();}
+async function deletePost(id){if(!confirm("Delete this post? This cannot be undone."))return;await db.collection("business_posts").doc(id).delete();state.posts=state.posts.filter(item=>item.id!==id);showToast("Post deleted");renderCurrentTab();}
+async function refreshAdminStatus(){const adminSnap=await db.collection("users").where("role","==","admin").limit(1).get();state.hasAdmin=!adminSnap.empty;}
+async function bootstrapFirstAdmin(user){if(!confirm("No admin exists yet. Make your account the first admin?"))return;await refreshAdminStatus();if(state.hasAdmin){showToast("An admin already exists.",true);return;}await db.collection("users").doc(user.uid).set({role:"admin",email:user.email||"",updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});showToast("Admin access created. Reloading...");setTimeout(()=>window.location.reload(),900);}
+async function toggleAdminRole(id,action){if(!confirm(`${action==="grant"?"Make":"Remove"} admin for this user?`))return;await db.collection("users").doc(id).update({role:action==="grant"?"admin":firebase.firestore.FieldValue.delete()});const target=state.users.find(item=>item.id===id);if(target){if(action==="grant")target.role="admin";else delete target.role;}showToast(action==="grant"?"Admin role granted":"Admin role removed");renderCurrentTab();}
+async function loadData(){const [businessSnap,postSnap,userSnap]=await Promise.all([db.collection("businesses").get(),db.collection("business_posts").get(),db.collection("users").get()]);state.businesses=businessSnap.docs.map(doc=>({id:doc.id,...doc.data()}));state.posts=postSnap.docs.map(doc=>({id:doc.id,...doc.data()}));state.users=userSnap.docs.map(doc=>({id:doc.id,...doc.data()}));state.businessMap=new Map(state.businesses.map(item=>[item.id,item.businessName||"Business"]));renderCurrentTab();}
+async function initAdmin(user){updateNavbar(user);if(!user){window.location.href="login.html";return;}await refreshAdminStatus();const userDoc=await db.collection("users").doc(user.uid).get();const role=userDoc.exists?userDoc.data().role:"";state.isAdmin=role==="admin";if(!state.isAdmin){document.getElementById("accessDenied").classList.remove("hidden");document.getElementById("adminContent").classList.add("hidden");const bootstrapBtn=document.getElementById("bootstrapAdminBtn");const bootstrapNote=document.getElementById("bootstrapNote");if(!state.hasAdmin){bootstrapBtn.classList.remove("hidden");bootstrapNote.textContent="No admin account exists yet. You can claim the first admin role for this signed-in account.";}else{bootstrapBtn.classList.add("hidden");bootstrapNote.textContent="An admin already exists, so this account cannot open the dashboard until it is granted the admin role.";}return;}document.getElementById("accessDenied").classList.add("hidden");document.getElementById("adminContent").classList.remove("hidden");await loadData();}
+document.getElementById("searchInput").addEventListener("input",e=>{state.search=e.target.value.trim().toLowerCase();renderCurrentTab();});
+document.querySelectorAll(".tab-btn").forEach(btn=>btn.addEventListener("click",()=>setActiveTab(btn.dataset.tab)));
+document.getElementById("bootstrapAdminBtn").addEventListener("click",()=>{const user=auth.currentUser;if(user)bootstrapFirstAdmin(user);});
+auth.onAuthStateChanged(initAdmin);
 </script>
 </body>
 </html>

@@ -858,7 +858,7 @@ try {
   const userDoc = await db.collection("users").doc(user.uid).get();
   const role = userDoc.exists ? userDoc.data().role : "";
   if (role === "admin" || user.email === "admin@community.business") {
-    adminLink = `<a href="admin.html"> 🛡️Admin Panel</a>`;
+    adminLink = `<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>`;
   }
 } catch (err) {
   console.warn("Admin lookup failed:", err);
@@ -866,23 +866,23 @@ try {
 
 nav.innerHTML = `
 
-<a href="index.html">🏠 Home</a>
+<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
 
-<a href="businesses.html">🏢 Businesses</a>
+<a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a>
 
-<a href="posts.html">📸 Posts</a>
+<a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a>
 
-<a href="about.html">ℹ️ About</a>
+<a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
 
 <a href="profile.html">
-👤 My Profile
+<i class="fa-solid fa-user"></i> My Profile
 </a>
 
 ${adminLink}
 
 <a href="#"
 onclick="logoutUser();return false;">
-🚪 Sign Out
+<i class="fa-solid fa-right-from-bracket"></i> Sign Out
 </a>
 
 `;
@@ -891,24 +891,63 @@ onclick="logoutUser();return false;">
 
 nav.innerHTML = `
 
-<a href="index.html">🏠 Home</a>
+<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
 
-<a href="businesses.html">🏢 Businesses</a>
+<a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a>
 
-<a href="posts.html">📸 Posts</a>
+<a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a>
 
-<a href="about.html">ℹ️ About</a>
+<a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
 
 <a href="login.html">
-🔑 Login
+<i class="fa-solid fa-right-to-bracket"></i> Login
 </a>
 
 <a href="signup.html">
-📝 Sign Up
+<i class="fa-solid fa-pen-to-square"></i> Sign Up
 </a>
 
 `;
 
+}
+
+}
+
+async function updateNavbar(user){
+
+const nav = document.getElementById("navbarLinks");
+nav.classList.remove("active");
+
+if (user) {
+  let adminLink = "";
+  try {
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    const role = userDoc.exists ? userDoc.data().role : "";
+    if (role === "admin" || user.email === "admin@community.business") {
+      adminLink = `<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>`;
+    }
+  } catch (err) {
+    console.warn("Admin lookup failed:", err);
+  }
+
+  nav.innerHTML = `
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a>
+    <a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="profile.html"><i class="fa-solid fa-user"></i> My Profile</a>
+    ${adminLink}
+    <a href="#" onclick="logoutUser();return false;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+  `;
+} else {
+  nav.innerHTML = `
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a>
+    <a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+    <a href="signup.html"><i class="fa-solid fa-pen-to-square"></i> Sign Up</a>
+  `;
 }
 
 }
