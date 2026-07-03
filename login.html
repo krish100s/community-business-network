@@ -1,297 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Login</title>
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, sans-serif;
-    }
-
-    body{
-      height:100vh;
-      background:#0f172a;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      overflow:hidden;
-    }
-
-    .background{
-      position:absolute;
-      width:100%;
-      height:100%;
-      background:
-      radial-gradient(circle at top left,#7c3aed,transparent 30%),
-      radial-gradient(circle at bottom right,#4f46e5,transparent 30%);
-      filter:blur(40px);
-      opacity:0.8;
-    }
-
-    .login-container{
-      position:relative;
-      width:900px;
-      height:550px;
-      background:rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.15);
-      border-radius:30px;
-      backdrop-filter:blur(20px);
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      overflow:hidden;
-      box-shadow:0 15px 50px rgba(0,0,0,0.3);
-    }
-
-    .left{
-      padding:70px;
-      color:white;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .left h1{
-      font-size:60px;
-      line-height:1.1;
-      margin-bottom:25px;
-    }
-
-    .left p{
-      color:#d1d5db;
-      line-height:1.8;
-      font-size:17px;
-    }
-
-    .right{
-      background:white;
-      padding:70px 50px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-
-    .form-box{
-      width:100%;
-      max-width:350px;
-    }
-
-    .form-box h2{
-      font-size:38px;
-      margin-bottom:10px;
-      color:#111827;
-    }
-
-    .form-box .small{
-      color:#6b7280;
-      margin-bottom:35px;
-    }
-
-    .input-box{
-      margin-bottom:20px;
-    }
-
-    .input-box input{
-      width:100%;
-      padding:16px;
-      border:none;
-      background:#f3f4f6;
-      border-radius:14px;
-      font-size:16px;
-      outline:none;
-      transition:0.3s;
-    }
-
-    .input-box input:focus{
-      background:white;
-      border:2px solid #4f46e5;
-    }
-
-    .login-btn{
-      width:100%;
-      padding:16px;
-      border:none;
-      border-radius:14px;
-      background:#4f46e5;
-      color:white;
-      font-size:16px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.3s;
-      margin-top:10px;
-    }
-
-    .login-btn:hover{
-      background:#372fcf;
-      transform:translateY(-3px);
-    }
-
-    .bottom{
-      text-align:center;
-      margin-top:25px;
-      color:#6b7280;
-    }
-
-    .bottom a{
-      color:#4f46e5;
-      text-decoration:none;
-      font-weight:bold;
-    }
-
-    .forgot-link{
-      display:inline-block;
-      margin-top:10px;
-      color:#6b7280;
-      text-decoration:none;
-      font-size:14px;
-    }
-
-    .forgot-link:hover{
-      color:#4f46e5;
-    }
-
-    @media(max-width:900px){
-
-      .login-container{
-        width:95%;
-        height:auto;
-        grid-template-columns:1fr;
-      }
-
-      .left{
-        padding:50px 35px;
-        text-align:center;
-      }
-
-      .left h1{
-        font-size:42px;
-      }
-
-      .right{
-        padding:50px 30px;
-      }
-
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Community Business Network</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+body{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at top left, rgba(196,154,108,.14), transparent 35%), linear-gradient(180deg,#fbfaf8,#f3f0eb);padding:24px;}
+.auth-shell{width:min(1080px,100%);display:grid;grid-template-columns:1.05fr .95fr;background:rgba(255,255,255,.72);border:1px solid var(--border);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);backdrop-filter:blur(18px);}
+.auth-aside{padding:56px;background:linear-gradient(135deg,#111,#1e1e1e);color:#fff;position:relative;overflow:hidden;}
+.auth-aside::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,108,.22),transparent 70%);}
+.auth-aside .brand{font-family:'Syne',sans-serif;font-weight:800;margin-bottom:18px;display:inline-flex;align-items:center;gap:10px;}
+.auth-aside .brand::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);}
+.auth-aside h1{font-family:'Instrument Serif',serif;font-size:clamp(2.5rem,5vw,4.2rem);line-height:.98;margin-bottom:14px;max-width:8ch;}
+.auth-aside p{max-width:30ch;color:rgba(255,255,255,.72);line-height:1.8}
+.auth-panel{padding:56px;}
+.auth-panel h2{font-family:'Instrument Serif',serif;font-size:2.2rem;margin-bottom:8px;}
+.auth-panel .small{color:var(--muted);margin-bottom:28px;}
+.auth-grid{display:grid;gap:14px}
+.auth-grid label{font-size:.82rem;font-weight:700;color:var(--ink);margin-bottom:4px;display:block}
+.auth-grid .field{display:grid;gap:6px}
+.auth-grid input{padding:14px 15px;border-radius:16px;border:1px solid var(--border);background:#fff;box-shadow:0 10px 28px rgba(17,17,17,.03)}
+.bottom{margin-top:18px;text-align:center;color:var(--muted);font-size:.92rem}
+.bottom a{color:var(--ink);font-weight:700}
+@media(max-width:900px){.auth-shell{grid-template-columns:1fr}.auth-aside{padding:36px}.auth-panel{padding:36px}}
+</style>
 </head>
-
 <body>
-
-  <div class="background"></div>
-
-  <div class="login-container">
-
-    <div class="left">
-
-      <h1>
-        Community Business Network
-      </h1>
-
-      <p>
-        Empowering local businesses through digital visibility,
-        networking, and community support.
-      </p>
-
-    </div>
-
-    <div class="right">
-
-      <div class="form-box">
-
-        <h2>Login</h2>
-
-        <p class="small">
-          Access your business dashboard
-        </p>
-
-        <div class="input-box">
-          <input type="email" id="email" placeholder="Email Address">
-        </div>
-
-        <div class="input-box">
-          <input type="password" id="password" placeholder="Password">
-        </div>
-
-        <button
-  type="button"
-  class="login-btn"
-  onclick="loginUser()"
->
-  Login
-</button>
-
-        <div class="bottom">
-
-          <a href="reset-password.html" class="forgot-link">
-            Forgot password?
-          </a>
-
-          <br>
-
-          Don't have an account?
-
-          <a href="signup.html">
-            Signup
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
+<div class="auth-shell">
+  <div class="auth-aside">
+    <div class="brand">Community.Business</div>
+    <h1>Welcome back.</h1>
+    <p>Sign in to manage your business profile, posts, and community presence from one premium dashboard.</p>
   </div>
+  <div class="auth-panel">
+    <h2>Login</h2>
+    <p class="small">Access your business dashboard</p>
+    <div class="auth-grid">
+      <div class="field"><label for="email">Email Address</label><input type="email" id="email" placeholder="you@example.com"></div>
+      <div class="field"><label for="password">Password</label><input type="password" id="password" placeholder="••••••••"></div>
+      <button type="button" onclick="loginUser()">Login</button>
+    </div>
+    <div class="bottom">
+      <a href="reset-password.html">Forgot password?</a><br><br>
+      Don't have an account? <a href="signup.html">Signup</a>
+    </div>
+  </div>
+</div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
 <script src="js/firebase.js"></script>
 <script>
-
 function loginUser(){
-
-    const email =
-    document.getElementById("email").value;
-
-    const password =
-    document.getElementById("password").value;
-
-    if(email === "" || password === ""){
-        alert("Please enter email and password");
-        return;
-    }
-
-    auth.signInWithEmailAndPassword(
-        email,
-        password
-    )
-
-    .then(() => {
-
-    
-
-    window.location.href = "index.html";
-
-})
-
-    .catch((error) => {
-
-    alert(error.message);
-
-});
-
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  if(email === "" || password === ""){ alert("Please enter email and password"); return; }
+  auth.signInWithEmailAndPassword(email,password).then(() => { window.location.href = "index.html"; }).catch((error) => { alert(error.message); });
 }
-
 </script>
 </body>
 </html>

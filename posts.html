@@ -1,649 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Posts – Community.Business</title>
+<title>Posts - Community Business Network</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <style>
-:root {
-  --bg:        #f3f4f8;
-  --surface:   #ffffff;
-  --surface2:  #f0f0f7;
-  --border:    rgba(0,0,0,0.07);
-  --accent:    #6f5dff;
-  --accent2:   #7c3aed;
-  --glow:      rgba(111,93,255,0.18);
-  --text:      #111827;
-  --muted:     #6b7280;
-  --radius:    16px;
-}
-
-*{box-sizing:border-box;margin:0;padding:0;}
-
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-  padding-top:78px;
-}
-
-/* ── Navbar ── */
-nav{
-  display:flex;
-  align-items:center;
-  gap:4px;
-}
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  background:#fff;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
-  padding:18px 8%;
-}
-
-.nav-logo{
-  font-family:'Syne',sans-serif;
-  font-weight:800;
-  font-size:1.15rem;
-  color:var(--text);
-  letter-spacing:-0.02em;
-  text-decoration:none;
-}
-.nav-logo span{color:var(--accent);}
-
-.nav-links,
-nav{
-  display:flex;
-  align-items:center;
-  gap:22px;
-  list-style:none;
-}
-.nav-links a,
-nav a{
-  position:relative;
-  font-size:0.875rem;
-  color:var(--text);
-  text-decoration:none;
-  padding:8px 0;
-  font-weight:600;
-  transition:color .18s;
-}
-.nav-links a:hover,
-nav a:hover{color:var(--accent);}
-.nav-links a::after,
-nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:0;
-  height:2px;
-  background:var(--accent);
-  transition:width .18s;
-}
-.nav-links a:hover::after,
-nav a:hover::after{width:100%;}
-
-/* ── Hero banner ── */
-.post-hero{
-  position:relative;
-  z-index:1;
-  background:linear-gradient(135deg,#1a0a3d 0%,#2d1b69 40%,#4c1d95 70%,#1e0533 100%);
-  padding:35px 8%;
-  height:210px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
-}
-
-.post-hero::before{
-  content:'POSTS';
-
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  font-family:'Syne',sans-serif;
-  font-weight:800;
-
-  font-size:clamp(70px,11vw,120px);
-
-  color:rgba(255,255,255,0.05);
-
-  letter-spacing:-0.04em;
-
-  pointer-events:none;
-
-  white-space:nowrap;
-
-  line-height:1;
-}
-
-.post-hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 14px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.2);
-  font-size:0.7rem;
-  font-weight:600;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.75);
-  margin-bottom:18px;
-}
-
-.post-hero-row{
-  display:flex;
-  align-items:center;
-  gap:18px;
-}
-
-.post-hero-icon{
-  width:60px;height:60px;
-  border-radius:16px;
-  background:linear-gradient(135deg,#6f5dff,#a78bfa);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;
-  flex-shrink:0;
-  box-shadow:0 8px 28px rgba(111,93,255,0.4);
-}
-
-.post-hero h1{
-  font-family:'Syne',sans-serif;
-  font-weight:800;
-  font-size:clamp(1.8rem,4vw,2.5rem);
-  letter-spacing:-0.03em;
-  line-height:1.1;
-  color:#fff;
-}
-.post-hero h1 em{font-style:italic;color:#a78bfa;font-weight:700;}
-.post-hero p{color:rgba(255,255,255,0.55);font-size:0.9rem;margin-top:6px;}
-
-/* ── Main content ── */
-.page{
-  max-width:680px;
-  margin:30px auto 0;
-  padding:0 20px 80px;
-}
-
-/* ── Loading skeleton ── */
-.skeleton-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:24px;
-  animation:pulse 1.6s ease-in-out infinite;
-}
-.sk-header{height:72px;background:#f5f5f9;border-bottom:1px solid var(--border);}
-.sk-img{height:260px;background:linear-gradient(90deg,#f0f0f7 25%,#e8e8f2 50%,#f0f0f7 75%);background-size:400% 100%;animation:shimmer 1.4s infinite;}
-.sk-body{padding:16px;display:flex;flex-direction:column;gap:8px;}
-.sk-line{height:12px;border-radius:6px;background:#ececf5;}
-.sk-line.w70{width:70%;}
-.sk-line.w45{width:45%;}
-
-@keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
-
-/* ── Post card ── */
-.post{
-  background:#ffffff;
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:24px;
-  box-shadow:0 2px 16px rgba(0,0,0,0.07);
-  animation:cardIn .45s cubic-bezier(0.16,1,0.3,1) both;
-  transition:transform .25s, box-shadow .25s;
-}
-.post:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 36px rgba(111,93,255,0.13), 0 0 0 1px rgba(111,93,255,0.1);
-}
-
-@keyframes cardIn{
-  from{opacity:0;transform:translateY(18px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.post-header{
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  border-bottom:1px solid var(--border);
-}
-
-.avatar{
-  width:46px;height:46px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#6f5dff,#a78bfa);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;
-  font-weight:700;
-  font-size:1.1rem;
-  color:#fff;
-  flex-shrink:0;
-  box-shadow:0 4px 14px rgba(111,93,255,0.25);
-  overflow:hidden;
-}
-.avatar img{width:100%;height:100%;object-fit:cover;}
-
-.post-meta{flex:1;min-width:0;}
-
-.business-name{
-  font-family:'Syne',sans-serif;
-  font-weight:700;
-  font-size:0.95rem;
-  color:var(--text);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.business-name a{
-  color:inherit;
-  text-decoration:none;
-  transition:0.3s;
-}
-
-.business-name a:hover{
-  color:var(--accent);
-}
-.post-time{
-  font-size:0.75rem;
-  color:var(--muted);
-  margin-top:2px;
-  display:flex;align-items:center;gap:4px;
-}
-
-.post-menu{
-  background:none;border:none;
-  color:var(--muted);cursor:pointer;
-  padding:6px;border-radius:8px;font-size:0.85rem;
-  transition:background .2s,color .2s;
-}
-.post-menu:hover{background:var(--surface2);color:var(--text);}
-
-.post-image{
-  width:100%;max-height:480px;object-fit:cover;
-  display:block;border-bottom:1px solid var(--border);
-  cursor:pointer;transition:filter .3s;
-}
-.post-image:hover{filter:brightness(1.04);}
-
-.post-body{padding:16px 18px 18px;}
-
-.caption{
-  font-size:0.9rem;line-height:1.65;
-  color:#374151;
-}
-
-/* ── Empty state ── */
-.empty{
-  text-align:center;
-  padding:80px 20px;
-  background:#fff;
-  border-radius:20px;
-  border:1px solid var(--border);
-  box-shadow:0 2px 16px rgba(0,0,0,0.06);
-  animation:cardIn .5s ease both;
-}
-.empty-icon{
-  width:72px;height:72px;
-  margin:0 auto 20px;
-  border-radius:20px;
-  background:rgba(111,93,255,0.08);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.8rem;color:var(--accent);
-}
-.empty h3{
-  font-family:'Syne',sans-serif;
-  font-size:1.1rem;font-weight:700;
-  color:var(--text);margin-bottom:8px;
-}
-.empty p{font-size:0.85rem;color:var(--muted);}
-
-/* ── Error card ── */
-.error-icon{background:rgba(239,68,68,0.08) !important;color:#ef4444 !important;}
-.error-title{color:#111827 !important;}
-.error-msg{color:#6b7280 !important;}
-/* MOBILE NAVBAR FIX */
-
-@media(max-width:768px){
-
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    padding:15px;
-}
-
-body{
-    padding-top:72px;
-}
-
-.menu-toggle{
-    display:block;
-    background:none;
-    border:none;
-    font-size:28px;
-    cursor:pointer;
-}
-
-#navbarLinks{
-    display:none;
-    width:100%;
-    flex-direction:column;
-    background:white;
-    margin-top:10px;
-    padding:10px;
-}
-
-#navbarLinks.active{
-    display:flex;
-}
-
-#navbarLinks a{
-    width:100%;
-    text-align:left;
-    padding:12px;
-    margin:0;
-}
-
-.post-hero{
-    height:auto;
-    padding:25px 20px;
-}
-
-.post-hero-row{
-    flex-direction:column;
-    align-items:flex-start;
-}
-
-.post-hero h1{
-    font-size:32px;
-}
-
-}
-/* ── Scrollbar ── */
-::-webkit-scrollbar{width:6px;}
-::-webkit-scrollbar-track{background:transparent;}
-::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px;}
+ :root{--bg:#f8f7f5;--surface:#fff;--border:#e8e8e8;--accent:#c49a6c;--ink:#111;--muted:#6b7280;--shadow:0 18px 50px rgba(17,17,17,.08);--shadow-hover:0 28px 60px rgba(17,17,17,.12)}
+ *{box-sizing:border-box;margin:0;padding:0}
+ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;padding-top:78px}
+ header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(248,247,245,.8);backdrop-filter:blur(18px);border-bottom:1px solid rgba(17,17,17,.06);padding:16px 6%;display:flex;justify-content:space-between;align-items:center}
+ .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.08rem;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+ .nav-logo::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(196,154,108,.12)}
+ nav{display:flex;align-items:center;gap:22px}
+ nav a{position:relative;text-decoration:none;color:rgba(17,17,17,.8);font-weight:600;font-size:.9rem;padding:8px 0;transition:color .18s ease,transform .18s ease}
+ nav a:hover{color:var(--ink);transform:translateY(-1px)}
+ nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .2s ease}
+ nav a:hover::after{width:100%}
+ .menu-toggle{display:none;border:1px solid rgba(17,17,17,.08);background:rgba(255,255,255,.72);width:44px;height:44px;border-radius:14px;font-size:20px}
+ .post-hero{position:relative;overflow:hidden;min-height:260px;display:flex;align-items:center;background:linear-gradient(180deg,#fbfaf8,#f3f0eb)}
+ .post-hero::before{content:'POSTS';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(70px,11vw,120px);color:rgba(17,17,17,.04);letter-spacing:-.04em;pointer-events:none;white-space:nowrap;line-height:1}
+ .post-hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;border:1px solid rgba(17,17,17,.08);font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,.76);margin-bottom:18px}
+ .post-hero-row{display:flex;align-items:center;gap:18px}
+ .post-hero-icon{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:var(--shadow);color:#fff}
+ .post-hero h1{font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-1px;line-height:1.05;color:var(--ink)}
+ .post-hero h1 em{font-style:italic;color:var(--accent)}
+ .post-hero p{color:var(--muted);font-size:1rem;margin-top:8px;max-width:50ch;line-height:1.75}
+ .page{max-width:720px;margin:0 auto;padding:32px 20px 84px}
+ .skeleton-card,.post,.empty{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 10px 28px rgba(17,17,17,.03)}
+ .skeleton-card{margin-bottom:24px;animation:pulse 1.6s ease-in-out infinite}
+ .sk-header{height:72px;background:#f5f5f9;border-bottom:1px solid var(--border)}
+ .sk-img{height:260px;background:linear-gradient(90deg,#f0f0f7 25%,#e8e8f2 50%,#f0f0f7 75%);background-size:400% 100%;animation:shimmer 1.4s infinite}
+ .sk-body{padding:16px;display:flex;flex-direction:column;gap:8px}
+ .sk-line{height:12px;border-radius:6px;background:#ececf5}
+ .sk-line.w70{width:70%}.sk-line.w45{width:45%}
+ @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}} @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+ .post{margin-bottom:24px;animation:cardIn .45s cubic-bezier(.16,1,.3,1) both;transition:transform .25s ease,box-shadow .25s ease}
+ .post:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+ @keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+ .post-header{padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+ .avatar{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:#fff;flex-shrink:0;box-shadow:0 4px 14px rgba(17,17,17,.14);overflow:hidden;text-decoration:none}
+ .avatar img{width:100%;height:100%;object-fit:cover}
+ .post-meta{flex:1;min-width:0}.business-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.business-name a{color:inherit;text-decoration:none}.business-name a:hover{color:var(--accent)}
+ .post-time{font-size:.75rem;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:4px}
+ .post-menu{background:none;border:none;color:var(--muted);cursor:pointer;padding:6px;border-radius:8px;font-size:.85rem;transition:background .2s ease,color .2s ease}.post-menu:hover{background:#f3f0eb;color:var(--ink)}
+ .post-image{width:100%;max-height:480px;object-fit:cover;display:block;border-bottom:1px solid var(--border);cursor:pointer;transition:filter .3s ease}
+ .post-image:hover{filter:brightness(1.04)}
+ .post-body{padding:16px 18px 18px}.caption{font-size:.92rem;line-height:1.7;color:#374151}
+ .empty{text-align:center;padding:80px 20px}
+ .empty-icon{width:72px;height:72px;margin:0 auto 20px;border-radius:20px;background:rgba(196,154,108,.12);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--accent)}
+ .empty h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:8px}
+ .empty p{font-size:.85rem;color:var(--muted)}
+ .error-icon{background:rgba(239,68,68,.08)!important;color:#ef4444!important}.error-title{color:var(--ink)!important}.error-msg{color:var(--muted)!important}
+ @media(max-width:768px){header{padding:14px 5%;flex-wrap:wrap;gap:10px}.menu-toggle{display:block}.nav-open{display:flex}#navbarLinks{display:none;width:100%;flex-direction:column;gap:0;padding-top:12px;border-top:1px solid rgba(17,17,17,.08)}#navbarLinks.active{display:flex}#navbarLinks a{width:100%;padding:12px 0}.post-hero{min-height:auto;padding:30px 0}.post-hero-row{flex-direction:column;align-items:flex-start}.page{padding:24px 16px 72px}.post-hero h1{font-size:2.2rem}}
 </style>
 </head>
-
 <body>
-
-<!-- Navbar -->
 <header>
-
-<a href="index.html" class="nav-logo">
-Community.Business
-</a>
-
-<button
-class="menu-toggle"
-onclick="toggleMenu()">
-
-☰
-
-</button>
-
-<nav id="navbarLinks">
-</nav>
-
+<a href="index.html" class="nav-logo">Community.Business</a>
+<button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+<nav id="navbarLinks"></nav>
 </header>
-
-<!-- Hero (kept dark purple as requested) -->
 <div class="post-hero">
-  <div class="post-hero-badge">
-    <i class="fa-solid fa-newspaper fa-xs"></i>
-    Community Feed
-</div>
+  <div class="post-hero-badge"><i class="fa-solid fa-newspaper fa-xs"></i> Community Feed</div>
   <div class="post-hero-row">
-    <div class="post-hero-icon">
-    <i class="fa-solid fa-layer-group" style="color:#fff;"></i>
-</div>
+    <div class="post-hero-icon"><i class="fa-solid fa-layer-group"></i></div>
     <div>
-      <h1>Business Posts.</h1>
-      <p>Latest updates from businesses in your community.</p>
+      <h1>Business <em>posts</em>.</h1>
+      <p>Latest updates from businesses in your community, presented in a cleaner feed experience.</p>
     </div>
   </div>
 </div>
-
-<!-- Feed -->
 <div class="page">
-
-  <!-- Skeleton loaders -->
   <div id="skeletons">
     <div class="skeleton-card"><div class="sk-header"></div><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line w70"></div><div class="sk-line w45"></div></div></div>
     <div class="skeleton-card"><div class="sk-header"></div><div class="sk-img"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line w70"></div></div></div>
   </div>
-
   <div id="feed"></div>
-
 </div>
-
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="js/firebase.js"></script>
 <script>
-function toggleMenu(){
-
-document
-.getElementById("navbarLinks")
-.classList
-.toggle("active");
-
-}
+function toggleMenu(){document.getElementById("navbarLinks").classList.toggle("active");}
 async function updateNavbar(user){
-
-const nav =
-document.getElementById(
-"navbarLinks"
-);
-
-nav.classList.remove(
-"active"
-);
-
+const nav=document.getElementById("navbarLinks"); nav.classList.remove("active");
 if(user){
-
-let adminLink = "";
-
-try {
-  const userDoc = await db.collection("users").doc(user.uid).get();
-  const role = userDoc.exists ? userDoc.data().role : "";
-  if (role === "admin" || user.email === "admin@community.business") {
-    adminLink = `<a href="admin.html">🛡️Admin Panel</a>`;
-  }
-} catch (err) {
-  console.warn("Admin lookup failed:", err);
-}
-
-nav.innerHTML = `
-
-<a href="index.html">🏠 Home</a>
-
-<a href="businesses.html">🏢 Businesses</a>
-
-<a href="posts.html">📸 Posts</a>
-
-<a href="about.html">ℹ️ About</a>
-
-<a href="profile.html">
-👤 My Profile
-</a>
-
-${adminLink}
-
-<a href="#"
-onclick="logoutUser();return false;">
-🚪 Sign Out
-</a>
-
-`;
-
+let adminLink="";
+try{const userDoc=await db.collection("users").doc(user.uid).get(); const role=userDoc.exists?userDoc.data().role:""; if(role==="admin"||user.email==="admin@community.business"){adminLink=`<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>`;}}catch(err){console.warn("Admin lookup failed:",err);}
+nav.innerHTML=`<a href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a><a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="profile.html"><i class="fa-solid fa-user"></i> My Profile</a>${adminLink}<a href="#" onclick="logoutUser();return false;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>`;
 }else{
-
-nav.innerHTML = `
-
-<a href="index.html">🏠 Home</a>
-
-<a href="businesses.html">🏢 Businesses</a>
-
-<a href="posts.html">📸 Posts</a>
-
-<a href="about.html">ℹ️ About</a>
-
-<a href="login.html">
-🔑 Login
-</a>
-
-<a href="signup.html">
-📝 Sign Up
-</a>
-
-`;
-
-}
-
-}
-
-function logoutUser(){
-
-auth.signOut()
-.then(()=>{
-
-window.location.href =
-"index.html";
-
-});
-
-}
-
-auth.onAuthStateChanged((user)=>{
-
-updateNavbar(user);
-
-});
-
-</script>
-<script>
+nav.innerHTML=`<a href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a><a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a><a href="signup.html"><i class="fa-solid fa-pen-to-square"></i> Sign Up</a>`;
+}}
+function logoutUser(){auth.signOut().then(()=>{window.location.href="login.html";});}
+auth.onAuthStateChanged((user)=>{updateNavbar(user);});
 loadPosts();
-
-async function loadPosts() {
-  const feed = document.getElementById('feed');
-  const skeletons = document.getElementById('skeletons');
-
-  try {
-    const snapshot = await db.collection('business_posts')
-      .orderBy('createdAt', 'desc')
-      .get();
-
-    skeletons.style.display = 'none';
-
-    if (snapshot.empty) {
-      feed.innerHTML = `
-        <div class="empty">
-          <div class="empty-icon"><i class="fa-solid fa-newspaper"></i></div>
-          <h3>No posts yet</h3>
-          <p>Be the first to share something with the community.</p>
-        </div>`;
-      return;
-    }
-
-    let delay = 0;
-    for (const doc of snapshot.docs) {
-      const post = doc.data();
-
-      const businessDoc = await db.collection('businesses').doc(post.businessId).get();
-      const businessName = businessDoc.exists ? businessDoc.data().businessName : 'Business';
-      const logoURL      = businessDoc.exists ? businessDoc.data().logoURL : null;
-
-      const timeStr = post.createdAt
-        ? new Date(post.createdAt.seconds * 1000).toLocaleString('en-IN', {
-            day: 'numeric', month: 'short', year: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-          })
-        : '';
-
-      const avatarContent = logoURL
-        ? `<img src="${logoURL}" alt="${businessName}">`
-        : businessName.charAt(0).toUpperCase();
-
-      const card = document.createElement('div');
-      card.className = 'post';
-      card.style.animationDelay = `${delay}ms`;
-      card.innerHTML = `
-        <div class="post-header">
-          <a
-href="business-details.html?id=${post.businessId}"
-class="avatar"
->
-
-${avatarContent}
-
-</a>
-          <div class="post-meta">
-            <div class="business-name">
-
-<a href="business-details.html?id=${post.businessId}"
-style="
-text-decoration:none;
-color:inherit;
-">
-
-${businessName}
-
-</a>
-
-</div>
-            <div class="post-time"><i class="fa-regular fa-clock fa-xs"></i>${timeStr}</div>
-          </div>
-          <button class="post-menu"><i class="fa-solid fa-ellipsis"></i></button>
-        </div>
-        <img class="post-image" src="${post.imageURL}" alt="Post image" loading="lazy">
-        <div class="post-body">
-          <div class="caption">${post.caption}</div>
-        </div>`;
-      feed.appendChild(card);
-      delay += 60;
-    }
-  } catch (err) {
-    skeletons.style.display = 'none';
-    console.error(err);
-    feed.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-        <h3 class="error-title">Couldn't load posts</h3>
-        <p class="error-msg">Please check your connection and try again.</p>
-      </div>`;
+async function loadPosts(){
+ const feed=document.getElementById('feed'); const skeletons=document.getElementById('skeletons');
+ try{
+  const snapshot=await db.collection('business_posts').orderBy('createdAt','desc').get();
+  skeletons.style.display='none';
+  if(snapshot.empty){feed.innerHTML=`<div class="empty"><div class="empty-icon"><i class="fa-solid fa-newspaper"></i></div><h3>No posts yet</h3><p>Be the first to share something with the community.</p></div>`; return;}
+  let delay=0;
+  for(const doc of snapshot.docs){
+    const post=doc.data();
+    const businessDoc=await db.collection('businesses').doc(post.businessId).get();
+    const businessName=businessDoc.exists?businessDoc.data().businessName:'Business';
+    const logoURL=businessDoc.exists?businessDoc.data().logoURL:null;
+    const timeStr=post.createdAt?new Date(post.createdAt.seconds*1000).toLocaleString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+    const avatarContent=logoURL?`<img src="${logoURL}" alt="${businessName}">`:businessName.charAt(0).toUpperCase();
+    const card=document.createElement('div');
+    card.className='post';
+    card.style.animationDelay=`${delay}ms`;
+    card.innerHTML=`<div class="post-header"><a href="business-details.html?id=${post.businessId}" class="avatar">${avatarContent}</a><div class="post-meta"><div class="business-name"><a href="business-details.html?id=${post.businessId}">${businessName}</a></div><div class="post-time"><i class="fa-regular fa-clock fa-xs"></i>${timeStr}</div></div><button class="post-menu"><i class="fa-solid fa-ellipsis"></i></button></div><img class="post-image" src="${post.imageURL}" alt="Post image" loading="lazy"><div class="post-body"><div class="caption">${post.caption}</div></div>`;
+    feed.appendChild(card); delay+=60;
   }
-}
-
-function logoutUser() {
-  auth.signOut().then(() => { window.location.href = 'login.html'; });
+ }catch(err){
+  skeletons.style.display='none'; console.error(err); feed.innerHTML=`<div class="empty"><div class="empty-icon error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div><h3 class="error-title">Couldn't load posts</h3><p class="error-msg">Please check your connection and try again.</p></div>`;
+ }
 }
 </script>
 </body>
