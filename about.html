@@ -39,10 +39,88 @@
   .benefit-card h3{font-size:1rem;margin-bottom:8px}
   .team-card{text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfaf8)}
   .team-card::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,108,.12),transparent 70%)}
-  .team-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;box-shadow:var(--shadow)}
+ .team-avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:0 auto 18px;
+    border:4px solid rgba(196,154,108,.25);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.team-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
   .team-card .role{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:8px 0 12px}
-  .team-socials{display:flex;justify-content:center;gap:10px;margin-top:16px}
-  .team-socials a{width:34px;height:34px;border-radius:10px;background:rgba(17,17,17,.06);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+ .team-socials{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:18px;
+}
+
+.team-socials a{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+
+    background:#f7f5f2;
+    color:#111111;
+
+    border:1px solid rgba(0,0,0,.08);
+
+    transition:all .3s ease;
+}
+
+.team-socials a:hover{
+    background:#111111;
+    color:#ffffff;
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.team-socials i{
+    font-size:18px;
+}
+.cta-section{
+    margin-top:60px;
+    display:flex;
+    justify-content:center;
+}
+
+.cta-card{
+    width:100%;
+    max-width:1100px;
+
+    padding:70px 60px;
+
+    border-radius:28px;
+
+    background:linear-gradient(135deg,#111,#1b1b1b);
+
+    color:#fff;
+
+    text-align:center;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.15);
+}
+
+.cta-card h2{
+    font-size:3rem;
+    margin-bottom:18px;
+}
+
+.cta-card p{
+    max-width:650px;
+    margin:0 auto 28px;
+}
   .stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
   .stat-card{text-align:left;padding:24px}
   .stat-num{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,2.9rem);font-weight:800;letter-spacing:-.05em;margin-bottom:6px}
@@ -80,12 +158,6 @@
     <div class="mission-card"><div class="mc-icon"><i class="fas fa-eye"></i></div><h2>Our Vision</h2><p>A thriving business ecosystem where every local business has equal opportunities to grow, collaborate, and succeed through technology and genuine community engagement.</p></div>
     <div class="mission-card"><div class="mc-icon"><i class="fas fa-lightbulb"></i></div><h2>Why We Built This</h2><p>Many small businesses struggle to gain online visibility. This platform bridges that gap with a simple, polished way to showcase services and expand reach.</p></div>
   </div>
-  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Community Stats</span><div class="eyebrow-line"></div></div>
-  <div class="stats-strip">
-    <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Businesses</div></div>
-    <div class="stat-card"><div class="stat-num">1200+</div><div class="stat-label">Members</div></div>
-    <div class="stat-card"><div class="stat-num">350+</div><div class="stat-label">Posts</div></div>
-  </div>
   <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Why Choose Us</span><div class="eyebrow-line"></div></div>
   <div class="benefits-grid">
     <div class="benefit-card"><div class="benefit-icon"><i class="fa-solid fa-bullhorn"></i></div><h3>Digital Visibility</h3><p>Showcase your business to a larger audience and get discovered online.</p></div>
@@ -100,16 +172,49 @@
       <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
     </div>
     <div class="team-card">
-      <div class="team-avatar">K</div><h3>Krish Soni</h3><p class="role">Project Coordinator</p><p>Responsible for project planning, development, coordination, and ensuring the platform delivers real value to local businesses.</p>
-      <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+      <div class="team-avatar">
+    <img src="images/krish.jpeg" alt="Krish Soni">
+</div>
+
+<h3>Krish Soni</h3>
+
+<p class="role">Project Coordinator & Full Stack Developer</p><p>Responsible for project planning, development, coordination, and ensuring the platform delivers real value to local businesses.</p>
+     <div class="team-socials">
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/krish-soni-6b408a320?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+       target="_blank"
+       title="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+    </a>
+
+    <!-- Gmail -->
+    <a href="mailto:krishs0105@gmail.com"
+       title="Email">
+        <i class="fas fa-envelope"></i>
+    </a>
+
+</div>
+  </div>
+  <div style="height:40px"></div>
+  <section class="cta-section">
+
+    <div class="cta-card">
+
+        <h2>Ready to grow your business?</h2>
+
+        <p>
+            Join hundreds of local businesses already thriving in the Community Business Network.
+        </p>
+
+        <a href="businesses.html" class="cta-btn">
+            <i class="fas fa-store"></i>
+            Explore Businesses
+        </a>
+
     </div>
-  </div>
-  <div style="height:20px"></div>
-  <div class="cta-card">
-    <h2>Ready to grow your business?</h2>
-    <p>Join hundreds of local businesses already thriving in the Community Business Network.</p>
-    <a href="businesses.html" class="cta-btn"><i class="fas fa-store"></i> Explore Businesses</a>
-  </div>
+
+</section>
 </div>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
