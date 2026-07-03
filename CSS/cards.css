@@ -1,0 +1,15 @@
+.card, .mission-card, .benefit-card, .team-card, .about-card, .profile-card, .auth-form, .stat-card, .why-card, .hero-panel, .cta-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 28px rgba(17, 17, 17, 0.03);
+}
+.card, .mission-card, .benefit-card, .team-card, .about-card, .profile-card, .stat-card, .why-card {
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover, .mission-card:hover, .benefit-card:hover, .team-card:hover, .about-card:hover, .profile-card:hover, .stat-card:hover, .why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+

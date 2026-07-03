@@ -1,0 +1,40 @@
+.btn,
+.btn-primary,
+.cta-btn,
+.view-btn,
+.search-btn,
+.button,
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 13px 20px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.btn, .btn-primary, .cta-btn, .view-btn, .search-btn, .button, button[type="submit"] {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.btn:hover, .btn-primary:hover, .cta-btn:hover, .view-btn:hover, .search-btn:hover, .button:hover, button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.btn-ghost, .btn-outline {
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  border-color: rgba(17,17,17,0.08);
+}
+.text-btn {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding-inline: 0;
+}
+

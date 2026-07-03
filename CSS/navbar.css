@@ -1,0 +1,65 @@
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 6%;
+  background: rgba(248, 247, 245, 0.78);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.06);
+}
+.nav-logo, .logo {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo::before, .logo::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(196, 154, 108, 0.12);
+}
+nav {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+nav a {
+  position: relative;
+  color: rgba(17, 17, 17, 0.8);
+  font-weight: 600;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+nav a:hover { color: var(--ink); transform: translateY(-1px); }
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+nav a:hover::after { width: 100%; }
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(17,17,17,0.08);
+  background: rgba(255,255,255,0.72);
+  color: var(--ink);
+  font-size: 20px;
+}
+

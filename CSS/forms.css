@@ -1,0 +1,19 @@
+input, textarea, select {
+  width: 100%;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 13px 14px;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(196,154,108,0.42);
+  box-shadow: 0 0 0 4px rgba(196,154,108,0.12);
+}
+.auth-form, .search-box input {
+  box-shadow: var(--shadow);
+}
+

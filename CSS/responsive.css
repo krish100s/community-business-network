@@ -1,0 +1,24 @@
+@media (max-width: 900px) {
+  header { padding: 14px 5%; }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  nav { width: 100%; }
+}
+@media (max-width: 768px) {
+  header { flex-wrap: wrap; }
+  nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(17,17,17,0.08);
+  }
+  nav.active, #navbarLinks.active { display: flex; }
+  nav a { width: 100%; padding: 12px 0; }
+  .page-wrap, .section, .about-content, .team-section, .benefits-section { padding-inline: 16px; }
+}
+@media (max-width: 600px) {
+  .hero, .hero-strip, .page-hero { min-height: auto; }
+  .business-grid, .mission-grid, .benefits-grid, .team-grid, .stats-grid, .why-grid, .footer-grid { grid-template-columns: 1fr !important; }
+}
