@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About - Community Business Network</title>
+<title>About - GrowCommunityBiz</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,19 +40,29 @@
   .team-card{text-align:center;position:relative;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfaf8)}
   .team-card::before{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,108,.12),transparent 70%)}
  .team-avatar{
-    width:90px;
-    height:90px;
+    width:130px;
+    height:130px;
+
+    margin:0 auto 20px;
+
     border-radius:50%;
+
     overflow:hidden;
-    margin:0 auto 18px;
+
     border:4px solid rgba(196,154,108,.25);
-    box-shadow:0 12px 30px rgba(0,0,0,.12);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
 }
 
 .team-avatar img{
+
     width:100%;
     height:100%;
+
     object-fit:cover;
+
+    display:block;
+
 }
   .team-card .role{font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:8px 0 12px}
  .team-socials{
@@ -135,7 +145,7 @@
 </head>
 <body>
 <header>
-<a href="index.html" class="nav-logo">Community.Business</a>
+<a href="index.html" class="nav-logo">GrowCommunityBiz</a>
 <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
 <nav id="navbarLinks"></nav>
 </header>
@@ -146,7 +156,7 @@
     <div class="hero-icon"><i class="fas fa-people-group"></i></div>
     <div class="hero-meta">
       <div class="hero-tag">Our Story</div>
-      <h1 class="hero-title">Community Business Network <em>built</em> for local growth.</h1>
+      <h1 class="hero-title">GrowCommunityBiz <em>built</em> for local growth.</h1>
       <p class="hero-sub">Empowering local businesses through digital visibility, community support, and a cleaner path to discovery.</p>
     </div>
   </div>
@@ -166,11 +176,42 @@
     <div class="benefit-card"><div class="benefit-icon"><i class="fa-solid fa-rocket"></i></div><h3>Business Growth</h3><p>Access real opportunities and tools that help your business expand.</p></div>
   </div>
   <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Meet the Team</span><div class="eyebrow-line"></div></div>
-  <div class="team-grid">
-    <div class="team-card">
-      <div class="team-avatar">D</div><h3>Devang Soni</h3><p class="role">Founder & Idea Creator</p><p>Visionary behind the Community Business Network, dedicated to supporting local entrepreneurs and strengthening community growth.</p>
-      <div class="team-socials"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div>
+ <div class="team-card">
+
+    <div class="team-avatar">
+        <img src="images/Devang_Soni.jpeg" alt="Devang Soni">
     </div>
+
+    <h3>Devang Soni</h3>
+
+    <p class="role">
+        Founder & Business Strategy Lead
+    </p>
+
+    <p>
+        Passionate entrepreneur focused on building innovative digital
+        solutions, empowering local businesses, and driving sustainable
+        community growth through technology and strategic leadership.
+    </p>
+
+    <div class="team-socials">
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/devangsoni?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+           target="_blank"
+           title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:devang@smartfabsystems.com"
+           title="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+
+    </div>
+
+</div>
     <div class="team-card">
       <div class="team-avatar">
     <img src="images/krish.jpeg" alt="Krish Soni">
@@ -204,7 +245,7 @@
         <h2>Ready to grow your business?</h2>
 
         <p>
-            Join hundreds of local businesses already thriving in the Community Business Network.
+            Join hundreds of local businesses already thriving in GrowCommunityBiz.
         </p>
 
         <a href="businesses.html" class="cta-btn">

@@ -60,9 +60,9 @@ exports.sendEmailResetOtp = functions.https.onCall(async (data) => {
   await transporter.sendMail({
     from: getSmtpConfig().from,
     to: email,
-    subject: "Community Business Network - Password Reset OTP",
+    subject: "GrowCommunityBiz - Password Reset OTP",
     text: `
-Community Business Network
+GrowCommunityBiz
 
 Your password reset OTP is:
 

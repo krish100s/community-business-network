@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Edit Profile - Community Business Network</title>
+<title>Edit Profile - GrowCommunityBiz</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,22 +55,160 @@
   .save-btn{border:none;background:#111;color:#fff;box-shadow:var(--shadow)}.save-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
   .back-btn{background:transparent;color:var(--muted);border:1px solid var(--border)}.back-btn:hover{background:var(--surface2);color:var(--ink);transform:translateY(-1px)}
   .sidebar{display:flex;flex-direction:column;gap:18px}
-  .avatar-card{background:#111;color:#fff;padding:26px;animation:fadeUp .6s ease .2s both;text-align:center}
-  .avatar-card-title{align-self:flex-start;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6b7280;margin-bottom:4px}
-  .avatar-ring{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:#fff;box-shadow:var(--shadow);position:relative;margin:0 auto}
-  .online-dot{position:absolute;bottom:4px;right:4px;width:14px;height:14px;background:#22c55e;border-radius:50%;border:2.5px solid #111;box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:ping 2s ease infinite}
+  .avatar-card{
+    background:var(--surface);
+    color:var(--ink);
+    padding:24px;
+    animation:fadeUp .6s ease .2s both;
+    text-align:left;
+    position:relative;
+    overflow:hidden;
+  }
+  .avatar-card::before{
+    content:'';
+    position:absolute;
+    inset:auto -70px -80px auto;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(196,154,108,.16) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .avatar-card-title{
+    align-self:flex-start;
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:16px;
+  }
+  .avatar-ring{
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid rgba(17,17,17,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Syne',sans-serif;
+    font-size:2.8rem;
+    font-weight:800;
+    color:var(--ink);
+    box-shadow:0 18px 40px rgba(17,17,17,.12);
+    position:relative;
+    margin:0 auto 18px;
+    overflow:hidden;
+  }
+  .avatar-ring img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+    display:block;
+  }
+  .online-dot{
+    position:absolute;
+    bottom:10px;
+    right:10px;
+    width:14px;
+    height:14px;
+    background:#22c55e;
+    border-radius:50%;
+    border:2.5px solid #fff;
+    box-shadow:0 0 0 0 rgba(34,197,94,.5);
+    animation:ping 2s ease infinite
+  }
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-  .preview-name{font-family:'Instrument Serif',serif;font-size:1.2rem;color:#fff;line-height:1.2;margin-top:14px}.preview-sub{font-size:.78rem;color:#6b7280}.preview-divider{width:100%;height:1px;background:rgba(255,255,255,.07);margin:16px 0}.preview-row{width:100%;display:flex;align-items:center;gap:10px;font-size:.82rem;color:rgba(255,255,255,.45);padding:4px 0}.preview-row i{width:16px;font-size:.75rem;color:#8b5cf6}
+  .preview-name{
+    font-family:'Instrument Serif',serif;
+    font-size:1.5rem;
+    color:var(--ink);
+    line-height:1.15;
+    margin-top:2px;
+  }
+  .preview-sub{
+    font-size:.8rem;
+    color:var(--muted);
+    margin-top:4px;
+  }
+  .preview-divider{
+    width:100%;
+    height:1px;
+    background:var(--border);
+    margin:18px 0;
+  }
+  .preview-row{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:.9rem;
+    color:#222;
+    padding:8px 0;
+  }
+  .preview-row i{
+    width:18px;
+    font-size:.82rem;
+    color:var(--accent);
+    flex-shrink:0;
+  }
+  .preview-row span{
+    color:#222;
+    word-break:break-word;
+  }
+  .preview-social{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+  .preview-social a{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--ink);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    box-shadow:0 8px 18px rgba(17,17,17,.04);
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .preview-social a:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 28px rgba(17,17,17,.08);
+    border-color:rgba(196,154,108,.3);
+  }
+  .preview-social a i{font-size:.92rem}
   .tips-card{padding:22px;animation:fadeUp .6s ease .3s both}.tips-title{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .social-card{background:var(--surface);border:1px solid var(--border);border-radius:22px;box-shadow:0 10px 28px rgba(17,17,17,.03);padding:22px;margin-top:20px;animation:fadeUp .6s ease .15s both}
+  .social-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .social-grid .fg{grid-column:auto}
+  .social-note{font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.5}
   .tip-item{display:flex;gap:9px;margin-bottom:11px;align-items:flex-start}.tip-item:last-child{margin-bottom:0}.tip-dot{width:6px;height:6px;border-radius:50%;background:#111;flex-shrink:0;margin-top:7px}.tip-text{font-size:.81rem;color:var(--muted);line-height:1.5}
   .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(70px);background:#1f2937;color:#fff;padding:12px 24px;border-radius:999px;font-size:.86rem;font-weight:700;display:flex;align-items:center;gap:9px;box-shadow:0 10px 32px rgba(0,0,0,.2);transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;opacity:0;z-index:1000}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
   .menu-toggle{display:none;border:1px solid rgba(17,17,17,.08);background:rgba(255,255,255,.72);width:44px;height:44px;border-radius:14px;font-size:20px}
-  @media(max-width:768px){header{padding:14px 5%;flex-wrap:wrap;gap:10px}.menu-toggle{display:block}#navbarLinks{display:none;width:100%;flex-direction:column;align-items:flex-start;background:#fff;margin-top:10px;padding:10px;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.1)}#navbarLinks.active{display:flex}#navbarLinks a{width:100%;text-align:left;padding:12px;margin:0}.hero-content{padding:0 5% 28px;flex-direction:column;align-items:flex-start}.hero-strip{min-height:220px}.page-wrap{padding:34px 16px 80px}.edit-layout,.two-col{grid-template-columns:1fr}}
+  @media(max-width:768px){
+    header{padding:14px 5%;flex-wrap:wrap;gap:10px}
+    .menu-toggle{display:block}
+    #navbarLinks{display:none;width:100%;flex-direction:column;align-items:flex-start;background:#fff;margin-top:10px;padding:10px;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.1)}
+    #navbarLinks.active{display:flex}
+    #navbarLinks a{width:100%;text-align:left;padding:12px;margin:0}
+    .hero-content{padding:0 5% 28px;flex-direction:column;align-items:flex-start}
+    .hero-strip{min-height:220px}
+    .page-wrap{padding:34px 16px 80px}
+    .edit-layout,.two-col,.social-grid{grid-template-columns:1fr}
+    .avatar-ring{width:132px;height:132px}
+  }
 </style>
 </head>
 <body>
 <header>
-  <a href="index.html" class="nav-logo">Community.Business</a>
+  <a href="index.html" class="nav-logo">GrowCommunityBiz</a>
   <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
   <nav id="navbarLinks">
     <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
@@ -108,6 +246,14 @@
             <div class="fg"><label>Phone Number</label><div class="input-wrap"><i class="fas fa-phone i-icon"></i><input type="text" id="phone" placeholder="+91 98765 43210" oninput="updatePreview()"></div></div>
             <div class="fg"><label>Location</label><div class="input-wrap"><i class="fas fa-location-dot i-icon"></i><input type="text" id="location" placeholder="City, State" oninput="updatePreview()"></div></div>
             <div class="fg"><label>Profile Picture</label><input type="file" id="profilePhotoInput" accept="image/*"><button type="button" id="uploadProfileBtn" class="save-btn" style="padding:10px 14px;margin-top:10px"><i class="fas fa-cloud-arrow-up"></i> Upload Profile Photo</button></div>
+          </div>
+          <div class="social-card">
+            <div class="fc-header" style="padding:0 0 14px;"><div class="fc-icon"><i class="fas fa-share-nodes"></i></div><span class="fc-label">Social Profiles</span></div>
+            <div class="social-grid">
+              <div class="fg"><label>WhatsApp Number</label><div class="input-wrap"><i class="fa-brands fa-whatsapp i-icon"></i><input type="text" id="whatsapp" placeholder="919876543210" oninput="updatePreview()"></div><div class="social-note">Use country code only. This stays hidden if left empty.</div></div>
+              <div class="fg"><label>Instagram Profile URL</label><div class="input-wrap"><i class="fa-brands fa-instagram i-icon"></i><input type="url" id="instagram" placeholder="https://instagram.com/yourname" oninput="updatePreview()"></div></div>
+              <div class="fg"><label>LinkedIn Profile URL</label><div class="input-wrap"><i class="fa-brands fa-linkedin i-icon"></i><input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourname" oninput="updatePreview()"></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -153,8 +299,8 @@ function updatePreview(){const name=document.getElementById("fullname").value;co
 function showToast(msg,isError=false){const t=document.getElementById("toast");document.getElementById("toastMsg").textContent=msg;t.querySelector("i").style.color=isError?"#ef4444":"#22c55e";t.querySelector("i").className=isError?"fas fa-circle-xmark":"fas fa-circle-check";t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
 function logoutUser(){auth.signOut().then(()=>{window.location.href="login.html";}).catch(e=>alert(e.message));}
 document.getElementById("uploadProfileBtn").addEventListener("click",async function(){const file=document.getElementById("profilePhotoInput").files[0];if(!file){alert("Please select a profile picture first");return;}try{const formData=new FormData();formData.append("file",file);formData.append("upload_preset","business_logos");const response=await fetch("https://api.cloudinary.com/v1_1/dzpzmkhoj/image/upload",{method:"POST",body:formData});const data=await response.json();profilePhotoURL=data.secure_url;document.getElementById("profilePreview").src=profilePhotoURL;document.getElementById("profilePreview").style.display="block";document.getElementById("previewInitials").style.display="none";alert("Profile picture uploaded successfully!");}catch(error){console.log(error);alert("Upload failed");}});
-auth.onAuthStateChanged(async (user)=>{if(!user){window.location.href="login.html";return;}const doc=await db.collection("users").doc(user.uid).get();if(doc.exists){const d=doc.data();const isAdmin=d.role==="admin"||user.email==="admin@community.business";document.getElementById("adminPanelLink").innerHTML=isAdmin?'<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>':'';profilePhotoURL=d.profilePhoto||"";if(profilePhotoURL){document.getElementById("profilePreview").src=profilePhotoURL;document.getElementById("profilePreview").style.display="block";document.getElementById("previewInitials").style.display="none";}document.getElementById("fullname").value=d.fullname||"";document.getElementById("businessname").value=d.businessname||"";document.getElementById("phone").value=d.phone||"";document.getElementById("location").value=d.location||"";document.getElementById("about").value=d.about||"";updatePreview();}});
-async function saveProfile(){try{const user=auth.currentUser;if(!user){alert("Please login first");return;}const btn=document.querySelector(".save-btn");btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';btn.disabled=true;await db.collection("users").doc(user.uid).update({profilePhoto:profilePhotoURL,fullname:document.getElementById("fullname").value,businessname:document.getElementById("businessname").value,phone:document.getElementById("phone").value,location:document.getElementById("location").value,about:document.getElementById("about").value});btn.innerHTML='<i class="fas fa-floppy-disk"></i> Save Changes';btn.disabled=false;showToast("Profile saved successfully!");setTimeout(()=>{window.location.href="profile.html";},1800);}catch(err){console.error(err);document.querySelector(".save-btn").innerHTML='<i class="fas fa-floppy-disk"></i> Save Changes';document.querySelector(".save-btn").disabled=false;showToast(err.message,true);}}
+auth.onAuthStateChanged(async (user)=>{if(!user){window.location.href="login.html";return;}const doc=await db.collection("users").doc(user.uid).get();if(doc.exists){const d=doc.data();const isAdmin=d.role==="admin"||user.email==="admin@community.business";document.getElementById("adminPanelLink").innerHTML=isAdmin?'<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>':'';profilePhotoURL=d.profilePhoto||"";if(profilePhotoURL){document.getElementById("profilePreview").src=profilePhotoURL;document.getElementById("profilePreview").style.display="block";document.getElementById("previewInitials").style.display="none";}document.getElementById("fullname").value=d.fullname||"";document.getElementById("businessname").value=d.businessname||"";document.getElementById("phone").value=d.phone||"";document.getElementById("location").value=d.location||"";document.getElementById("about").value=d.about||"";document.getElementById("whatsapp").value=d.whatsapp||"";document.getElementById("instagram").value=d.instagram||"";document.getElementById("linkedin").value=d.linkedin||"";updatePreview();}});
+async function saveProfile(){try{const user=auth.currentUser;if(!user){alert("Please login first");return;}const btn=document.querySelector(".save-btn");btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';btn.disabled=true;await db.collection("users").doc(user.uid).update({profilePhoto:profilePhotoURL,fullname:document.getElementById("fullname").value,businessname:document.getElementById("businessname").value,phone:document.getElementById("phone").value,location:document.getElementById("location").value,about:document.getElementById("about").value,whatsapp:document.getElementById("whatsapp").value,instagram:document.getElementById("instagram").value,linkedin:document.getElementById("linkedin").value});btn.innerHTML='<i class="fas fa-floppy-disk"></i> Save Changes';btn.disabled=false;showToast("Profile saved successfully!");setTimeout(()=>{window.location.href="profile.html";},1800);}catch(err){console.error(err);document.querySelector(".save-btn").innerHTML='<i class="fas fa-floppy-disk"></i> Save Changes';document.querySelector(".save-btn").disabled=false;showToast(err.message,true);}}
 </script>
 </body>
 </html>

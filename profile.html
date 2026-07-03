@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Profile - Community Business Network</title>
+<title>My Profile - GrowCommunityBiz</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,13 +81,19 @@
   .action-btn.edit{background:#111;color:#fff}.action-btn.edit:hover{background:#000}
   .action-btn.signout{background:rgba(239,68,68,.08);color:#ef4444;border:1px solid rgba(239,68,68,.18)}.action-btn.signout:hover{background:rgba(239,68,68,.14)}
   .action-btn i{font-size:.85rem}.action-btn span{flex:1}.action-btn .arr{margin-left:auto;font-size:.75rem;opacity:.5}
+  .social-card{background:var(--cream);border:1px solid var(--border);border-radius:20px;box-shadow:0 10px 28px rgba(17,17,17,.03);padding:20px;display:flex;flex-direction:column;gap:12px}
+  .social-card-title{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .social-links{display:grid;grid-template-columns:1fr;gap:10px}
+  .social-link{display:none;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--border);background:#fff;text-decoration:none;color:var(--ink);font-weight:700;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  .social-link:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(17,17,17,.04);border-color:rgba(196,154,108,.3)}
+  .social-link i{width:18px;text-align:center;color:var(--accent)}
   .delete-btn{background:#ef4444;color:#fff;border:none;padding:8px 14px;border-radius:12px;cursor:pointer;font-weight:800;transition:transform .18s ease,background .18s ease}.delete-btn:hover{background:#dc2626;transform:translateY(-1px)}
   @media(max-width:768px){header{padding:14px 5%;flex-wrap:wrap;gap:10px}.menu-toggle{display:block}#navbarLinks{display:none;width:100%;flex-direction:column;align-items:flex-start;background:#fff;margin-top:10px;padding:10px;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.08)}#navbarLinks.active{display:flex}#navbarLinks a{width:100%;padding:12px 0}.hero-content{padding:0 5% 38px;flex-direction:column;align-items:flex-start;gap:18px}.avatar-ring{width:90px;height:90px}.page-wrap{padding:34px 16px 80px}.stat-row{grid-template-columns:1fr}.content-grid{grid-template-columns:1fr}.card-header{flex-direction:column;align-items:flex-start;gap:10px}.biz-item{flex-direction:column;align-items:flex-start}.biz-item > div:last-child{width:100%;display:flex;flex-direction:column;gap:10px}.manage-btn,.delete-btn{width:100%;justify-content:center;text-align:center}}
 </style>
 </head>
 <body>
 <header>
-<a href="index.html" class="nav-logo">Community.Business</a>
+<a href="index.html" class="nav-logo">GrowCommunityBiz</a>
 <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
 <nav id="navbarLinks">
   <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
@@ -144,6 +150,14 @@
         <div class="info-row"><div class="ir-icon ir-phone"><i class="fas fa-phone"></i></div><div><div class="ir-sub">Phone</div><div class="ir-val" id="phone">Loading...</div></div></div>
         <div class="info-row"><div class="ir-icon ir-loc"><i class="fas fa-location-dot"></i></div><div><div class="ir-sub">Location</div><div class="ir-val" id="location">Loading...</div></div></div>
       </div>
+      <div class="social-card">
+        <div class="social-card-title">Social Profiles</div>
+        <div class="social-links">
+          <a id="whatsappBtn" class="social-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+          <a id="instagramBtn" class="social-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+          <a id="linkedinBtn" class="social-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
+        </div>
+      </div>
       <div class="action-card">
         <a href="edit-profile.html" class="action-btn edit"><i class="fas fa-pen"></i><span>Edit Profile</span><i class="fas fa-chevron-right arr"></i></a>
         <button class="action-btn signout" onclick="logoutUser()"><i class="fas fa-right-from-bracket"></i><span>Sign Out</span><i class="fas fa-chevron-right arr"></i></button>
@@ -161,6 +175,7 @@ function toggleMenu(){document.getElementById("navbarLinks").classList.toggle("a
 function getInitials(name){ if(!name)return"?"; const words=name.trim().split(/\s+/); return words.length>=2?(words[0][0]+words[1][0]).toUpperCase():name.substring(0,2).toUpperCase(); }
 async function deleteBusiness(id){ const confirmDelete=confirm("Are you sure you want to delete this business?"); if(!confirmDelete)return; try{await db.collection("businesses").doc(id).delete(); alert("Business Deleted Successfully"); location.reload();}catch(error){alert(error.message);} }
 function logoutUser(){ auth.signOut().then(()=>{ window.location.href="login.html"; }).catch(err=>alert(err.message)); }
+function setSocialLink(id,url,kind){const el=document.getElementById(id);if(!url){el.style.display="none";return;}let href=url; if(kind==="whatsapp"){const digits=String(url).replace(/[^\d]/g,""); if(!digits){el.style.display="none";return;} href="https://wa.me/"+digits;} el.href=href; el.style.display="flex";}
 auth.onAuthStateChanged(async (user) => {
   if (!user) { window.location.href = "login.html"; return; }
   try {
@@ -193,6 +208,9 @@ auth.onAuthStateChanged(async (user) => {
     document.getElementById("email").textContent = d.email || "—";
     document.getElementById("phone").textContent = d.phone || "Not Added";
     document.getElementById("location").textContent = d.location || "Not Added";
+    setSocialLink("whatsappBtn", d.whatsapp, "whatsapp");
+    setSocialLink("instagramBtn", d.instagram, "url");
+    setSocialLink("linkedinBtn", d.linkedin, "url");
   } catch (err) { console.error(err); }
 });
 </script>

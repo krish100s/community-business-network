@@ -1,4 +1,4 @@
-console.log("Community Business Website Loaded")
+console.log("GrowCommunityBiz Website Loaded")
 document.getElementById("myBusiness").innerText =
 data.businessname;
 const words = data.businessName.split(" ");
