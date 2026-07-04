@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Posts - GrowCommunityBiz</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#f8f7f5;--surface:#fff;--ink:#111;--muted:#6b7280;--border:#e8e8e8;--accent:#c49a6c;--accent-soft:rgba(196,154,108,.12);--shadow:0 18px 50px rgba(17,17,17,.08);--shadow-hover:0 28px 60px rgba(17,17,17,.12)}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;padding-top:78px}
+  header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(248,247,245,.8);backdrop-filter:blur(18px);border-bottom:1px solid rgba(17,17,17,.06);padding:16px 6%;display:flex;justify-content:space-between;align-items:center}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.08rem;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+  .nav-logo::before{content:"";width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(196,154,108,.12)}
+  nav{display:flex;align-items:center;gap:22px}
+  nav a{position:relative;text-decoration:none;color:rgba(17,17,17,.8);font-weight:600;font-size:.9rem;padding:8px 0;transition:color .18s ease,transform .18s ease;white-space:nowrap}
+  nav a:hover{color:var(--ink);transform:translateY(-1px)}
+  nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:width .2s ease}
+  nav a:hover::after{width:100%}
+  .menu-toggle{display:none;border:1px solid rgba(17,17,17,.08);background:rgba(255,255,255,.72);width:44px;height:44px;border-radius:14px;font-size:20px}
+  .page{max-width:1180px;margin:0 auto;padding:44px 24px 96px}
+  .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:28px}
+  .hero h1{font-family:'Instrument Serif',serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.05;letter-spacing:-1px}
+  .hero h1 em{font-style:normal;color:var(--accent);font-family:inherit}
+  .hero p{color:var(--muted);margin-top:8px;line-height:1.75;max-width:52ch}
+  .hero-stats{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+  .pill{padding:12px 16px;border:1px solid var(--border);border-radius:16px;background:#fff;box-shadow:0 10px 28px rgba(17,17,17,.03);font-size:.88rem;font-weight:700}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 18px;border-radius:14px;text-decoration:none;font-weight:800;border:1px solid transparent;min-height:44px}
+  .btn.primary{background:#111;color:#fff;box-shadow:var(--shadow)}
+  .btn.secondary{background:#fff;color:var(--ink);border-color:var(--border)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 10px 28px rgba(17,17,17,.03);animation:fadeUp .5s ease both}
+  @keyframes fadeUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:#eee}
+  .card-body{padding:18px}
+  .card h3{font-family:'Syne',sans-serif;font-size:1.02rem;line-height:1.25;margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--muted);line-height:1.7}
+  .meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.8rem;margin:12px 0 16px}
+  .card-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .card-actions .btn{flex:1;justify-content:center}
+  .empty{grid-column:1/-1;background:#fff;border:1px solid var(--border);border-radius:22px;padding:72px 24px;text-align:center;box-shadow:0 10px 28px rgba(17,17,17,.03)}
+  .empty i{font-size:3rem;color:var(--accent);margin-bottom:16px}
+  .empty h3{font-family:'Syne',sans-serif;font-size:1.1rem;margin-bottom:8px}
+  .empty p{color:var(--muted);line-height:1.7;margin-bottom:18px}
+  .loading{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+  .skeleton{background:#fff;border:1px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 10px 28px rgba(17,17,17,.03);animation:pulse 1.4s ease-in-out infinite}
+  .sk-img{aspect-ratio:4/3;background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:400% 100%;animation:shimmer 1.3s infinite}
+  .sk-body{padding:18px;display:grid;gap:10px}
+  .sk-line{height:12px;border-radius:999px;background:#ececec}
+  .w80{width:80%}.w60{width:60%}.w45{width:45%}
+  @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(17,17,17,.55);display:none;align-items:center;justify-content:center;z-index:2000;padding:20px}
+  .modal-backdrop.show{display:flex}
+  .modal{width:min(440px,100%);background:#fff;border-radius:24px;padding:24px;border:1px solid var(--border);box-shadow:0 28px 70px rgba(0,0,0,.25)}
+  .modal h3{font-family:'Syne',sans-serif;font-size:1.15rem;margin-bottom:8px}
+  .modal p{color:var(--muted);line-height:1.7;margin-bottom:18px}
+  .modal-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .modal-actions .btn{flex:1;justify-content:center}
+  @media(max-width:768px){
+    header{padding:14px 5%;flex-wrap:wrap;gap:10px}
+    .menu-toggle{display:block}
+    #navbarLinks{display:none;width:100%;flex-direction:column;align-items:flex-start;background:#fff;margin-top:10px;padding:10px;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+    #navbarLinks.active{display:flex}
+    #navbarLinks a{width:100%;padding:12px 0}
+    .page{padding:30px 16px 80px}
+    .hero{flex-direction:column;align-items:flex-start}
+    .hero-stats{justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+<header>
+  <a href="index.html" class="nav-logo">GrowCommunityBiz</a>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+  <nav id="navbarLinks"></nav>
+</header>
+<main class="page">
+  <section class="hero">
+    <div>
+      <h1 id="businessName">Business <em>Posts</em></h1>
+      <p>Manage all posts for this business in one place.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="pill">Posts: <span id="postCount">0</span></div>
+    </div>
+  </section>
+  <div class="actions">
+    <a class="btn primary" id="createPostBtn" href="create-post.html"><i class="fa-solid fa-plus"></i> Create New Post</a>
+    <a class="btn secondary" href="profile.html"><i class="fa-solid fa-arrow-left"></i> Back to Profile</a>
+  </div>
+  <section id="content" class="grid">
+    <div class="loading" id="loadingState">
+      <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w45"></div></div></div>
+      <div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w45"></div></div></div>
+    </div>
+  </section>
+</main>
+
+<div class="modal-backdrop" id="confirmBackdrop" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <h3 id="confirmTitle">Delete this post?</h3>
+    <p>This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn secondary" id="cancelDelete" type="button">Cancel</button>
+      <button class="btn primary" id="confirmDelete" type="button">Delete</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-brand">GrowCommunityBiz</div>
+      <p>Promoting businesses and building stronger community connections through a polished local network.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/krish-soni-6b408a320" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/krish100s" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:krishs0105@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3>Company</h3>
+      <a href="about.html">About</a>
+      <a href="businesses.html">Businesses</a>
+      <a href="posts.html">Posts</a>
+    </div>
+    <div class="footer-col">
+      <h3>Quick Links</h3>
+      <a href="profile.html">Add Business</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <p>krishs0105@gmail.com</p>
+      <p>Local business growth, simplified.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 GrowCommunityBiz. All rights reserved.</span>
+    <span>Designed &amp; Developed by <a href="https://www.linkedin.com/in/krish-soni-6b408a320" target="_blank" rel="noopener noreferrer">Krish Soni</a></span>
+    <span>Designed for local businesses and communities.</span>
+  </div>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const businessId = params.get("id");
+let currentBusiness = null;
+let currentPosts = [];
+let pendingDeleteId = "";
+
+function toggleMenu(){document.getElementById("navbarLinks").classList.toggle("active");}
+async function updateNavbar(user){
+  const nav=document.getElementById("navbarLinks");
+  nav.classList.remove("active");
+  if(user){
+    let adminLink="";
+    try{
+      const userDoc=await db.collection("users").doc(user.uid).get();
+      const role=userDoc.exists?userDoc.data().role:"";
+      if(role==="admin"||user.email==="admin@community.business"){adminLink=`<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>`;}
+    }catch(err){console.warn("Admin lookup failed:",err);}
+    nav.innerHTML=`<a href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a><a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="profile.html"><i class="fa-solid fa-user"></i> My Profile</a>${adminLink}<a href="#" onclick="logoutUser();return false;"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>`;
+  }else{
+    nav.innerHTML=`<a href="index.html"><i class="fa-solid fa-house"></i> Home</a><a href="businesses.html"><i class="fa-solid fa-shop"></i> Businesses</a><a href="posts.html"><i class="fa-solid fa-image"></i> Posts</a><a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a><a href="login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a><a href="signup.html"><i class="fa-solid fa-pen-to-square"></i> Sign Up</a>`;
+  }
+}
+function logoutUser(){auth.signOut().then(()=>{window.location.href="login.html";});}
+function formatDate(ts){
+  if(!ts) return "No date";
+  const d = ts.seconds ? new Date(ts.seconds * 1000) : new Date(ts);
+  return d.toLocaleDateString("en-IN",{day:"numeric",month:"short",year:"numeric"});
+}
+function renderEmpty(){
+  document.getElementById("content").innerHTML = `
+    <div class="empty">
+      <i class="fa-solid fa-image"></i>
+      <h3>No posts yet.</h3>
+      <p>Create your first business post.</p>
+      <a class="btn primary" href="create-post.html?id=${businessId}"><i class="fa-solid fa-plus"></i> Create Post</a>
+    </div>`;
+}
+function openDeleteModal(postId){
+  pendingDeleteId = postId;
+  const modal = document.getElementById("confirmBackdrop");
+  modal.classList.add("show");
+  modal.setAttribute("aria-hidden","false");
+}
+function closeDeleteModal(){
+  const modal = document.getElementById("confirmBackdrop");
+  modal.classList.remove("show");
+  modal.setAttribute("aria-hidden","true");
+  pendingDeleteId = "";
+}
+async function deletePost(){
+  if(!pendingDeleteId) return;
+  await db.collection("business_posts").doc(pendingDeleteId).delete();
+  closeDeleteModal();
+  loadPosts();
+}
+async function loadBusiness(){
+  if(!businessId){
+    document.getElementById("businessName").textContent = "Business Posts";
+    renderEmpty();
+    return;
+  }
+  const doc = await db.collection("businesses").doc(businessId).get();
+  if(!doc.exists){
+    document.getElementById("businessName").textContent = "Business Posts";
+    renderEmpty();
+    return;
+  }
+  currentBusiness = doc.data();
+  document.getElementById("businessName").innerHTML = `${currentBusiness.businessName || "Business"} <em>Posts</em>`;
+  document.getElementById("createPostBtn").href = `create-post.html?id=${businessId}`;
+}
+async function loadPosts(){
+  const content = document.getElementById("content");
+  content.innerHTML = document.getElementById("loadingState").outerHTML;
+  try{
+    const snap = await db.collection("business_posts").where("businessId","==",businessId).get();
+    currentPosts = snap.docs.map(doc=>({id:doc.id,...doc.data()})).sort((a,b)=>{
+      const at = a.createdAt?.seconds || 0;
+      const bt = b.createdAt?.seconds || 0;
+      return bt - at;
+    });
+    document.getElementById("postCount").textContent = currentPosts.length;
+    if(!currentPosts.length){ renderEmpty(); return; }
+    content.innerHTML = currentPosts.map(post => `
+      <article class="card">
+        <img src="${post.imageURL || 'https://via.placeholder.com/800x600'}" alt="Post image">
+        <div class="card-body">
+          <h3>${post.title || "Business Post"}</h3>
+          <p>${post.caption || "No description available."}</p>
+          <div class="meta"><i class="fa-regular fa-calendar"></i><span>${formatDate(post.createdAt)}</span></div>
+          <div class="card-actions">
+            <a class="btn secondary" href="create-post.html?id=${businessId}&postId=${post.id}"><i class="fa-solid fa-pen"></i> Edit</a>
+            <button class="btn primary" type="button" onclick="openDeleteModal('${post.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+          </div>
+        </div>
+      </article>
+    `).join("");
+  }catch(err){
+    console.error(err);
+    content.innerHTML = `<div class="empty"><i class="fa-solid fa-triangle-exclamation"></i><h3>Could not load posts</h3><p>${err.message}</p></div>`;
+  }
+}
+document.getElementById("cancelDelete").addEventListener("click", closeDeleteModal);
+document.getElementById("confirmDelete").addEventListener("click", deletePost);
+document.getElementById("confirmBackdrop").addEventListener("click",(e)=>{if(e.target.id==="confirmBackdrop") closeDeleteModal();});
+auth.onAuthStateChanged(async (user)=>{
+  if(!user){window.location.href="login.html";return;}
+  await updateNavbar(user);
+  await loadBusiness();
+  if(businessId) await loadPosts();
+});
+</script>
+</body>
+</html>

@@ -198,6 +198,7 @@ auth.onAuthStateChanged(async (user) => {
         <div class="biz-info"><div class="biz-name">${business.businessName}</div><div class="biz-cat">${business.category || "Business"}</div></div>
         <div style="display:flex;gap:8px;">
           <a href="manage-business.html?id=${businessDoc.id}" class="manage-btn">Manage</a>
+          <a href="business-posts.html?id=${businessDoc.id}" class="manage-btn">Business Posts</a>
           <a href="create-post.html?id=${businessDoc.id}" class="manage-btn">Create Post</a>
           <button class="delete-btn" onclick="deleteBusiness('${businessDoc.id}')">Delete</button>
         </div>
