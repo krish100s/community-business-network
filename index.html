@@ -197,7 +197,7 @@
     margin-bottom: 20px;
     max-width: 10ch;
   }
-  .hero-title em { color: var(--accent); font-style: italic; }
+  .hero-title em { color: var(--accent); font-style: normal; font-family: inherit; }
   .hero-sub {
     font-size: 1.02rem;
     color: var(--muted);
@@ -367,7 +367,7 @@
     color: var(--ink);
     letter-spacing: -0.5px;
   }
-  .section-header h2 em { color: var(--accent); font-style: italic; }
+  .section-header h2 em { color: var(--accent); font-style: normal; font-family: inherit; }
   .see-all {
     font-size: 0.84rem;
     font-weight: 700;
@@ -619,7 +619,7 @@
     position: relative;
     z-index: 1;
   }
-  .cta-banner h2 em { color: var(--accent); font-style: italic; }
+  .cta-banner h2 em { color: var(--accent); font-style: normal; font-family: inherit; }
   .cta-stack {
     position: relative;
     z-index: 1;
@@ -643,66 +643,9 @@
   }
   .cta-banner a { position: relative; z-index: 1; }
 
-  footer {
-    background: #111111;
-    color: rgba(255,255,255,0.72);
-    padding: 54px 6% 30px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr 1fr;
-    gap: 24px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    margin-bottom: 18px;
-  }
-  .footer-col h3 {
-    font-family: 'Syne', sans-serif;
-    color: #fff;
-    font-size: 0.96rem;
-    margin-bottom: 14px;
-  }
-  .footer-col p, .footer-col a {
-    display: block;
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.65);
-    text-decoration: none;
-  }
-  .footer-col a:hover { color: #fff; }
-  .footer-brand {
-    font-family: 'Syne', sans-serif;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 12px;
-  }
-  .footer-social {
-    display: flex;
-    gap: 10px;
-    margin-top: 14px;
-  }
-  .footer-social a {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.06);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    align-items: center;
-    font-size: 0.84rem;
-  }
-
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; gap: 30px; }
-    .stats-grid, .why-grid, .footer-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid, .why-grid { grid-template-columns: 1fr 1fr; }
     .how-grid { grid-template-columns: 1fr; }
     .hero-title { max-width: 12ch; }
   }
@@ -727,7 +670,7 @@
     .business-grid { grid-template-columns: 1fr; }
     .cta-banner { padding: 36px 22px; }
     .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .stats-grid, .why-grid, .footer-grid { grid-template-columns: 1fr; }
+    .stats-grid, .why-grid { grid-template-columns: 1fr; }
     .search-shell { grid-template-columns: 1fr; }
   }
 </style>
@@ -894,9 +837,9 @@
       <div class="footer-brand">GrowCommunityBiz</div>
       <p>Promoting businesses and building stronger community connections through a polished local network.</p>
       <div class="footer-social">
-        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/krish-soni-6b408a320" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/krish100s" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:krishs0105@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
       </div>
     </div>
     <div class="footer-col">
@@ -913,13 +856,13 @@
     </div>
     <div class="footer-col">
       <h3>Contact</h3>
-      <p>support@community.business</p>
+      <p>krishs0105@gmail.com</p>
       <p>Local business growth, simplified.</p>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Copyright (c) 2026 GrowCommunityBiz</span>
-    <span> Developed by Krish Soni </span>
+    <span>© 2026 GrowCommunityBiz. All rights reserved.</span>
+    <span>Designed &amp; Developed by <a href="https://www.linkedin.com/in/krish-soni-6b408a320" target="_blank" rel="noopener noreferrer">Krish Soni</a></span>
     <span>Designed for local businesses and communities.</span>
   </div>
 </footer>
