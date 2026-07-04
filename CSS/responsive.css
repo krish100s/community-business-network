@@ -21,4 +21,17 @@
 @media (max-width: 600px) {
   .hero, .hero-strip, .page-hero { min-height: auto; }
   .business-grid, .mission-grid, .benefits-grid, .team-grid, .stats-grid, .why-grid, .footer-grid { grid-template-columns: 1fr !important; }
+  footer .footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
+  footer .footer-bottom span {
+    width: 100%;
+  }
+  footer .footer-social {
+    flex-wrap: wrap;
+  }
+  button, .btn, .btn-primary, .btn-ghost, .cta-btn, .view-btn, .manage-btn, .delete-btn, .action-btn, .save-btn, .back-btn {
+    min-height: 44px;
+  }
 }
