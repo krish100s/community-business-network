@@ -202,7 +202,9 @@ function applyFilters(){
  if(query){filtered=filtered.filter(b=>((b.data.businessName+" "+b.data.description+" "+b.data.category+" "+b.data.location).toLowerCase()).includes(query));}
  renderCards(filtered);
 }
-document.getElementById("searchInput").addEventListener("input",applyFilters);
+const searchInput=document.getElementById("searchInput");
+searchInput.addEventListener("input",applyFilters);
+searchInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();applyFilters();}});
 document.getElementById("filterPills").addEventListener("click",e=>{const pill=e.target.closest(".pill"); if(!pill)return; document.querySelectorAll(".pill").forEach(p=>p.classList.remove("active")); pill.classList.add("active"); activeCategory=pill.dataset.cat; applyFilters();});
 async function loadBusinesses(){try{const snapshot=await db.collection("businesses").get(); allBusinesses=snapshot.docs.map(doc=>({id:doc.id,data:doc.data()})); applyFilters();}catch(err){console.error(err); document.getElementById("businessGrid").innerHTML=`<div class="empty-state"><i class="fas fa-triangle-exclamation"></i><h3>Could not load businesses</h3><p>${err.message}</p></div>`;}}
 loadBusinesses();

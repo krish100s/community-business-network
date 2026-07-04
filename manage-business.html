@@ -335,6 +335,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 <script src="js/firebase.js"></script>
+<script src="js/notifications.js"></script>
 <script>
 const businessParams = new URLSearchParams(window.location.search);
 const businessId = businessParams.get("id");
@@ -377,14 +378,14 @@ function removeBusinessImage(index){
   renderBusinessImages();
 }
 function showToast(msg,isError=false){const t=document.getElementById("toast");document.getElementById("toastMsg").textContent=msg;t.querySelector("i").style.color=isError?"#ef4444":"#22c55e";t.querySelector("i").className=isError?"fas fa-circle-xmark":"fas fa-circle-check";t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3000);}
-function logoutUser(){auth.signOut().then(()=>{window.location.href="login.html";}).catch(e=>alert(e.message));}
-document.getElementById("uploadProfileBtn").addEventListener("click",async function(){const file=document.getElementById("profilePhotoInput").files[0];if(!file){alert("Please select a logo first");return;}try{const formData=new FormData();formData.append("file",file);formData.append("upload_preset","business_logos");const response=await fetch("https://api.cloudinary.com/v1_1/dzpzmkhoj/image/upload",{method:"POST",body:formData});const data=await response.json();profilePhotoURL=data.secure_url;document.getElementById("profilePreview").src=profilePhotoURL;document.getElementById("profilePreview").style.display="block";document.getElementById("previewInitials").style.display="none";alert("Logo uploaded successfully!");}catch(error){console.log(error);alert("Upload failed");}});
+function logoutUser(){auth.signOut().then(()=>{window.location.href="login.html";}).catch(e=>GCBNotify.error(e.message));}
+document.getElementById("uploadProfileBtn").addEventListener("click",async function(){const file=document.getElementById("profilePhotoInput").files[0];if(!file){GCBNotify.warning("Please select a logo first.");return;}try{const formData=new FormData();formData.append("file",file);formData.append("upload_preset","business_logos");const response=await fetch("https://api.cloudinary.com/v1_1/dzpzmkhoj/image/upload",{method:"POST",body:formData});const data=await response.json();profilePhotoURL=data.secure_url;document.getElementById("profilePreview").src=profilePhotoURL;document.getElementById("profilePreview").style.display="block";document.getElementById("previewInitials").style.display="none";GCBNotify.success("Logo uploaded successfully.");}catch(error){console.log(error);GCBNotify.error("Upload failed.");}});
 document.getElementById("businessImagesInput").addEventListener("change", async function(){
   const files=Array.from(this.files || []);
   if(!files.length) return;
   const remaining=Math.max(0,6-businessImageURLs.length);
   const uploadFiles=files.slice(0, remaining);
-  if(!uploadFiles.length){ alert("You can add up to 6 images"); return; }
+  if(!uploadFiles.length){ GCBNotify.warning("You can add up to 6 images."); return; }
   try{
     for(const file of uploadFiles){
       const formData=new FormData();
@@ -452,7 +453,7 @@ auth.onAuthStateChanged(async (user)=>{
 async function saveProfile(){
   try{
     const user=auth.currentUser;
-    if(!user){alert("Please login first");return;}
+    if(!user){GCBNotify.warning("Please login first.");return;}
     const btn=document.querySelector(".save-btn");
     btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Saving...';
     btn.disabled=true;
