@@ -7,12 +7,13 @@
 <link rel="stylesheet" href="CSS/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <style>
   :root{--bg:#f8f7f5;--surface:#fff;--border:#e8e8e8;--accent:#c49a6c;--ink:#111;--muted:#6b7280;--shadow:0 18px 50px rgba(17,17,17,.08);--shadow-hover:0 28px 60px rgba(17,17,17,.12)}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;padding-top:78px}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;padding-top:78px;line-height:1.6}
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.45}
   header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(248,247,245,.8);backdrop-filter:blur(18px);border-bottom:1px solid rgba(17,17,17,.06);padding:16px 6%;display:flex;justify-content:space-between;align-items:center}
   .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.08rem;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:10px}
@@ -27,7 +28,7 @@
   @keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
   .card-header{padding:28px 32px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
   .header-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:var(--shadow);color:#fff}
-  .header-text h2{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-.02em;color:var(--ink);line-height:1.2}
+  .header-text h2{font-family:'Manrope',sans-serif;font-weight:800;font-size:1.2rem;letter-spacing:-.02em;color:var(--ink);line-height:1.2}
   .header-text p{font-size:.8rem;color:var(--muted);margin-top:2px}
   .card-body{padding:28px 32px 32px;display:flex;flex-direction:column;gap:20px}
   .upload-zone{border:2px dashed rgba(196,154,108,.28);border-radius:16px;background:rgba(196,154,108,.06);padding:36px 24px;text-align:center;cursor:pointer;transition:border-color .18s ease,background .18s ease,transform .18s ease;position:relative;overflow:hidden}
@@ -35,7 +36,7 @@
   .upload-zone.drag-over{border-color:var(--accent);background:rgba(196,154,108,.12);transform:scale(1.01)}
   .upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
   .upload-icon{width:52px;height:52px;margin:0 auto 12px;border-radius:14px;background:rgba(196,154,108,.14);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--accent)}
-  .upload-zone h3{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:var(--ink)}
+  .upload-zone h3{font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:700;color:var(--ink)}
   .upload-zone p{font-size:.78rem;color:var(--muted);margin-top:4px}
   .upload-zone .pill{display:inline-block;margin-top:10px;padding:4px 12px;border-radius:999px;background:rgba(196,154,108,.15);color:var(--accent);font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
   .preview-wrap{display:none;position:relative;border-radius:16px;overflow:hidden;animation:fadeIn .35s ease both}
@@ -45,7 +46,13 @@
   .preview-badge{font-size:.72rem;font-weight:700;color:#fff;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);padding:4px 10px;border-radius:999px;display:flex;align-items:center;gap:5px}
   .remove-btn{background:rgba(255,95,126,.9);border:none;border-radius:8px;color:#fff;font-size:.72rem;padding:5px 12px;cursor:pointer;display:flex;align-items:center;gap:5px;font:inherit;font-weight:700;transition:background .18s ease}.remove-btn:hover{background:#ef4444}
   .field-group{display:flex;flex-direction:column;gap:6px}.field-label{font-size:.8rem;font-weight:800;color:var(--muted);letter-spacing:.02em;display:flex;align-items:center;gap:6px}.field-label i{color:#111;font-size:.7rem}
-  textarea{width:100%;padding:14px 16px;background:#fff;border:1px solid var(--border);border-radius:16px;color:var(--ink);font:inherit;font-size:.9rem;line-height:1.6;resize:none;height:130px;outline:none;transition:border-color .18s ease,box-shadow .18s ease}textarea::placeholder{color:rgba(107,114,128,.55)}textarea:focus{border-color:rgba(196,154,108,.45);box-shadow:0 0 0 4px rgba(196,154,108,.12)}
+  .editor-shell{border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#fff;transition:border-color .18s ease,box-shadow .18s ease}
+  .editor-shell:focus-within{border-color:rgba(196,154,108,.45);box-shadow:0 0 0 4px rgba(196,154,108,.12)}
+  .ql-toolbar.ql-snow,.ql-container.ql-snow{border:none}
+  .ql-toolbar.ql-snow{border-bottom:1px solid var(--border);padding:10px 12px;background:#fbfaf8}
+  .ql-container{font-family:'Inter',sans-serif;font-size:.95rem;color:var(--ink);min-height:160px}
+  .ql-editor{min-height:160px;padding:14px 16px;line-height:1.7}
+  .ql-editor.ql-blank::before{color:rgba(107,114,128,.6);font-style:normal;left:16px;right:16px}
   .char-count{align-self:flex-end;font-size:.72rem;color:var(--muted)}.char-count.warn{color:#ef4444}
   .divider{height:1px;background:var(--border);margin:2px 0}
   .card-footer{display:flex;align-items:center;gap:12px}
@@ -54,9 +61,11 @@
   .btn-primary{flex:2;padding:14px;background:#111;box-shadow:var(--shadow)}.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
   .btn-primary.loading .btn-text{display:none}.btn-primary .spinner{display:none}.btn-primary.loading .spinner{display:block;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
   .menu-toggle{display:none;border:1px solid rgba(17,17,17,.08);background:rgba(255,255,255,.72);width:44px;height:44px;border-radius:14px;font-size:20px}
-  .toast-wrap{position:fixed;bottom:32px;right:32px;z-index:999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
-  .toast{padding:12px 18px;border-radius:12px;font-size:.85rem;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px;backdrop-filter:blur(12px);box-shadow:0 8px 32px rgba(0,0,0,.4);animation:toastIn .35s cubic-bezier(.16,1,.3,1) both;pointer-events:auto}.toast.success{background:rgba(74,222,128,.2);border:1px solid rgba(74,222,128,.3)}.toast.error{background:rgba(255,95,126,.2);border:1px solid rgba(255,95,126,.3)}
-  @keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}} @keyframes toastOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(20px)}}
+  .toast-wrap{position:fixed;top:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+  .toast{min-width:min(360px,calc(100vw - 32px));padding:14px 16px;border-radius:16px;font-size:.9rem;font-weight:700;color:#fff;display:flex;align-items:flex-start;gap:10px;box-shadow:0 22px 54px rgba(17,17,17,.18);animation:toastIn .28s ease both;pointer-events:auto;border:1px solid rgba(255,255,255,.12)}.toast.success{background:#15803d}.toast.error{background:#b91c1c}.toast.info{background:#1d4ed8}.toast.warning{background:#b45309}
+  .toast-msg{display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+  @keyframes toastIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}} @keyframes toastOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-8px) scale(.98)}}
+  .btn-secondary:disabled,.btn-primary:disabled{opacity:.72;cursor:not-allowed;transform:none}
   ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px}
   @media(max-width:768px){header{padding:14px 5%;flex-wrap:wrap;gap:10px}.menu-toggle{display:block}#navbarLinks{display:none;width:100%;flex-direction:column;align-items:flex-start;background:#fff;margin-top:10px;padding:10px;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.1)}#navbarLinks.active{display:flex}#navbarLinks a{width:100%;text-align:left;padding:12px;margin:0}.page{padding:30px 16px 80px}.card{max-width:700px}.card-header{padding:22px 20px 18px}.card-body{padding:22px 20px 24px}}
 </style>
@@ -81,7 +90,7 @@
     <div class="card-body">
       <div class="upload-zone" id="uploadZone"><input type="file" id="postImage" accept="image/*"><div class="upload-icon"><i class="fa-solid fa-image"></i></div><h3>Drop your photo here</h3><p>PNG, JPG, WEBP up to 10 MB</p><span class="pill"><i class="fa-solid fa-arrow-up-from-bracket"></i> Browse files</span></div>
       <div class="preview-wrap" id="previewWrap"><img id="preview" src="" alt="Preview"><div class="preview-overlay"><span class="preview-badge"><i class="fa-solid fa-check"></i> Photo selected</span><button class="remove-btn" onclick="removeImage()"><i class="fa-solid fa-xmark"></i> Remove</button></div></div>
-      <div class="field-group"><label class="field-label" for="caption"><i class="fa-solid fa-align-left"></i> Caption</label><textarea id="caption" placeholder="What's happening with your business? Share an update, promotion, or story…" maxlength="500" oninput="updateCount(this)"></textarea><span class="char-count" id="charCount">0 / 500</span></div>
+      <div class="field-group"><label class="field-label" for="caption"><i class="fa-solid fa-align-left"></i> Caption</label><div class="editor-shell"><div id="captionEditor"></div></div><input type="hidden" id="caption" maxlength="500"><span class="char-count" id="charCount">0 / 500</span></div>
       <div class="divider"></div>
       <div class="card-footer"><button class="btn-secondary" onclick="window.location.href='profile.html'"><i class="fa-solid fa-xmark"></i> Discard</button><button class="btn-primary" id="publishBtn" onclick="publishPost()"><span class="btn-text"><i class="fa-solid fa-paper-plane"></i> Publish Post</span><span class="spinner"></span></button></div>
     </div>
@@ -91,22 +100,25 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 <script src="js/firebase.js"></script>
 <script>
 auth.onAuthStateChanged((user)=>{ if(!user){window.location.href="login.html";} });
 auth.onAuthStateChanged(async (user)=>{ if(!user)return; try{const userDoc=await db.collection("users").doc(user.uid).get(); const role=userDoc.exists?userDoc.data().role:""; const isAdmin=role==="admin"||user.email==="admin@community.business"; document.getElementById("adminPanelLink").innerHTML=isAdmin?'<a href="admin.html"><i class="fa-solid fa-shield-halved"></i> Admin Panel</a>':'';}catch(err){console.warn("Admin lookup failed:",err);} });
 function toggleMenu(){document.getElementById("navbarLinks").classList.toggle("active");}
-function showToast(msg,type='success'){const wrap=document.getElementById('toastWrap');const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<div class="toast-msg"><i class="fa-solid fa-${type==='success'?'check-circle':'circle-exclamation'}"></i> ${msg}</div>`;wrap.appendChild(t);setTimeout(()=>{t.style.animation='toastOut 0.3s ease forwards';setTimeout(()=>t.remove(),300);},3000);}
-function setLoading(on){const btn=document.getElementById('publishBtn');btn.classList.toggle('loading',on);btn.disabled=on;}
-function updateCount(el){const c=document.getElementById('charCount');c.textContent=`${el.value.length} / 500`;c.classList.toggle('warn',el.value.length>460);}
+function showToast(msg,type='success'){const wrap=document.getElementById('toastWrap');const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<div class="toast-msg"><i class="fa-solid fa-${type==='success'?'check-circle':type==='warning'?'triangle-exclamation':'circle-exclamation'}"></i><span>${msg}</span></div>`;wrap.appendChild(t);setTimeout(()=>{t.style.animation='toastOut 0.24s ease forwards';setTimeout(()=>t.remove(),240);},3200);}
+function setLoading(on){const btn=document.getElementById('publishBtn');btn.classList.toggle('loading',on);btn.disabled=on;btn.querySelector('.btn-text').innerHTML=on?'<i class="fa-solid fa-spinner fa-spin"></i> Please wait...':'<i class="fa-solid fa-paper-plane"></i> Publish Post';}
+function updateCount(value){const c=document.getElementById('charCount');c.textContent=`${value.length} / 500`;c.classList.toggle('warn',value.length>460);}
+const quill=new Quill('#captionEditor',{theme:'snow',placeholder:"What's happening with your business? Share an update, promotion, or story...",modules:{toolbar:[['bold','italic','underline'],[{header:[1,2,false]}],[{list:'ordered'},{list:'bullet'}],['blockquote','code-block'],['link'],['clean']]}});quill.on('text-change',()=>{const html=DOMPurify.sanitize(quill.root.innerHTML,{USE_PROFILES:{html:true}});document.getElementById('caption').value=html;updateCount(quill.getText().trim());});
 document.getElementById('postImage').addEventListener('change',function(){const file=this.files[0];if(!file)return;const reader=new FileReader();reader.onload=e=>{document.getElementById('preview').src=e.target.result;document.getElementById('previewWrap').style.display='block';document.getElementById('uploadZone').style.display='none';};reader.readAsDataURL(file);});
 function removeImage(){document.getElementById('preview').src='';document.getElementById('previewWrap').style.display='none';document.getElementById('uploadZone').style.display='block';document.getElementById('postImage').value='';}
 const zone=document.getElementById('uploadZone');zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag-over');});zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag-over');const file=e.dataTransfer.files[0];if(file&&file.type.startsWith('image/')){const dt=new DataTransfer();dt.items.add(file);document.getElementById('postImage').files=dt.files;document.getElementById('postImage').dispatchEvent(new Event('change'));}});
 const params=new URLSearchParams(window.location.search); const businessId=params.get("id"); loadBusinessName();
 const postId=params.get("postId");
 let existingPostImageURL="";
-async function loadBusinessName(){if(!businessId)return; const doc=await db.collection("businesses").doc(businessId).get(); if(!doc.exists)return; document.getElementById("postBusinessName").innerText=postId?"Edit Business Post":"Create Post for "+doc.data().businessName; document.getElementById("postSubtext").innerText=postId?"Update the post caption and image for this business.":"Share updates, offers, and stories with your community"; if(postId){const postDoc=await db.collection("business_posts").doc(postId).get(); if(postDoc.exists){const post=postDoc.data(); if(post.caption){document.getElementById("caption").value=post.caption; updateCount(document.getElementById("caption"));} if(post.imageURL){existingPostImageURL=post.imageURL; document.getElementById("preview").src=post.imageURL; document.getElementById("previewWrap").style.display='block'; document.getElementById("uploadZone").style.display='none';}}}}
-async function publishPost(){const user=auth.currentUser;if(!user){showToast('Please sign in first','error');return;}const imageFile=document.getElementById('postImage').files[0];const caption=document.getElementById('caption').value.trim();if(!caption){showToast('Please write a caption','error');return;}setLoading(true);try{let imageURL=existingPostImageURL;if(imageFile){const formData=new FormData();formData.append('file',imageFile);formData.append('upload_preset','business_logos');const res=await fetch('https://api.cloudinary.com/v1_1/dzpzmkhoj/image/upload',{method:'POST',body:formData});const imageData=await res.json();imageURL=imageData.secure_url;}if(!businessId){showToast("Business not selected","error");setLoading(false);return;}if(postId){await db.collection('business_posts').doc(postId).update({businessId,ownerUID:user.uid,imageURL,caption});showToast('Post updated successfully!');}else{if(!imageURL){showToast('Please select a photo','error');setLoading(false);return;}await db.collection('business_posts').add({businessId,ownerUID:user.uid,imageURL,caption,createdAt:firebase.firestore.FieldValue.serverTimestamp()});showToast('Post published successfully!');}setTimeout(()=>window.location.href='profile.html',1400);}catch(err){console.error(err);showToast('Something went wrong. Try again.','error');setLoading(false);}}
+async function loadBusinessName(){if(!businessId)return; const doc=await db.collection("businesses").doc(businessId).get(); if(!doc.exists)return; document.getElementById("postBusinessName").innerText=postId?"Edit Business Post":"Create Post for "+doc.data().businessName; document.getElementById("postSubtext").innerText=postId?"Update the post caption and image for this business.":"Share updates, offers, and stories with your community"; if(postId){const postDoc=await db.collection("business_posts").doc(postId).get(); if(postDoc.exists){const post=postDoc.data(); if(post.caption){const safeCaption=DOMPurify.sanitize(post.caption,{USE_PROFILES:{html:true}}); quill.clipboard.dangerouslyPasteHTML(safeCaption); document.getElementById("caption").value=safeCaption; updateCount(quill.getText().trim());} if(post.imageURL){existingPostImageURL=post.imageURL; document.getElementById("preview").src=post.imageURL; document.getElementById("previewWrap").style.display='block'; document.getElementById("uploadZone").style.display='none';}}}}
+async function publishPost(){const user=auth.currentUser;if(!user){showToast('Please sign in first','error');return;}const imageFile=document.getElementById('postImage').files[0];const caption=document.getElementById('caption').value.trim();if(!caption){showToast('Please write a caption','error');return;}setLoading(true);try{let imageURL=existingPostImageURL;if(imageFile){const formData=new FormData();formData.append('file',imageFile);formData.append('upload_preset','business_logos');const res=await fetch('https://api.cloudinary.com/v1_1/dzpzmkhoj/image/upload',{method:'POST',body:formData});const imageData=await res.json();if(!imageData.secure_url)throw new Error("Image upload failed");imageURL=imageData.secure_url;}if(!businessId){showToast("Business not selected","error");setLoading(false);return;}if(postId){await db.collection('business_posts').doc(postId).update({businessId,ownerUID:user.uid,imageURL,caption});showToast('Post updated successfully!');}else{if(!imageURL){showToast('Please select a photo','error');setLoading(false);return;}await db.collection('business_posts').add({businessId,ownerUID:user.uid,imageURL,caption,createdAt:firebase.firestore.FieldValue.serverTimestamp()});showToast('Post published successfully!');}setTimeout(()=>window.location.href='profile.html',1400);}catch(err){console.error(err);showToast('Something went wrong. Try again.','error');setLoading(false);}}
 </script>
 </body>
 </html>
