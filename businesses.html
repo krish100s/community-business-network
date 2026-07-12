@@ -7,17 +7,17 @@
 <link rel="stylesheet" href="CSS/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   .hero-strip{margin-top:65px;position:relative;overflow:hidden;min-height:260px;display:flex;align-items:flex-end;background:linear-gradient(180deg,#fbfaf8,#f3f0eb)}
-  .hero-bg-text{position:absolute;top:-10px;left:-10px;font-family:'Syne',sans-serif;font-size:clamp(90px,14vw,180px);font-weight:800;color:rgba(17,17,17,.04);white-space:nowrap;letter-spacing:-6px;user-select:none;line-height:1;animation:drift 24s linear infinite}
+  .hero-bg-text{position:absolute;top:-10px;left:-10px;font-family:'Manrope',sans-serif;font-size:clamp(90px,14vw,180px);font-weight:800;color:rgba(17,17,17,.04);white-space:nowrap;letter-spacing:-6px;user-select:none;line-height:1;animation:drift 24s linear infinite}
   @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-4%)}}
   .hero-glow{position:absolute;right:-60px;top:-60px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(196,154,108,.2) 0%,transparent 70%);pointer-events:none}
   .hero-content{position:relative;z-index:2;padding:0 6% 34px;display:flex;align-items:flex-end;gap:20px;width:100%;animation:fadeUp .6s ease .2s both}
   .hero-icon{width:70px;height:70px;border-radius:18px;flex-shrink:0;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;box-shadow:var(--shadow)}
   .hero-tag{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--accent-soft);border:1px solid rgba(196,154,108,.22);padding:4px 12px;border-radius:999px;margin-bottom:8px}
-  .hero-title{font-family:'Instrument Serif',serif;font-size:clamp(1.9rem,3.8vw,3.1rem);color:var(--ink);line-height:1.06;letter-spacing:-1px}
+  .hero-title{font-family:'Manrope',sans-serif;font-size:clamp(1.9rem,3.8vw,3.1rem);color:var(--ink);line-height:1.08;letter-spacing:-.04em;font-weight:700}
   .hero-title em{color:var(--accent);font-style:normal;font-family:inherit}
   .hero-sub{font-size:1rem;color:var(--muted);margin-top:8px;max-width:56ch;line-height:1.75}
   .page-wrap{max-width:1180px;margin:0 auto;padding:42px 24px 96px}
@@ -42,10 +42,10 @@
   .card-img{width:100%;height:190px;object-fit:cover;display:block;background:#e5e7eb;transition:transform .4s ease}
   .card:hover .card-img{transform:scale(1.03)}
   .card-img-wrap{overflow:hidden;position:relative;height:190px}
-  .card-initials{width:100%;height:190px;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:rgba(255,255,255,.24);letter-spacing:-2px}
+  .card-initials{width:100%;height:190px;background:linear-gradient(135deg,#111,#1e1e1e);display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:3rem;font-weight:800;color:rgba(255,255,255,.24);letter-spacing:-2px}
   .card-content{padding:18px 20px 20px}
   .category-tag{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--accent-soft);border:1px solid rgba(196,154,108,.2);padding:4px 10px;border-radius:999px;margin-bottom:10px}
-  .card-content h3{font-family:'Instrument Serif',serif;font-size:1.28rem;color:var(--ink);margin-bottom:7px;line-height:1.25}
+  .card-content h3{font-family:'Manrope',sans-serif;font-size:1.28rem;color:var(--ink);margin-bottom:7px;line-height:1.25;font-weight:700}
   .card-content p{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:16px;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
   .card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border)}
   .card-location{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:5px}
