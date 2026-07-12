@@ -933,16 +933,25 @@ async function loadHomepageStats() {
     const posts = await db.collection("business_posts").get();
 
     // Business Count
-    document.getElementById("liveBusinesses").innerText = businesses.size + "+";
-    document.getElementById("statBusinesses").innerText = businesses.size + "+";
+    const businessValue = businesses.size + "+";
+    document.getElementById("liveBusinesses").dataset.countTarget = businessValue;
+    document.getElementById("statBusinesses").dataset.countTarget = businessValue;
+    document.getElementById("liveBusinesses").innerText = businessValue;
+    document.getElementById("statBusinesses").innerText = businessValue;
 
     // User Count
-    document.getElementById("liveUsers").innerText = users.size + "+";
-    document.getElementById("statUsers").innerText = users.size + "+";
+    const userValue = users.size + "+";
+    document.getElementById("liveUsers").dataset.countTarget = userValue;
+    document.getElementById("statUsers").dataset.countTarget = userValue;
+    document.getElementById("liveUsers").innerText = userValue;
+    document.getElementById("statUsers").innerText = userValue;
 
     // Posts Count
-    document.getElementById("livePosts").innerText = posts.size + "+";
-    document.getElementById("statPosts").innerText = posts.size + "+";
+    const postValue = posts.size + "+";
+    document.getElementById("livePosts").dataset.countTarget = postValue;
+    document.getElementById("statPosts").dataset.countTarget = postValue;
+    document.getElementById("livePosts").innerText = postValue;
+    document.getElementById("statPosts").innerText = postValue;
 
     // Categories Count
     const categories = new Set();
@@ -954,8 +963,20 @@ async function loadHomepageStats() {
         }
     });
 
-    document.getElementById("statCategories").innerText =
-        categories.size + "+";
+    const categoryValue = categories.size + "+";
+    const statCategories = document.getElementById("statCategories");
+    statCategories.dataset.countTarget = categoryValue;
+    statCategories.innerText = categoryValue;
+
+    if (window.GCBAnimateCountUp) {
+      window.GCBAnimateCountUp(document.getElementById("liveBusinesses"));
+      window.GCBAnimateCountUp(document.getElementById("statBusinesses"));
+      window.GCBAnimateCountUp(document.getElementById("liveUsers"));
+      window.GCBAnimateCountUp(document.getElementById("statUsers"));
+      window.GCBAnimateCountUp(document.getElementById("livePosts"));
+      window.GCBAnimateCountUp(document.getElementById("statPosts"));
+      window.GCBAnimateCountUp(statCategories);
+    }
 }
 
 async function loadFeaturedBusinesses(){
@@ -987,5 +1008,8 @@ async function loadFeaturedBusinesses(){
   });
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="js/animations.js"></script>
 </body>
 </html>

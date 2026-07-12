@@ -146,5 +146,9 @@ function loginUser(){
   auth.signInWithEmailAndPassword(email,password).then(() => { GCBNotify.success("Login successful."); setTimeout(() => { window.location.href = "index.html"; }, 900); }).catch((error) => { GCBNotify.error(getLoginErrorMessage(error.code)); });
 }
 </script>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="js/animations.js"></script>
 </body>
 </html>
