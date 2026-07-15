@@ -4,6 +4,8 @@ functions/node_modules/
 .firebase/
 
 .env
+.env.*
+js/firebase-config.js
 
 .vscode/
 

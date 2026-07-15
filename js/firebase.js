@@ -1,12 +1,10 @@
-const firebaseConfig = {
-  apiKey: "AIzaSyDzvpyk0820xCUiNHmDYWI8QUG2ZhU5aXY",
-  authDomain: "community-business-network.firebaseapp.com",
-  projectId: "community-business-network",
-  storageBucket: "community-business-network.firebasestorage.app",
-  messagingSenderId: "631499831089",
-  appId: "1:631499831089:web:ac5ce03fa92389f679a210",
-  measurementId: "G-01EBE300WR"
-};
+const firebaseConfig = window.FIREBASE_CONFIG;
+
+if (!firebaseConfig) {
+  throw new Error(
+    "Firebase config is missing. Run the build so js/firebase-config.js is generated, or define window.FIREBASE_CONFIG before loading js/firebase.js."
+  );
+}
 
 firebase.initializeApp(firebaseConfig);
 
