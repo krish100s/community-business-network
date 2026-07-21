@@ -4,61 +4,6 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  function animateCountUp(el) {
-    if (!el || el.dataset.gcbAnimated === "true") return;
-    const targetText = el.dataset.countTarget || el.textContent.trim();
-    const match = targetText.match(/[\d,.]+/);
-    if (!match) return;
-    const raw = match[0].replace(/,/g, "");
-    const value = parseFloat(raw);
-    if (Number.isNaN(value)) return;
-    const decimals = raw.includes(".") ? raw.split(".")[1].length : 0;
-    const suffix = targetText.replace(match[0], "");
-    const state = { value: 0 };
-    el.dataset.gcbAnimated = "true";
-    el.textContent = `0${suffix}`;
-    gsap.to(state, {
-      value,
-      duration: 0.9,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: el,
-        start: "top 90%",
-        toggleActions: "play none none none",
-        once: true
-      },
-      onUpdate: () => {
-        const formatted = state.value.toFixed(decimals);
-        el.textContent = `${formatted}${suffix}`;
-      }
-    });
-  }
-
-  window.GCBAnimateCountUp = animateCountUp;
-
-  function watchCountTargets() {
-    const watched = new WeakSet();
-    const targets = ".stat-number, .stat-num, .summary-card .value";
-
-    const process = (root) => {
-      gsap.utils.toArray(root.querySelectorAll ? root.querySelectorAll(targets) : []).forEach((el) => {
-        if (watched.has(el) || !el.dataset.countTarget) return;
-        watched.add(el);
-        animateCountUp(el);
-      });
-    };
-
-    process(document);
-
-    const observer = new MutationObserver(() => process(document));
-    observer.observe(document.body, {
-      subtree: true,
-      childList: true,
-      attributes: true,
-      attributeFilter: ["data-count-target"]
-    });
-  }
-
   const heroSelectors = [
     ".hero",
     ".hero-strip",
@@ -186,8 +131,6 @@
       }
     });
   });
-
-  watchCountTargets();
 
   gsap.utils.toArray("footer").forEach((el) => {
     gsap.fromTo(el, { autoAlpha: 0, y: 24 }, {
