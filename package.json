@@ -3,5 +3,24 @@
   "private": true,
   "scripts": {
     "build": "node scripts/generate-firebase-config.js"
+  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krish100s/community-business-network.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/krish100s/community-business-network/issues"
+  },
+  "homepage": "https://github.com/krish100s/community-business-network#readme",
+  "dependencies": {
+    "firebase-admin": "^14.2.0",
+    "resend": "^6.18.0"
   }
 }
