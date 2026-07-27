@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Share2, Settings2, BriefcaseBusiness, MessageSquareText } from 'lucide-react'
+import { Link, Share2, Settings2, BriefcaseBusiness } from 'lucide-react'
 import { Footer } from '../components/home/Footer.jsx'
 
 export default function Profile() {
