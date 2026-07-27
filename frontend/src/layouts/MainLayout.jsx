@@ -8,8 +8,9 @@ import { cn } from '../utils/cn.js'
 const NAV_ITEMS = [
   { to: '/', label: 'Home' },
   { to: '/businesses', label: 'Businesses' },
-  { to: '/community', label: 'Community' },
+  { to: '/posts', label: 'Posts' },
   { to: '/about', label: 'About' },
+  { to: '/profile', label: 'Profile' },
 ]
 
 export function MainLayout() {
