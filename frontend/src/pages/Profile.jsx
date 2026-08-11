@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link as RouterLink } from 'react-router-dom'
 import { Link, Share2, Settings2, BriefcaseBusiness } from 'lucide-react'
 import { Footer } from '../components/home/Footer.jsx'
 
@@ -36,18 +37,18 @@ export default function Profile() {
                 <p>Helping local businesses grow with premium digital experiences.</p>
               </div>
               <div className="gcb-profile-actions">
-                <button type="button" className="gcb-profile-action">
+                <RouterLink to="/profile/edit" className="gcb-profile-action">
                   <Settings2 size={16} />
                   Edit Profile
-                </button>
+                </RouterLink>
                 <button type="button" className="gcb-profile-action">
                   <Share2 size={16} />
                   Share Profile
                 </button>
-                <button type="button" className="gcb-profile-action gcb-profile-action--primary">
+                <RouterLink to="/businesses/manage" className="gcb-profile-action gcb-profile-action--primary">
                   <BriefcaseBusiness size={16} />
                   Manage Businesses
-                </button>
+                </RouterLink>
               </div>
             </div>
           </motion.div>

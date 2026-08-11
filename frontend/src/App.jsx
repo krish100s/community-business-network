@@ -14,6 +14,7 @@ const Signup = lazy(() => import('./pages/Signup.jsx'))
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword.jsx'))
 const EditProfile = lazy(() => import('./pages/EditProfile.jsx'))
 const ManageBusiness = lazy(() => import('./pages/ManageBusiness.jsx'))
+const EditBusiness = lazy(() => import('./pages/EditBusiness.jsx'))
 const CreatePost = lazy(() => import('./pages/CreatePost.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
@@ -39,6 +40,7 @@ export default function App() {
               <Route path="forgot-password" element={<ForgotPassword />} />
               <Route path="profile/edit" element={<EditProfile />} />
               <Route path="businesses/manage" element={<ManageBusiness />} />
+              <Route path="businesses/edit" element={<EditBusiness />} />
               <Route path="posts/create" element={<CreatePost />} />
             </Route>
             <Route path="*" element={<NotFound />} />
