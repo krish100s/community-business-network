@@ -1,0 +1,31 @@
+name: Node 22 emulator tests
+
+on:
+  pull_request:
+  push:
+    branches: [main, ci/node22-verification]
+
+jobs:
+  emulator-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm ci --prefix functions
+      - run: node --version
+      - run: node --check functions/index.js
+      - run: node --check functions/firestore.rules.test.js
+      - run: node --check functions/otp.integration.test.js
+      - run: node --check functions/account-deletion.integration.test.js
+      - run: node --check functions/public-stats.integration.test.js
+      - run: node --check functions/admin-concurrency.integration.test.js
+      - run: npx firebase-tools@latest emulators:exec --project demo-growcommunitybiz --only firestore "npx mocha functions/firestore.rules.test.js --timeout 60000"
+      - run: npx firebase-tools@latest emulators:exec --project demo-growcommunitybiz --only auth,firestore,functions "npx mocha functions/public-stats.integration.test.js --timeout 120000"
+      - run: npx firebase-tools@latest emulators:exec --project demo-growcommunitybiz --only auth,firestore,functions "npx mocha functions/admin-concurrency.integration.test.js --timeout 60000"
+      - run: npx firebase-tools@latest emulators:exec --project demo-growcommunitybiz --only auth,firestore,functions "npx mocha functions/otp.integration.test.js --timeout 120000"
+      - run: npx firebase-tools@latest emulators:exec --project demo-growcommunitybiz --only auth,firestore,functions "npx mocha functions/account-deletion.integration.test.js --timeout 120000"
+      - run: npx firebase-tools@latest emulators:exec --project demo-growcommunitybiz --only auth,firestore,functions,pubsub "npx mocha functions/scheduled-deletion.integration.test.js --timeout 90000"
